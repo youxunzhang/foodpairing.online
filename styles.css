@@ -235,20 +235,20 @@ body {
 .nutrition-calculator {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin-top: 3rem;
+    gap: 2rem;
+    margin-top: 2rem;
 }
 
 .food-selector {
     background: #f8f9fa;
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .food-selector h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
     color: #333;
 }
 
@@ -256,7 +256,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .category-btn {
@@ -279,16 +279,16 @@ body {
 
 .food-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 0.8rem;
     max-height: 400px;
     overflow-y: auto;
 }
 
 .food-card {
     background: white;
-    border-radius: 15px;
-    padding: 1rem;
+    border-radius: 12px;
+    padding: 0.8rem;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -309,31 +309,31 @@ body {
 }
 
 .food-card .emoji {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .food-card .name {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 500;
 }
 
 .nutrition-results {
     background: white;
-    padding: 2rem;
+    padding: 1.5rem;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .nutrition-results h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
     color: #333;
 }
 
 .selected-foods {
-    margin-bottom: 2rem;
-    min-height: 100px;
+    margin-bottom: 1.5rem;
+    min-height: 80px;
 }
 
 .selected-food-item {
@@ -358,13 +358,13 @@ body {
 }
 
 .nutrition-chart {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .nutrition-item {
     display: flex;
     align-items: center;
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     gap: 1rem;
 }
 
@@ -396,12 +396,12 @@ body {
 
 .nutrition-summary {
     background: #f8f9fa;
-    padding: 1.5rem;
+    padding: 1.2rem;
     border-radius: 15px;
 }
 
 .nutrition-summary h4 {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
     color: #333;
 }
 
@@ -545,8 +545,8 @@ body {
 
 .foods-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1.5rem;
     margin-bottom: 3rem;
 }
 
@@ -567,59 +567,59 @@ body {
 .food-item-header {
     background: linear-gradient(135deg, #ff6b6b, #ffa500);
     color: white;
-    padding: 1.5rem;
+    padding: 1rem;
     text-align: center;
 }
 
 .food-item-emoji {
-    font-size: 3rem;
-    margin-bottom: 0.5rem;
+    font-size: 2rem;
+    margin-bottom: 0.4rem;
 }
 
 .food-item-name {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.4rem;
 }
 
 .food-item-category {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     opacity: 0.8;
 }
 
 .food-item-body {
-    padding: 1.5rem;
+    padding: 1rem;
 }
 
 .nutrition-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin-bottom: 1rem;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
 }
 
 .nutrition-stat {
     text-align: center;
-    padding: 0.5rem;
+    padding: 0.4rem;
     background: #f8f9fa;
-    border-radius: 10px;
+    border-radius: 8px;
 }
 
 .nutrition-stat-value {
-    font-size: 1.1rem;
+    font-size: 0.9rem;
     font-weight: 600;
     color: #ff6b6b;
 }
 
 .nutrition-stat-label {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: #666;
 }
 
 .food-item-description {
     color: #666;
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 0.8rem;
+    line-height: 1.4;
 }
 
 /* 分页 */
@@ -713,7 +713,7 @@ body {
 
 .game-info {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
     gap: 2rem;
@@ -744,7 +744,8 @@ body {
 
 .game-buttons {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
+    align-items: center;
 }
 
 .game-btn {
@@ -754,11 +755,16 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
+    font-size: 1rem;
 }
 
 .game-btn.primary {
     background: linear-gradient(135deg, #ff6b6b, #ffa500);
     color: white;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
 }
 
 .game-btn.secondary {
@@ -832,7 +838,7 @@ body {
 
 .food-selection {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: 1rem;
     max-height: 400px;
     overflow-y: auto;
@@ -846,6 +852,10 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     border: 2px solid transparent;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .game-food-card:hover {
@@ -866,6 +876,27 @@ body {
 .game-food-card .name {
     font-size: 0.8rem;
     font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.game-food-card .nutrition-info {
+    font-size: 0.7rem;
+    color: #666;
+}
+
+.game-food-card .nutrition-info .nutrition-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.2rem;
+}
+
+.game-food-card .nutrition-info .label {
+    font-weight: 500;
+}
+
+.game-food-card .nutrition-info .value {
+    color: #ff6b6b;
+    font-weight: 600;
 }
 
 .current-foods {
@@ -1066,9 +1097,14 @@ body {
         gap: 1rem;
     }
     
+    .food-selection {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    
     .game-info {
         flex-direction: column;
         text-align: center;
+        gap: 1.5rem;
     }
     
     .score-board {
@@ -1076,7 +1112,7 @@ body {
     }
     
     .foods-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
     }
     
     .features-grid {
@@ -1103,15 +1139,34 @@ body {
     }
     
     .food-grid {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
     }
     
     .foods-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     }
     
     .game-buttons {
         flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .game-btn.primary {
+        padding: 1.2rem 2.5rem;
+        font-size: 1.2rem;
+    }
+    
+    .food-selection {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    }
+    
+    .game-food-card {
+        min-height: 100px;
+        padding: 0.8rem;
+    }
+    
+    .game-food-card .nutrition-info {
+        font-size: 0.6rem;
     }
     
     .result-actions {

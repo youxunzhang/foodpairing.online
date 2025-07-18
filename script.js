@@ -701,8 +701,22 @@ function loadGameFoodSelection() {
     const foodSelection = document.getElementById('foodSelection');
     if (!foodSelection) return;
     
-    // 随机选择一些食物供游戏使用
-    const gameFoods = foodsData.sort(() => 0.5 - Math.random()).slice(0, 20);
+    // 随机选择一些食物供游戏使用，确保包含不同类别
+    const categories = ['grains', 'protein', 'dairy', 'fruits', 'vegetables'];
+    let gameFoods = [];
+    
+    categories.forEach(category => {
+        const categoryFoods = foodsData.filter(food => food.category === category);
+        const randomFoods = categoryFoods.sort(() => 0.5 - Math.random()).slice(0, 4);
+        gameFoods = gameFoods.concat(randomFoods);
+    });
+    
+    // 如果总数不足20个，再随机添加一些
+    if (gameFoods.length < 20) {
+        const remainingFoods = foodsData.filter(food => !gameFoods.includes(food));
+        const additionalFoods = remainingFoods.sort(() => 0.5 - Math.random()).slice(0, 20 - gameFoods.length);
+        gameFoods = gameFoods.concat(additionalFoods);
+    }
     
     foodSelection.innerHTML = '';
     gameFoods.forEach(food => {
@@ -720,6 +734,24 @@ function createGameFoodCard(food) {
     card.innerHTML = `
         <div class="emoji">${food.emoji}</div>
         <div class="name">${food.name}</div>
+        <div class="nutrition-info">
+            <div class="nutrition-item">
+                <span class="label">热量:</span>
+                <span class="value">${food.calories} kcal</span>
+            </div>
+            <div class="nutrition-item">
+                <span class="label">蛋白质:</span>
+                <span class="value">${food.protein}g</span>
+            </div>
+            <div class="nutrition-item">
+                <span class="label">碳水:</span>
+                <span class="value">${food.carbs}g</span>
+            </div>
+            <div class="nutrition-item">
+                <span class="label">脂肪:</span>
+                <span class="value">${food.fat}g</span>
+            </div>
+        </div>
     `;
     
     card.addEventListener('click', () => toggleGameFoodSelection(food));

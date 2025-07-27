@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食物库测试 - 营养早餐</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .test-header {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            color: white;
+            margin-bottom: 2rem;
+        }
+        .test-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .status-card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .status-title {
+            color: #ff6b6b;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        .status-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .status-success { color: #28a745; }
+        .status-error { color: #dc3545; }
+        .status-info { color: #17a2b8; }
+        .food-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .food-card {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        .food-card:hover {
+            transform: translateY(-5px);
+        }
+        .food-emoji {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        .food-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .food-category {
+            color: #666;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-header">
+        <h1>🍽️ 食物库功能测试</h1>
+        <p>验证食物库页面各项功能是否正常工作</p>
+    </div>
+
+    <div class="test-section">
+        <div class="status-card">
+            <div class="status-title">📊 数据加载状态</div>
+            <div id="dataStatus">
+                <div class="status-item status-info">正在检查数据...</div>
+            </div>
+        </div>
+
+        <div class="status-card">
+            <div class="status-title">🔧 功能测试</div>
+            <div id="functionStatus">
+                <div class="status-item status-info">正在测试功能...</div>
+            </div>
+        </div>
+
+        <div class="status-card">
+            <div class="status-title">🍎 食物数据预览</div>
+            <div id="foodPreview">
+                <div class="status-item status-info">正在加载食物预览...</div>
+            </div>
+        </div>
+
+        <div class="status-card">
+            <div class="status-title">🔗 快速链接</div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="foods.html" style="background: linear-gradient(135deg, #ff6b6b, #ffa500); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600;">完整食物库页面</a>
+                <a href="debug-food.html" style="background: linear-gradient(135deg, #17a2b8, #20c997); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600;">详细调试页面</a>
+                <a href="test-food-simple.html" style="background: linear-gradient(135deg, #28a745, #20c997); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600;">简单测试页面</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="i18n.js"></script>
+    <script src="foods-data.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        // 测试脚本
+        function updateStatus(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.innerHTML = `<div class="status-item status-${type}">${message}</div>`;
+            }
+        }
+
+        function testDataLoading() {
+            console.log('开始测试数据加载...');
+            
+            // 测试 foodsData
+            if (typeof foodsData !== 'undefined') {
+                updateStatus('dataStatus', `✅ foodsData 加载成功，共 ${foodsData.length} 种食物`, 'success');
+                
+                // 显示前6种食物预览
+                const previewContainer = document.getElementById('foodPreview');
+                if (previewContainer) {
+                    let previewHTML = '<div class="food-preview">';
+                    foodsData.slice(0, 6).forEach(food => {
+                        previewHTML += `
+                            <div class="food-card">
+                                <div class="food-emoji">${food.emoji}</div>
+                                <div class="food-name">${food.name}</div>
+                                <div class="food-category">${food.category}</div>
+                            </div>
+                        `;
+                    });
+                    previewHTML += '</div>';
+                    previewContainer.innerHTML = previewHTML;
+                }
+            } else {
+                updateStatus('dataStatus', '❌ foodsData 未定义', 'error');
+            }
+        }
+
+        function testFunctions() {
+            console.log('开始测试功能...');
+            let functionStatus = '';
+            
+            // 测试关键函数
+            const functions = [
+                { name: 'initializeFoodsPage', func: typeof initializeFoodsPage },
+                { name: 'displayFoods', func: typeof displayFoods },
+                { name: 'createFoodItemCard', func: typeof createFoodItemCard },
+                { name: 'getCategoryName', func: typeof getCategoryName }
+            ];
+            
+            functions.forEach(f => {
+                if (f.func === 'function') {
+                    functionStatus += `<div class="status-item status-success">✅ ${f.name} 函数存在</div>`;
+                } else {
+                    functionStatus += `<div class="status-item status-error">❌ ${f.name} 函数不存在</div>`;
+                }
+            });
+            
+            // 测试全局变量
+            if (typeof filteredFoods !== 'undefined') {
+                functionStatus += `<div class="status-item status-success">✅ filteredFoods 变量存在</div>`;
+            } else {
+                functionStatus += `<div class="status-item status-error">❌ filteredFoods 变量不存在</div>`;
+            }
+            
+            if (typeof currentPage !== 'undefined') {
+                functionStatus += `<div class="status-item status-success">✅ currentPage 变量存在</div>`;
+            } else {
+                functionStatus += `<div class="status-item status-error">❌ currentPage 变量不存在</div>`;
+            }
+            
+            document.getElementById('functionStatus').innerHTML = functionStatus;
+        }
+
+        // 页面加载完成后执行测试
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('测试页面加载完成');
+            
+            setTimeout(() => {
+                testDataLoading();
+                testFunctions();
+                
+                console.log('测试完成');
+            }, 500);
+        });
+    </script>
+</body>
+</html> 

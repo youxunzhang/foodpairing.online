@@ -35,17 +35,17 @@ document.addEventListener('DOMContentLoaded', function() {
 // 初始化应用
 function initializeApp() {
     // 根据当前页面初始化不同的功能
-    let currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    let pageName = window.location.pathname.split('/').pop() || 'index.html';
     
     // 处理服务器路径问题，确保正确识别页面
-    if (!currentPage || currentPage === '' || currentPage === '/') {
-        currentPage = 'index.html';
+    if (!pageName || pageName === '' || pageName === '/') {
+        pageName = 'index.html';
     }
     
     // 移除查询参数和哈希
-    currentPage = currentPage.split('?')[0].split('#')[0];
+    pageName = pageName.split('?')[0].split('#')[0];
     
-    switch(currentPage) {
+    switch(pageName) {
         case 'index.html':
         case 'index':
         case '':

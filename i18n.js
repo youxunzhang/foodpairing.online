@@ -75,6 +75,79 @@ const i18nData = {
             email: "Email"
         },
         
+        // 食物库页面
+        foods: {
+            title: "食物营养库",
+            subtitle: "探索100种常见食物的详细营养信息，为您的健康早餐提供科学参考",
+            categoryFilter: "分类筛选：",
+            allCategories: "全部",
+            grains: "谷物类",
+            protein: "蛋白质类",
+            dairy: "乳制品",
+            fruits: "水果类",
+            vegetables: "蔬菜类",
+            nuts: "坚果类",
+            drinks: "饮品",
+            sortBy: "营养排序：",
+            sortByName: "按名称",
+            sortByCalories: "按热量",
+            sortByProtein: "按蛋白质",
+            sortByCarbs: "按碳水化合物",
+            sortByFat: "按脂肪",
+            sortByFiber: "按纤维"
+        },
+        
+        // 导航
+        nav: {
+            home: "首页",
+            foods: "食物库",
+            game: "营养游戏"
+        },
+        
+        // 营养游戏
+        game: {
+            title: "营养搭配挑战",
+            subtitle: "通过搭配食物完成营养目标，学习健康饮食知识",
+            score: "得分",
+            level: "关卡",
+            time: "时间",
+            start: "开始游戏",
+            pause: "暂停",
+            restart: "重新开始",
+            nutritionTargets: "营养目标",
+            selectFoods: "选择食物",
+            selectedFoods: "已选食物",
+            currentNutrition: "当前营养",
+            clearSelection: "清空选择",
+            checkTarget: "检查目标",
+            howToPlay: "游戏说明",
+            instruction1: {
+                title: "设定目标",
+                desc: "查看左侧的营养目标，了解需要达到的营养要求"
+            },
+            instruction2: {
+                title: "选择食物",
+                desc: "从中间的食物库中选择合适的食物进行搭配"
+            },
+            instruction3: {
+                title: "查看营养",
+                desc: "右侧实时显示当前选择的营养信息"
+            },
+            instruction4: {
+                title: "完成挑战",
+                desc: "点击检查目标，看是否达到营养要求"
+            }
+        },
+        
+        // 营养信息
+        nutrition: {
+            calories: "热量",
+            protein: "蛋白质",
+            carbs: "碳水化合物",
+            fat: "脂肪",
+            fiber: "纤维"
+        },
+        
         // 页脚
         footer: {
             title: "营养早餐",
@@ -180,6 +253,70 @@ const i18nData = {
             whatsapp: "WhatsApp",
             telegram: "Telegram",
             email: "Email"
+        },
+        
+        // Food Library
+        foods: {
+            title: "Food Nutrition Library",
+            subtitle: "Explore detailed nutrition information of 100 common foods for your healthy breakfast",
+            categoryFilter: "Category Filter:",
+            allCategories: "All",
+            grains: "Grains",
+            protein: "Protein",
+            dairy: "Dairy",
+            fruits: "Fruits",
+            vegetables: "Vegetables",
+            nuts: "Nuts",
+            drinks: "Drinks",
+            sortBy: "Sort by:",
+            sortByName: "By Name",
+            sortByCalories: "By Calories",
+            sortByProtein: "By Protein",
+            sortByCarbs: "By Carbohydrates",
+            sortByFat: "By Fat",
+            sortByFiber: "By Fiber"
+        },
+        
+        // Navigation
+        nav: {
+            home: "Home",
+            foods: "Food Library",
+            game: "Nutrition Game"
+        },
+        
+        // Nutrition Game
+        game: {
+            title: "Nutrition Matching Challenge",
+            subtitle: "Complete nutrition goals by matching foods and learn healthy eating knowledge",
+            score: "Score",
+            level: "Level",
+            time: "Time",
+            start: "Start Game",
+            pause: "Pause",
+            restart: "Restart",
+            nutritionTargets: "Nutrition Targets",
+            selectFoods: "Select Foods",
+            selectedFoods: "Selected Foods",
+            currentNutrition: "Current Nutrition",
+            clearSelection: "Clear Selection",
+            checkTarget: "Check Target",
+            howToPlay: "How to Play",
+            instruction1: {
+                title: "Set Goals",
+                desc: "Check the nutrition targets on the left to understand the requirements"
+            },
+            instruction2: {
+                title: "Select Foods",
+                desc: "Choose suitable foods from the food library in the middle"
+            },
+            instruction3: {
+                title: "View Nutrition",
+                desc: "Real-time nutrition information is displayed on the right"
+            },
+            instruction4: {
+                title: "Complete Challenge",
+                desc: "Click check target to see if nutrition requirements are met"
+            }
         },
         
         // Footer

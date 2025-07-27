@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>营养游戏 - 营养早餐</title>
+    <title>营养搭配挑战 - 营养早餐</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -25,42 +25,46 @@
                     <a href="game.html" class="nav-link active">营养游戏</a>
                 </li>
             </ul>
+            <div class="language-switcher">
+                <button class="lang-btn active" onclick="switchLanguage('zh')">中文</button>
+                <button class="lang-btn" onclick="switchLanguage('en')">English</button>
+            </div>
         </div>
     </nav>
 
-    <!-- 游戏标题 -->
-    <header class="game-header">
+    <!-- 页面标题 -->
+    <header class="page-header">
         <div class="container">
-            <h1>营养搭配挑战</h1>
-            <p>通过搭配食物完成营养目标，学习健康饮食知识</p>
+            <h1 data-i18n="game.title">营养搭配挑战</h1>
+            <p data-i18n="game.subtitle">通过搭配食物完成营养目标，学习健康饮食知识</p>
             
             <!-- 分享按钮 -->
             <div class="share-section">
-                <h4>分享到社交媒体</h4>
+                <h4 data-i18n="share.title">分享到社交媒体</h4>
                 <div class="share-buttons">
                     <button class="share-btn facebook" onclick="shareToFacebook()" title="Facebook">
                         <span class="share-icon">📘</span>
-                        <span class="share-text">Facebook</span>
+                        <span class="share-text" data-i18n="share.facebook">Facebook</span>
                     </button>
                     <button class="share-btn twitter" onclick="shareToTwitter()" title="Twitter">
                         <span class="share-icon">🐦</span>
-                        <span class="share-text">Twitter</span>
+                        <span class="share-text" data-i18n="share.twitter">Twitter</span>
                     </button>
                     <button class="share-btn linkedin" onclick="shareToLinkedIn()" title="LinkedIn">
                         <span class="share-icon">💼</span>
-                        <span class="share-text">LinkedIn</span>
+                        <span class="share-text" data-i18n="share.linkedin">LinkedIn</span>
                     </button>
                     <button class="share-btn whatsapp" onclick="shareToWhatsApp()" title="WhatsApp">
                         <span class="share-icon">💬</span>
-                        <span class="share-text">WhatsApp</span>
+                        <span class="share-text" data-i18n="share.whatsapp">WhatsApp</span>
                     </button>
                     <button class="share-btn telegram" onclick="shareToTelegram()" title="Telegram">
                         <span class="share-icon">📱</span>
-                        <span class="share-text">Telegram</span>
+                        <span class="share-text" data-i18n="share.telegram">Telegram</span>
                     </button>
                     <button class="share-btn email" onclick="shareToEmail()" title="Email">
                         <span class="share-icon">📧</span>
-                        <span class="share-text">Email</span>
+                        <span class="share-text" data-i18n="share.email">Email</span>
                     </button>
                 </div>
             </div>
@@ -68,170 +72,626 @@
     </header>
 
     <!-- 游戏控制面板 -->
-    <section class="game-controls">
+    <section class="game-header">
         <div class="container">
-            <div class="game-info">
-                <div class="score-board">
-                    <div class="score-item">
-                        <span class="score-label">得分</span>
-                        <span class="score-value" id="score">0</span>
+            <div class="game-controls">
+                <div class="game-info">
+                    <div class="score-board">
+                        <div class="score-item">
+                            <div class="score-label" data-i18n="game.score">得分</div>
+                            <div class="score-value" id="score">0</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label" data-i18n="game.level">关卡</div>
+                            <div class="score-value" id="level">1</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label" data-i18n="game.time">时间</div>
+                            <div class="score-value" id="timer">60</div>
+                        </div>
                     </div>
-                    <div class="score-item">
-                        <span class="score-label">关卡</span>
-                        <span class="score-value" id="level">1</span>
+                    
+                    <div class="game-buttons">
+                        <button class="game-btn primary" id="startBtn" onclick="startGame()" data-i18n="game.start">开始游戏</button>
+                        <button class="game-btn secondary" id="pauseBtn" onclick="pauseGame()" disabled data-i18n="game.pause">暂停</button>
+                        <button class="game-btn secondary" id="restartBtn" onclick="restartGame()" data-i18n="game.restart">重新开始</button>
                     </div>
-                    <div class="score-item">
-                        <span class="score-label">时间</span>
-                        <span class="score-value" id="timer">60</span>
-                    </div>
-                </div>
-                
-                <div class="game-buttons">
-                    <button id="startGame" class="game-btn primary">开始游戏</button>
-                    <button id="pauseGame" class="game-btn secondary" disabled>暂停</button>
-                    <button id="restartGame" class="game-btn secondary">重新开始</button>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 游戏主界面 -->
+    <!-- 游戏主要内容 -->
     <section class="game-main">
         <div class="container">
             <div class="game-layout">
                 <!-- 左侧：营养目标 -->
                 <div class="game-targets">
-                    <h3>营养目标</h3>
+                    <h3 data-i18n="game.nutritionTargets">营养目标</h3>
                     <div class="target-list" id="targetList">
-                        <!-- 目标将通过JavaScript动态加载 -->
+                        <!-- 营养目标将通过JavaScript动态加载 -->
                     </div>
                 </div>
-                
-                <!-- 中间：食物选择区 -->
-                <div class="game-food-area">
-                    <h3>选择食物</h3>
-                    <div class="food-selection" id="foodSelection">
-                        <!-- 食物选项将通过JavaScript动态加载 -->
+
+                <!-- 中间：食物选择 -->
+                <div class="food-selection">
+                    <h3 data-i18n="game.selectFoods">选择食物</h3>
+                    <div class="game-food-grid" id="gameFoodGrid">
+                        <!-- 食物选择卡片将通过JavaScript动态加载 -->
                     </div>
                 </div>
-                
-                <!-- 右侧：当前搭配 -->
-                <div class="game-current">
-                    <h3>当前搭配</h3>
-                    <div class="current-foods" id="currentFoods">
-                        <p class="empty-message">请选择食物开始搭配</p>
+
+                <!-- 右侧：当前选择和营养显示 -->
+                <div class="game-info-panel">
+                    <div class="current-foods">
+                        <h4 data-i18n="game.selectedFoods">已选食物</h4>
+                        <div id="currentFoodsList">
+                            <!-- 当前选择的食物将在这里显示 -->
+                        </div>
+                        <button class="action-btn secondary" onclick="clearGameSelection()" data-i18n="game.clearSelection">清空选择</button>
                     </div>
-                    
-                    <div class="current-nutrition">
-                        <h4>营养分析</h4>
-                        <div class="nutrition-display">
-                            <div class="nutrition-row">
-                                <span>热量:</span>
-                                <span id="currentCalories">0 kcal</span>
-                            </div>
-                            <div class="nutrition-row">
-                                <span>蛋白质:</span>
-                                <span id="currentProtein">0g</span>
-                            </div>
-                            <div class="nutrition-row">
-                                <span>碳水化合物:</span>
-                                <span id="currentCarbs">0g</span>
-                            </div>
-                            <div class="nutrition-row">
-                                <span>脂肪:</span>
-                                <span id="currentFat">0g</span>
-                            </div>
-                            <div class="nutrition-row">
-                                <span>纤维:</span>
-                                <span id="currentFiber">0g</span>
-                            </div>
+
+                    <div class="nutrition-display">
+                        <h4 data-i18n="game.currentNutrition">当前营养</h4>
+                        <div class="nutrition-row">
+                            <span data-i18n="nutrition.calories">热量:</span>
+                            <span id="currentCalories">0 kcal</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span data-i18n="nutrition.protein">蛋白质:</span>
+                            <span id="currentProtein">0g</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span data-i18n="nutrition.carbs">碳水化合物:</span>
+                            <span id="currentCarbs">0g</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span data-i18n="nutrition.fat">脂肪:</span>
+                            <span id="currentFat">0g</span>
+                        </div>
+                        <div class="nutrition-row">
+                            <span data-i18n="nutrition.fiber">纤维:</span>
+                            <span id="currentFiber">0g</span>
                         </div>
                     </div>
-                    
+
                     <div class="game-actions">
-                        <button id="checkTarget" class="action-btn primary" disabled>检查目标</button>
-                        <button id="clearSelection" class="action-btn secondary">清空选择</button>
+                        <button class="action-btn primary" onclick="checkGameTarget()" data-i18n="game.checkTarget">检查目标</button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游戏说明 -->
+    <section class="game-instructions">
+        <div class="container">
+            <h3 data-i18n="game.howToPlay">游戏说明</h3>
+            <div class="instructions-grid">
+                <div class="instruction-card">
+                    <div class="instruction-icon">🎯</div>
+                    <h4 data-i18n="game.instruction1.title">设定目标</h4>
+                    <p data-i18n="game.instruction1.desc">查看左侧的营养目标，了解需要达到的营养要求</p>
+                </div>
+                <div class="instruction-card">
+                    <div class="instruction-icon">🍽️</div>
+                    <h4 data-i18n="game.instruction2.title">选择食物</h4>
+                    <p data-i18n="game.instruction2.desc">从中间的食物库中选择合适的食物进行搭配</p>
+                </div>
+                <div class="instruction-card">
+                    <div class="instruction-icon">📊</div>
+                    <h4 data-i18n="game.instruction3.title">查看营养</h4>
+                    <p data-i18n="game.instruction3.desc">右侧实时显示当前选择的营养信息</p>
+                </div>
+                <div class="instruction-card">
+                    <div class="instruction-icon">✅</div>
+                    <h4 data-i18n="game.instruction4.title">完成挑战</h4>
+                    <p data-i18n="game.instruction4.desc">点击检查目标，看是否达到营养要求</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- 游戏结果模态框 -->
-    <div id="resultModal" class="modal">
-        <div class="modal-content game-result">
-            <div id="resultContent">
+    <div id="gameResultModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeGameModal()">&times;</span>
+            <div id="gameResultContent">
                 <!-- 游戏结果内容将通过JavaScript动态加载 -->
-            </div>
-            <div class="result-actions">
-                <button id="nextLevel" class="action-btn primary">下一关</button>
-                <button id="playAgain" class="action-btn secondary">再玩一次</button>
-                <button id="backToMenu" class="action-btn secondary">返回菜单</button>
             </div>
         </div>
     </div>
-
-    <!-- 游戏说明 -->
-    <section class="game-instructions">
-        <div class="container">
-            <h2>游戏说明</h2>
-            <div class="instructions-grid">
-                <div class="instruction-card">
-                    <div class="instruction-icon">🎯</div>
-                    <h3>目标</h3>
-                    <p>根据给定的营养目标，选择合适的食物进行搭配，尽可能接近目标值</p>
-                </div>
-                <div class="instruction-card">
-                    <div class="instruction-icon">⚡</div>
-                    <h3>得分</h3>
-                    <p>营养值越接近目标，得分越高。完美匹配可获得额外奖励</p>
-                </div>
-                <div class="instruction-card">
-                    <div class="instruction-icon">⏰</div>
-                    <h3>时间</h3>
-                    <p>每关都有时间限制，在时间内完成搭配可获得时间奖励</p>
-                </div>
-                <div class="instruction-card">
-                    <div class="instruction-icon">🏆</div>
-                    <h3>等级</h3>
-                    <p>完成目标后进入下一关，难度逐渐增加，营养目标更加复杂</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- 页脚 -->
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <h3>🍳 营养早餐</h3>
-                    <p>让健康生活从每一顿营养早餐开始</p>
+                    <h3 data-i18n="footer.title">🍳 营养早餐</h3>
+                    <p data-i18n="footer.slogan">让健康生活从每一顿营养早餐开始</p>
                 </div>
                 <div class="footer-section">
-                    <h4>快速链接</h4>
+                    <h4 data-i18n="footer.quickLinks">快速链接</h4>
                     <ul>
-                        <li><a href="index.html">首页</a></li>
-                        <li><a href="foods.html">食物库</a></li>
-                        <li><a href="game.html">营养游戏</a></li>
+                        <li><a href="index.html" data-i18n="nav.home">首页</a></li>
+                        <li><a href="foods.html" data-i18n="nav.foods">食物库</a></li>
+                        <li><a href="game.html" data-i18n="nav.game">营养游戏</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
-                    <h4>联系我们</h4>
-                    <p>📧 邮箱: 0</p>
-                    <p>📱 微信: zhangyouxun2013</p>
-                    <p>📞 电话: 0</p>
+                    <h4 data-i18n="footer.contact">联系我们</h4>
+                    <p>📧 <span data-i18n="footer.email">邮箱</span>: <span data-i18n="footer.emailAddress">0</span></p>
+                    <p>📱 <span data-i18n="footer.wechat">微信</span>: zhangyouxun2013</p>
+                    <p>📞 <span data-i18n="footer.phone">电话</span>: <span data-i18n="footer.phoneNumber">0</span></p>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 营养早餐. 保留所有权利.</p>
-                <p><a href="https://www.seodog.cn" target="_blank" rel="noopener noreferrer">🔗 AI工具导航 - SEOdog.cn</a></p>
+                <p data-i18n="footer.copyright">&copy; 2024 营养早餐. 保留所有权利.</p>
+                <p><a href="https://www.seodog.cn" target="_blank" rel="noopener noreferrer" class="ai-tools-link"><span class="link-icon">🔗</span> <span data-i18n="footer.aiTools">AI工具导航</span> - SEOdog.cn</a></p>
             </div>
         </div>
     </footer>
 
+    <!-- JavaScript文件 -->
     <script src="i18n.js"></script>
     <script src="foods-data.js"></script>
     <script src="script.js"></script>
+    
+    <script>
+        // 游戏相关的全局变量
+        let gameState = {
+            isActive: false,
+            score: 0,
+            level: 1,
+            timeLeft: 60,
+            selectedFoods: [],
+            currentTargets: [],
+            timer: null
+        };
+
+        // 页面特定的JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('营养游戏页面加载完成');
+            
+            // 初始化国际化
+            if (typeof updateLanguage === 'function') {
+                updateLanguage();
+            }
+            
+            // 初始化游戏
+            initializeGame();
+            
+            console.log('营养游戏页面初始化完成');
+        });
+
+        // 初始化游戏
+        function initializeGame() {
+            console.log('初始化游戏...');
+            
+            // 加载游戏关卡
+            loadGameLevel();
+            
+            // 加载食物选择
+            loadGameFoodSelection();
+            
+            // 更新显示
+            updateGameDisplay();
+            updateGameNutritionDisplay();
+            
+            console.log('游戏初始化完成');
+        }
+
+        // 加载游戏关卡
+        function loadGameLevel() {
+            console.log('加载游戏关卡:', gameState.level);
+            
+            // 定义关卡目标
+            const levelTargets = [
+                {
+                    level: 1,
+                    targets: [
+                        { type: 'calories', min: 200, max: 400, label: '热量 200-400 kcal' },
+                        { type: 'protein', min: 10, max: 25, label: '蛋白质 10-25g' }
+                    ]
+                },
+                {
+                    level: 2,
+                    targets: [
+                        { type: 'calories', min: 300, max: 500, label: '热量 300-500 kcal' },
+                        { type: 'protein', min: 15, max: 30, label: '蛋白质 15-30g' },
+                        { type: 'carbs', min: 30, max: 60, label: '碳水化合物 30-60g' }
+                    ]
+                },
+                {
+                    level: 3,
+                    targets: [
+                        { type: 'calories', min: 400, max: 600, label: '热量 400-600 kcal' },
+                        { type: 'protein', min: 20, max: 35, label: '蛋白质 20-35g' },
+                        { type: 'carbs', min: 40, max: 70, label: '碳水化合物 40-70g' },
+                        { type: 'fiber', min: 5, max: 15, label: '纤维 5-15g' }
+                    ]
+                }
+            ];
+
+            // 获取当前关卡目标
+            const currentLevel = levelTargets.find(l => l.level === gameState.level) || levelTargets[0];
+            gameState.currentTargets = currentLevel.targets;
+
+            // 显示目标
+            displayGameTargets();
+        }
+
+        // 显示游戏目标
+        function displayGameTargets() {
+            const targetList = document.getElementById('targetList');
+            if (!targetList) return;
+
+            targetList.innerHTML = '';
+            gameState.currentTargets.forEach(target => {
+                const targetItem = document.createElement('div');
+                targetItem.className = 'target-item';
+                targetItem.innerHTML = `
+                    <h4>${target.label}</h4>
+                    <div class="target-range">目标范围</div>
+                `;
+                targetList.appendChild(targetItem);
+            });
+        }
+
+        // 加载游戏食物选择
+        function loadGameFoodSelection() {
+            console.log('加载游戏食物选择...');
+            
+            if (typeof foodsData === 'undefined') {
+                console.error('foodsData 未定义');
+                return;
+            }
+
+            const gameFoodGrid = document.getElementById('gameFoodGrid');
+            if (!gameFoodGrid) return;
+
+            // 选择一些适合游戏的食物
+            const gameFoods = foodsData.slice(0, 20); // 取前20种食物
+
+            gameFoodGrid.innerHTML = '';
+            gameFoods.forEach(food => {
+                const foodCard = createGameFoodCard(food);
+                gameFoodGrid.appendChild(foodCard);
+            });
+
+            console.log('游戏食物选择加载完成');
+        }
+
+        // 创建游戏食物卡片
+        function createGameFoodCard(food) {
+            const card = document.createElement('div');
+            card.className = 'game-food-card';
+            card.setAttribute('data-food-id', food.id);
+            
+            card.innerHTML = `
+                <div class="emoji">${food.emoji}</div>
+                <div class="name">${food.name}</div>
+                <div class="nutrition-info">
+                    <div class="nutrition-item">
+                        <span class="label">热量:</span>
+                        <span class="value">${food.calories}kcal</span>
+                    </div>
+                    <div class="nutrition-item">
+                        <span class="label">蛋白质:</span>
+                        <span class="value">${food.protein}g</span>
+                    </div>
+                </div>
+            `;
+            
+            card.addEventListener('click', () => toggleGameFoodSelection(food));
+            
+            return card;
+        }
+
+        // 切换游戏食物选择
+        function toggleGameFoodSelection(food) {
+            const existingIndex = gameState.selectedFoods.findIndex(f => f.id === food.id);
+            
+            if (existingIndex >= 0) {
+                // 移除食物
+                gameState.selectedFoods.splice(existingIndex, 1);
+                document.querySelector(`[data-food-id="${food.id}"]`).classList.remove('selected');
+            } else {
+                // 添加食物
+                gameState.selectedFoods.push(food);
+                document.querySelector(`[data-food-id="${food.id}"]`).classList.add('selected');
+            }
+            
+            updateGameCurrentFoods();
+            updateGameNutritionDisplay();
+        }
+
+        // 更新当前选择的食物显示
+        function updateGameCurrentFoods() {
+            const currentFoodsList = document.getElementById('currentFoodsList');
+            if (!currentFoodsList) return;
+
+            currentFoodsList.innerHTML = '';
+            gameState.selectedFoods.forEach(food => {
+                const foodItem = document.createElement('div');
+                foodItem.className = 'current-food-item';
+                foodItem.innerHTML = `
+                    <span>${food.emoji} ${food.name}</span>
+                    <button onclick="removeGameFood(${food.id})" class="remove-btn">×</button>
+                `;
+                currentFoodsList.appendChild(foodItem);
+            });
+        }
+
+        // 移除游戏食物
+        function removeGameFood(foodId) {
+            gameState.selectedFoods = gameState.selectedFoods.filter(f => f.id !== foodId);
+            document.querySelector(`[data-food-id="${foodId}"]`).classList.remove('selected');
+            updateGameCurrentFoods();
+            updateGameNutritionDisplay();
+        }
+
+        // 清空游戏选择
+        function clearGameSelection() {
+            gameState.selectedFoods = [];
+            document.querySelectorAll('.game-food-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            updateGameCurrentFoods();
+            updateGameNutritionDisplay();
+        }
+
+        // 更新游戏营养显示
+        function updateGameNutritionDisplay() {
+            const nutrition = calculateGameNutrition(gameState.selectedFoods);
+            
+            document.getElementById('currentCalories').textContent = `${nutrition.calories} kcal`;
+            document.getElementById('currentProtein').textContent = `${nutrition.protein}g`;
+            document.getElementById('currentCarbs').textContent = `${nutrition.carbs}g`;
+            document.getElementById('currentFat').textContent = `${nutrition.fat}g`;
+            document.getElementById('currentFiber').textContent = `${nutrition.fiber}g`;
+        }
+
+        // 计算游戏营养
+        function calculateGameNutrition(foods) {
+            return foods.reduce((total, food) => {
+                total.calories += food.calories;
+                total.protein += food.protein;
+                total.carbs += food.carbs;
+                total.fat += food.fat;
+                total.fiber += food.fiber || 0;
+                return total;
+            }, { calories: 0, protein: 0, carbs: 0, fat: 0, fiber: 0 });
+        }
+
+        // 开始游戏
+        function startGame() {
+            console.log('开始游戏');
+            gameState.isActive = true;
+            gameState.timeLeft = 60;
+            
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('pauseBtn').disabled = false;
+            
+            // 开始计时器
+            gameState.timer = setInterval(() => {
+                gameState.timeLeft--;
+                updateGameDisplay();
+                
+                if (gameState.timeLeft <= 0) {
+                    endGame();
+                }
+            }, 1000);
+            
+            updateGameDisplay();
+        }
+
+        // 暂停游戏
+        function pauseGame() {
+            console.log('暂停游戏');
+            gameState.isActive = false;
+            
+            if (gameState.timer) {
+                clearInterval(gameState.timer);
+                gameState.timer = null;
+            }
+            
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('pauseBtn').disabled = true;
+        }
+
+        // 重新开始游戏
+        function restartGame() {
+            console.log('重新开始游戏');
+            
+            // 停止当前游戏
+            if (gameState.timer) {
+                clearInterval(gameState.timer);
+                gameState.timer = null;
+            }
+            
+            // 重置游戏状态
+            gameState = {
+                isActive: false,
+                score: 0,
+                level: 1,
+                timeLeft: 60,
+                selectedFoods: [],
+                currentTargets: [],
+                timer: null
+            };
+            
+            // 重新初始化
+            initializeGame();
+            
+            // 重置按钮状态
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('pauseBtn').disabled = true;
+        }
+
+        // 更新游戏显示
+        function updateGameDisplay() {
+            document.getElementById('score').textContent = gameState.score;
+            document.getElementById('level').textContent = gameState.level;
+            document.getElementById('timer').textContent = gameState.timeLeft;
+        }
+
+        // 检查游戏目标
+        function checkGameTarget() {
+            console.log('检查游戏目标');
+            
+            if (gameState.selectedFoods.length === 0) {
+                showToast('请先选择一些食物！');
+                return;
+            }
+            
+            const nutrition = calculateGameNutrition(gameState.selectedFoods);
+            let allTargetsMet = true;
+            let metTargets = 0;
+            
+            // 检查每个目标
+            gameState.currentTargets.forEach(target => {
+                const value = nutrition[target.type];
+                const isMet = value >= target.min && value <= target.max;
+                
+                if (isMet) {
+                    metTargets++;
+                } else {
+                    allTargetsMet = false;
+                }
+            });
+            
+            // 计算得分
+            const targetScore = Math.floor((metTargets / gameState.currentTargets.length) * 100);
+            gameState.score += targetScore;
+            
+            // 显示结果
+            showGameResult(targetScore, allTargetsMet, nutrition);
+            
+            updateGameDisplay();
+        }
+
+        // 显示游戏结果
+        function showGameResult(score, allTargetsMet, nutrition) {
+            const modal = document.getElementById('gameResultModal');
+            const content = document.getElementById('gameResultContent');
+            
+            if (!modal || !content) return;
+            
+            const resultHTML = `
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">
+                        ${allTargetsMet ? '🎉' : '📊'}
+                    </div>
+                    <h2 style="color: ${allTargetsMet ? '#28a745' : '#ffc107'}; margin-bottom: 15px;">
+                        ${allTargetsMet ? '恭喜！目标达成！' : '继续努力！'}
+                    </h2>
+                    <p style="color: #666; margin-bottom: 20px;">
+                        本次得分: ${score} 分
+                    </p>
+                    
+                    <div style="background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                        <h4 style="margin-bottom: 10px;">当前营养值</h4>
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; text-align: left;">
+                            <div>热量: ${nutrition.calories} kcal</div>
+                            <div>蛋白质: ${nutrition.protein}g</div>
+                            <div>碳水化合物: ${nutrition.carbs}g</div>
+                            <div>脂肪: ${nutrition.fat}g</div>
+                            <div>纤维: ${nutrition.fiber}g</div>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 10px; justify-content: center;">
+                        <button onclick="closeGameModal()" style="background: linear-gradient(135deg, #ff6b6b, #ffa500); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 600;">
+                            继续游戏
+                        </button>
+                        ${allTargetsMet ? `
+                            <button onclick="nextLevel()" style="background: linear-gradient(135deg, #28a745, #20c997); color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 600;">
+                                下一关
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+            
+            content.innerHTML = resultHTML;
+            modal.style.display = 'block';
+        }
+
+        // 关闭游戏结果模态框
+        function closeGameModal() {
+            const modal = document.getElementById('gameResultModal');
+            if (modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        // 下一关
+        function nextLevel() {
+            gameState.level++;
+            closeGameModal();
+            clearGameSelection();
+            loadGameLevel();
+            updateGameDisplay();
+            
+            if (gameState.level > 3) {
+                showToast('恭喜通关！你已经完成了所有关卡！');
+            }
+        }
+
+        // 结束游戏
+        function endGame() {
+            console.log('游戏结束');
+            
+            if (gameState.timer) {
+                clearInterval(gameState.timer);
+                gameState.timer = null;
+            }
+            
+            gameState.isActive = false;
+            document.getElementById('startBtn').disabled = false;
+            document.getElementById('pauseBtn').disabled = true;
+            
+            showToast(`游戏结束！最终得分: ${gameState.score} 分`);
+        }
+
+        // 显示提示信息
+        function showToast(message) {
+            // 创建toast元素
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: linear-gradient(135deg, #ff6b6b, #ffa500);
+                color: white;
+                padding: 15px 20px;
+                border-radius: 25px;
+                box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+                z-index: 10000;
+                font-weight: 600;
+                animation: slideIn 0.3s ease;
+            `;
+            toast.textContent = message;
+            
+            // 添加动画样式
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes slideIn {
+                    from { transform: translateX(100%); opacity: 0; }
+                    to { transform: translateX(0); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+            
+            document.body.appendChild(toast);
+            
+            // 3秒后移除
+            setTimeout(() => {
+                toast.remove();
+                style.remove();
+            }, 3000);
+        }
+    </script>
 </body>
 </html> 

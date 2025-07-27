@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>功能测试 - 营养早餐</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .success {
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>营养早餐网站功能测试</h1>
+    
+    <div class="test-section">
+        <h2>基础功能测试</h2>
+        <div id="basicTest">
+            <p>正在测试基础功能...</p>
+        </div>
+        <button onclick="runBasicTest()">重新测试</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>数据加载测试</h2>
+        <div id="dataTest">
+            <p>正在测试数据加载...</p>
+        </div>
+        <button onclick="runDataTest()">重新测试</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>页面导航测试</h2>
+        <div id="navigationTest">
+            <p>正在测试页面导航...</p>
+        </div>
+        <button onclick="runNavigationTest()">重新测试</button>
+    </div>
+    
+    <div class="test-section">
+        <h2>游戏功能测试</h2>
+        <div id="gameTest">
+            <p>正在测试游戏功能...</p>
+        </div>
+        <button onclick="runGameTest()">重新测试</button>
+    </div>
+
+    <script src="foods-data.js"></script>
+    <script src="i18n.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // 基础功能测试
+        function runBasicTest() {
+            const testDiv = document.getElementById('basicTest');
+            testDiv.innerHTML = '<p>正在测试基础功能...</p>';
+            
+            try {
+                // 测试全局变量
+                if (typeof foodsData !== 'undefined') {
+                    testDiv.innerHTML += '<p class="success">✓ foodsData 数据加载成功</p>';
+                } else {
+                    testDiv.innerHTML += '<p class="error">✗ foodsData 数据加载失败</p>';
+                }
+                
+                if (typeof gameLevels !== 'undefined') {
+                    testDiv.innerHTML += '<p class="success">✓ gameLevels 数据加载成功</p>';
+                } else {
+                    testDiv.innerHTML += '<p class="error">✗ gameLevels 数据加载失败</p>';
+                }
+                
+                if (typeof i18nData !== 'undefined') {
+                    testDiv.innerHTML += '<p class="success">✓ i18nData 数据加载成功</p>';
+                } else {
+                    testDiv.innerHTML += '<p class="error">✗ i18nData 数据加载失败</p>';
+                }
+                
+                testDiv.innerHTML += '<p class="success">✓ 基础功能测试完成</p>';
+            } catch (error) {
+                testDiv.innerHTML += `<p class="error">✗ 基础功能测试失败: ${error.message}</p>`;
+            }
+        }
+        
+        // 数据加载测试
+        function runDataTest() {
+            const testDiv = document.getElementById('dataTest');
+            testDiv.innerHTML = '<p>正在测试数据加载...</p>';
+            
+            try {
+                if (foodsData && foodsData.length > 0) {
+                    testDiv.innerHTML += `<p class="success">✓ 食物数据加载成功，共 ${foodsData.length} 种食物</p>`;
+                } else {
+                    testDiv.innerHTML += '<p class="error">✗ 食物数据为空</p>';
+                }
+                
+                if (gameLevels && gameLevels.length > 0) {
+                    testDiv.innerHTML += `<p class="success">✓ 游戏关卡数据加载成功，共 ${gameLevels.length} 个关卡</p>`;
+                } else {
+                    testDiv.innerHTML += '<p class="error">✗ 游戏关卡数据为空</p>';
+                }
+                
+                testDiv.innerHTML += '<p class="success">✓ 数据加载测试完成</p>';
+            } catch (error) {
+                testDiv.innerHTML += `<p class="error">✗ 数据加载测试失败: ${error.message}</p>`;
+            }
+        }
+        
+        // 页面导航测试
+        function runNavigationTest() {
+            const testDiv = document.getElementById('navigationTest');
+            testDiv.innerHTML = '<p>正在测试页面导航...</p>';
+            
+            try {
+                const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+                testDiv.innerHTML += `<p class="success">✓ 当前页面: ${currentPage}</p>`;
+                
+                // 测试路径解析
+                let testPath = window.location.pathname.split('/').pop() || 'index.html';
+                if (!testPath || testPath === '' || testPath === '/') {
+                    testPath = 'index.html';
+                }
+                testPath = testPath.split('?')[0].split('#')[0];
+                testDiv.innerHTML += `<p class="success">✓ 路径解析: ${testPath}</p>`;
+                
+                testDiv.innerHTML += '<p class="success">✓ 页面导航测试完成</p>';
+            } catch (error) {
+                testDiv.innerHTML += `<p class="error">✗ 页面导航测试失败: ${error.message}</p>`;
+            }
+        }
+        
+        // 游戏功能测试
+        function runGameTest() {
+            const testDiv = document.getElementById('gameTest');
+            testDiv.innerHTML = '<p>正在测试游戏功能...</p>';
+            
+            try {
+                // 测试游戏关卡数据
+                if (gameLevels && gameLevels[0]) {
+                    const firstLevel = gameLevels[0];
+                    testDiv.innerHTML += `<p class="success">✓ 第一关数据: ${firstLevel.description}</p>`;
+                    testDiv.innerHTML += `<p class="success">✓ 时间限制: ${firstLevel.timeLimit} 秒</p>`;
+                } else {
+                    testDiv.innerHTML += '<p class="error">✗ 游戏关卡数据无效</p>';
+                }
+                
+                // 测试营养计算函数
+                if (typeof calculateTotalNutrition === 'function') {
+                    const testFoods = foodsData.slice(0, 2);
+                    const nutrition = calculateTotalNutrition(testFoods);
+                    testDiv.innerHTML += `<p class="success">✓ 营养计算功能正常，测试食物营养: ${Math.round(nutrition.calories)} kcal</p>`;
+                } else {
+                    testDiv.innerHTML += '<p class="error">✗ 营养计算函数未定义</p>';
+                }
+                
+                testDiv.innerHTML += '<p class="success">✓ 游戏功能测试完成</p>';
+            } catch (error) {
+                testDiv.innerHTML += `<p class="error">✗ 游戏功能测试失败: ${error.message}</p>`;
+            }
+        }
+        
+        // 页面加载时自动运行测试
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                runBasicTest();
+                runDataTest();
+                runNavigationTest();
+                runGameTest();
+            }, 500);
+        });
+    </script>
+</body>
+</html> 

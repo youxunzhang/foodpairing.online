@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>营养游戏 - 营养早餐</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🍳 营养早餐</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="foods.html" class="nav-link">食物库</a>
+                </li>
+                <li class="nav-item">
+                    <a href="game.html" class="nav-link active">营养游戏</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 游戏标题 -->
+    <header class="game-header">
+        <div class="container">
+            <h1>营养搭配挑战</h1>
+            <p>通过搭配食物完成营养目标，学习健康饮食知识</p>
+            
+            <!-- 分享按钮 -->
+            <div class="share-section">
+                <h4>分享到社交媒体</h4>
+                <div class="share-buttons">
+                    <button class="share-btn facebook" onclick="shareToFacebook()" title="Facebook">
+                        <span class="share-icon">📘</span>
+                        <span class="share-text">Facebook</span>
+                    </button>
+                    <button class="share-btn twitter" onclick="shareToTwitter()" title="Twitter">
+                        <span class="share-icon">🐦</span>
+                        <span class="share-text">Twitter</span>
+                    </button>
+                    <button class="share-btn linkedin" onclick="shareToLinkedIn()" title="LinkedIn">
+                        <span class="share-icon">💼</span>
+                        <span class="share-text">LinkedIn</span>
+                    </button>
+                    <button class="share-btn whatsapp" onclick="shareToWhatsApp()" title="WhatsApp">
+                        <span class="share-icon">💬</span>
+                        <span class="share-text">WhatsApp</span>
+                    </button>
+                    <button class="share-btn telegram" onclick="shareToTelegram()" title="Telegram">
+                        <span class="share-icon">📱</span>
+                        <span class="share-text">Telegram</span>
+                    </button>
+                    <button class="share-btn email" onclick="shareToEmail()" title="Email">
+                        <span class="share-icon">📧</span>
+                        <span class="share-text">Email</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 游戏控制面板 -->
+    <section class="game-controls">
+        <div class="container">
+            <div class="game-info">
+                <div class="score-board">
+                    <div class="score-item">
+                        <span class="score-label">得分</span>
+                        <span class="score-value" id="score">0</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">关卡</span>
+                        <span class="score-value" id="level">1</span>
+                    </div>
+                    <div class="score-item">
+                        <span class="score-label">时间</span>
+                        <span class="score-value" id="timer">60</span>
+                    </div>
+                </div>
+                
+                <div class="game-buttons">
+                    <button id="startGame" class="game-btn primary">开始游戏</button>
+                    <button id="pauseGame" class="game-btn secondary" disabled>暂停</button>
+                    <button id="restartGame" class="game-btn secondary">重新开始</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游戏主界面 -->
+    <section class="game-main">
+        <div class="container">
+            <div class="game-layout">
+                <!-- 左侧：营养目标 -->
+                <div class="game-targets">
+                    <h3>营养目标</h3>
+                    <div class="target-list" id="targetList">
+                        <!-- 目标将通过JavaScript动态加载 -->
+                    </div>
+                </div>
+                
+                <!-- 中间：食物选择区 -->
+                <div class="game-food-area">
+                    <h3>选择食物</h3>
+                    <div class="food-selection" id="foodSelection">
+                        <!-- 食物选项将通过JavaScript动态加载 -->
+                    </div>
+                </div>
+                
+                <!-- 右侧：当前搭配 -->
+                <div class="game-current">
+                    <h3>当前搭配</h3>
+                    <div class="current-foods" id="currentFoods">
+                        <p class="empty-message">请选择食物开始搭配</p>
+                    </div>
+                    
+                    <div class="current-nutrition">
+                        <h4>营养分析</h4>
+                        <div class="nutrition-display">
+                            <div class="nutrition-row">
+                                <span>热量:</span>
+                                <span id="currentCalories">0 kcal</span>
+                            </div>
+                            <div class="nutrition-row">
+                                <span>蛋白质:</span>
+                                <span id="currentProtein">0g</span>
+                            </div>
+                            <div class="nutrition-row">
+                                <span>碳水化合物:</span>
+                                <span id="currentCarbs">0g</span>
+                            </div>
+                            <div class="nutrition-row">
+                                <span>脂肪:</span>
+                                <span id="currentFat">0g</span>
+                            </div>
+                            <div class="nutrition-row">
+                                <span>纤维:</span>
+                                <span id="currentFiber">0g</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="game-actions">
+                        <button id="checkTarget" class="action-btn primary" disabled>检查目标</button>
+                        <button id="clearSelection" class="action-btn secondary">清空选择</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 游戏结果模态框 -->
+    <div id="resultModal" class="modal">
+        <div class="modal-content game-result">
+            <div id="resultContent">
+                <!-- 游戏结果内容将通过JavaScript动态加载 -->
+            </div>
+            <div class="result-actions">
+                <button id="nextLevel" class="action-btn primary">下一关</button>
+                <button id="playAgain" class="action-btn secondary">再玩一次</button>
+                <button id="backToMenu" class="action-btn secondary">返回菜单</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 游戏说明 -->
+    <section class="game-instructions">
+        <div class="container">
+            <h2>游戏说明</h2>
+            <div class="instructions-grid">
+                <div class="instruction-card">
+                    <div class="instruction-icon">🎯</div>
+                    <h3>目标</h3>
+                    <p>根据给定的营养目标，选择合适的食物进行搭配，尽可能接近目标值</p>
+                </div>
+                <div class="instruction-card">
+                    <div class="instruction-icon">⚡</div>
+                    <h3>得分</h3>
+                    <p>营养值越接近目标，得分越高。完美匹配可获得额外奖励</p>
+                </div>
+                <div class="instruction-card">
+                    <div class="instruction-icon">⏰</div>
+                    <h3>时间</h3>
+                    <p>每关都有时间限制，在时间内完成搭配可获得时间奖励</p>
+                </div>
+                <div class="instruction-card">
+                    <div class="instruction-icon">🏆</div>
+                    <h3>等级</h3>
+                    <p>完成目标后进入下一关，难度逐渐增加，营养目标更加复杂</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🍳 营养早餐</h3>
+                    <p>让健康生活从每一顿营养早餐开始</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="foods.html">食物库</a></li>
+                        <li><a href="game.html">营养游戏</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <p>📧 邮箱: 0</p>
+                    <p>📱 微信: zhangyouxun2013</p>
+                    <p>📞 电话: 0</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 营养早餐. 保留所有权利.</p>
+                <p><a href="https://www.seodog.cn" target="_blank" rel="noopener noreferrer">🔗 AI工具导航 - SEOdog.cn</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="i18n.js"></script>
+    <script src="foods-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

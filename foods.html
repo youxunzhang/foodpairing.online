@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食物库 - 营养早餐</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🍳 营养早餐</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="foods.html" class="nav-link active">食物库</a>
+                </li>
+                <li class="nav-item">
+                    <a href="game.html" class="nav-link">营养游戏</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <header class="page-header">
+        <div class="container">
+            <h1>食物营养库</h1>
+            <p>探索100种常见食物的详细营养信息，为您的健康早餐提供科学参考</p>
+            
+            <!-- 分享按钮 -->
+            <div class="share-section">
+                <h4>分享到社交媒体</h4>
+                <div class="share-buttons">
+                    <button class="share-btn facebook" onclick="shareToFacebook()" title="Facebook">
+                        <span class="share-icon">📘</span>
+                        <span class="share-text">Facebook</span>
+                    </button>
+                    <button class="share-btn twitter" onclick="shareToTwitter()" title="Twitter">
+                        <span class="share-icon">🐦</span>
+                        <span class="share-text">Twitter</span>
+                    </button>
+                    <button class="share-btn linkedin" onclick="shareToLinkedIn()" title="LinkedIn">
+                        <span class="share-icon">💼</span>
+                        <span class="share-text">LinkedIn</span>
+                    </button>
+                    <button class="share-btn whatsapp" onclick="shareToWhatsApp()" title="WhatsApp">
+                        <span class="share-icon">💬</span>
+                        <span class="share-text">WhatsApp</span>
+                    </button>
+                    <button class="share-btn telegram" onclick="shareToTelegram()" title="Telegram">
+                        <span class="share-icon">📱</span>
+                        <span class="share-text">Telegram</span>
+                    </button>
+                    <button class="share-btn email" onclick="shareToEmail()" title="Email">
+                        <span class="share-icon">📧</span>
+                        <span class="share-text">Email</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 搜索和筛选 -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="搜索食物名称..." class="search-input">
+                <button class="search-btn">🔍</button>
+            </div>
+            
+            <div class="filter-container">
+                <div class="filter-group">
+                    <label>分类筛选：</label>
+                    <button class="filter-btn active" data-category="all">全部</button>
+                    <button class="filter-btn" data-category="grains">谷物类</button>
+                    <button class="filter-btn" data-category="protein">蛋白质类</button>
+                    <button class="filter-btn" data-category="dairy">乳制品</button>
+                    <button class="filter-btn" data-category="fruits">水果类</button>
+                    <button class="filter-btn" data-category="vegetables">蔬菜类</button>
+                    <button class="filter-btn" data-category="nuts">坚果类</button>
+                    <button class="filter-btn" data-category="drinks">饮品</button>
+                </div>
+                
+                <div class="filter-group">
+                    <label>营养排序：</label>
+                    <select id="sortSelect" class="sort-select">
+                        <option value="name">按名称</option>
+                        <option value="calories">按热量</option>
+                        <option value="protein">按蛋白质</option>
+                        <option value="carbs">按碳水化合物</option>
+                        <option value="fat">按脂肪</option>
+                        <option value="fiber">按纤维</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 食物展示 -->
+    <section class="foods-section">
+        <div class="container">
+            <div class="foods-grid" id="foodsGrid">
+                <!-- 食物卡片将通过JavaScript动态加载 -->
+            </div>
+            
+            <div class="pagination" id="pagination">
+                <!-- 分页控件将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 食物详情模态框 -->
+    <div id="foodModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div id="modalContent">
+                <!-- 食物详情内容将通过JavaScript动态加载 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>🍳 营养早餐</h3>
+                    <p>让健康生活从每一顿营养早餐开始</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="index.html">首页</a></li>
+                        <li><a href="foods.html">食物库</a></li>
+                        <li><a href="game.html">营养游戏</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <p>📧 邮箱: 0</p>
+                    <p>📱 微信: zhangyouxun2013</p>
+                    <p>📞 电话: 0</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 营养早餐. 保留所有权利.</p>
+                <p><a href="https://www.seodog.cn" target="_blank" rel="noopener noreferrer">🔗 AI工具导航 - SEOdog.cn</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="i18n.js"></script>
+    <script src="foods-data.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 

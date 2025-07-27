@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调试页面 - 营养早餐</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .debug-section {
+            background: white;
+            margin: 20px 0;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .success {
+            color: green;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .warning {
+            color: orange;
+            font-weight: bold;
+        }
+        .info {
+            color: blue;
+            font-weight: bold;
+        }
+        .food-item {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 营养早餐网站调试页面</h1>
+    
+    <div class="debug-section">
+        <h2>📊 基础信息检查</h2>
+        <div id="basicInfo">
+            <p>正在检查基础信息...</p>
+        </div>
+        <button onclick="checkBasicInfo()">重新检查</button>
+    </div>
+    
+    <div class="debug-section">
+        <h2>🍎 食物数据检查</h2>
+        <div id="foodDataInfo">
+            <p>正在检查食物数据...</p>
+        </div>
+        <button onclick="checkFoodData()">重新检查</button>
+        <button onclick="showSampleFoods()">显示示例食物</button>
+    </div>
+    
+    <div class="debug-section">
+        <h2>🎮 游戏数据检查</h2>
+        <div id="gameDataInfo">
+            <p>正在检查游戏数据...</p>
+        </div>
+        <button onclick="checkGameData()">重新检查</button>
+    </div>
+    
+    <div class="debug-section">
+        <h2>🌐 页面路径检查</h2>
+        <div id="pathInfo">
+            <p>正在检查页面路径...</p>
+        </div>
+        <button onclick="checkPathInfo()">重新检查</button>
+    </div>
+    
+    <div class="debug-section">
+        <h2>🔍 控制台日志</h2>
+        <div id="consoleLog">
+            <p>控制台日志将显示在这里...</p>
+        </div>
+        <button onclick="clearConsoleLog()">清空日志</button>
+    </div>
+
+    <script src="i18n.js"></script>
+    <script src="foods-data.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // 重写console.log来捕获日志
+        const originalLog = console.log;
+        const originalError = console.error;
+        const originalWarn = console.warn;
+        
+        function addToConsoleLog(type, message) {
+            const logDiv = document.getElementById('consoleLog');
+            const timestamp = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.innerHTML = `<span style="color: #666;">[${timestamp}]</span> <span class="${type}">${type.toUpperCase()}:</span> ${message}`;
+            logDiv.appendChild(logEntry);
+        }
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addToConsoleLog('info', args.join(' '));
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addToConsoleLog('error', args.join(' '));
+        };
+        
+        console.warn = function(...args) {
+            originalWarn.apply(console, args);
+            addToConsoleLog('warning', args.join(' '));
+        };
+        
+        // 基础信息检查
+        function checkBasicInfo() {
+            const div = document.getElementById('basicInfo');
+            div.innerHTML = '';
+            
+            // 检查文件加载
+            const checks = [
+                { name: 'i18n.js', check: () => typeof i18nData !== 'undefined' },
+                { name: 'foods-data.js', check: () => typeof foodsData !== 'undefined' },
+                { name: 'script.js', check: () => typeof initializeApp === 'function' }
+            ];
+            
+            checks.forEach(item => {
+                const result = item.check();
+                const status = result ? 'success' : 'error';
+                const icon = result ? '✅' : '❌';
+                div.innerHTML += `<p class="${status}">${icon} ${item.name}: ${result ? '已加载' : '未加载'}</p>`;
+            });
+        }
+        
+        // 食物数据检查
+        function checkFoodData() {
+            const div = document.getElementById('foodDataInfo');
+            div.innerHTML = '';
+            
+            if (typeof foodsData === 'undefined') {
+                div.innerHTML = '<p class="error">❌ foodsData 未定义</p>';
+                return;
+            }
+            
+            div.innerHTML += `<p class="success">✅ 食物数据已加载，共 ${foodsData.length} 种食物</p>`;
+            
+            // 检查分类
+            const categories = {};
+            foodsData.forEach(food => {
+                categories[food.category] = (categories[food.category] || 0) + 1;
+            });
+            
+            div.innerHTML += '<h3>分类统计：</h3>';
+            Object.entries(categories).forEach(([category, count]) => {
+                div.innerHTML += `<p>📁 ${category}: ${count} 种食物</p>`;
+            });
+            
+            // 检查数据结构
+            if (foodsData.length > 0) {
+                const sample = foodsData[0];
+                div.innerHTML += '<h3>数据结构示例：</h3>';
+                div.innerHTML += `<pre>${JSON.stringify(sample, null, 2)}</pre>`;
+            }
+        }
+        
+        // 显示示例食物
+        function showSampleFoods() {
+            const div = document.getElementById('foodDataInfo');
+            if (!foodsData || foodsData.length === 0) {
+                div.innerHTML += '<p class="error">❌ 没有食物数据</p>';
+                return;
+            }
+            
+            div.innerHTML += '<h3>前5种食物：</h3>';
+            foodsData.slice(0, 5).forEach(food => {
+                div.innerHTML += `
+                    <div class="food-item">
+                        <strong>${food.emoji} ${food.name}</strong><br>
+                        分类: ${food.category} | 热量: ${food.calories} kcal | 蛋白质: ${food.protein}g
+                    </div>
+                `;
+            });
+        }
+        
+        // 游戏数据检查
+        function checkGameData() {
+            const div = document.getElementById('gameDataInfo');
+            div.innerHTML = '';
+            
+            if (typeof gameLevels === 'undefined') {
+                div.innerHTML = '<p class="error">❌ gameLevels 未定义</p>';
+                return;
+            }
+            
+            div.innerHTML += `<p class="success">✅ 游戏关卡数据已加载，共 ${gameLevels.length} 个关卡</p>`;
+            
+            gameLevels.forEach((level, index) => {
+                div.innerHTML += `
+                    <div class="food-item">
+                        <strong>关卡 ${level.level}</strong>: ${level.description}<br>
+                        时间限制: ${level.timeLimit} 秒
+                    </div>
+                `;
+            });
+        }
+        
+        // 页面路径检查
+        function checkPathInfo() {
+            const div = document.getElementById('pathInfo');
+            div.innerHTML = '';
+            
+            const pathname = window.location.pathname;
+            const hostname = window.location.hostname;
+            const href = window.location.href;
+            
+            div.innerHTML += `<p><strong>当前路径:</strong> ${pathname}</p>`;
+            div.innerHTML += `<p><strong>主机名:</strong> ${hostname}</p>`;
+            div.innerHTML += `<p><strong>完整URL:</strong> ${href}</p>`;
+            
+            // 测试路径解析
+            let currentPage = pathname.split('/').pop() || 'index.html';
+            if (!currentPage || currentPage === '' || currentPage === '/') {
+                currentPage = 'index.html';
+            }
+            currentPage = currentPage.split('?')[0].split('#')[0];
+            
+            div.innerHTML += `<p><strong>解析后的页面:</strong> ${currentPage}</p>`;
+        }
+        
+        // 清空控制台日志
+        function clearConsoleLog() {
+            document.getElementById('consoleLog').innerHTML = '<p>控制台日志已清空...</p>';
+        }
+        
+        // 页面加载时自动运行检查
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('调试页面加载完成');
+            setTimeout(() => {
+                checkBasicInfo();
+                checkFoodData();
+                checkGameData();
+                checkPathInfo();
+            }, 500);
+        });
+    </script>
+</body>
+</html> 

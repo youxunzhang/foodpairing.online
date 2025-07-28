@@ -6,6 +6,7 @@ const i18nData = {
             title: "营养早餐",
             home: "首页",
             foods: "食物库",
+            chinese: "中国美食",
             game: "营养游戏"
         },
         
@@ -13,6 +14,15 @@ const i18nData = {
         header: {
             title: "营养早餐搭配计算器",
             subtitle: "选择您喜欢的食物，查看营养信息并计算搭配效果"
+        },
+        
+        // 计算器
+        calculator: {
+            selectFood: "选择食物",
+            nutritionAnalysis: "营养分析",
+            selectFoodToStart: "请选择食物开始计算营养",
+            nutritionAdvice: "营养建议",
+            selectFoodForAdvice: "选择食物后查看个性化营养建议"
         },
         
         // 计算器
@@ -99,6 +109,7 @@ const i18nData = {
         
         // 导航
         nav: {
+            title: "营养早餐",
             home: "首页",
             foods: "食物库",
             game: "营养游戏"
@@ -137,6 +148,22 @@ const i18nData = {
                 title: "完成挑战",
                 desc: "点击检查目标，看是否达到营养要求"
             }
+        },
+        
+        // 中国美食
+        chinese: {
+            title: "Chinese Regional Cuisine",
+            subtitle: "Explore the rich diversity of Chinese regional specialties and their nutritional information",
+            searchPlaceholder: "Search for dishes...",
+            allRegions: "All Regions",
+            sichuan: "Sichuan",
+            cantonese: "Cantonese",
+            shandong: "Shandong",
+            jiangsu: "Jiangsu",
+            zhejiang: "Zhejiang",
+            fujian: "Fujian",
+            hunan: "Hunan",
+            anhui: "Anhui"
         },
         
         // 营养信息
@@ -186,6 +213,7 @@ const i18nData = {
             title: "Nutrition Breakfast",
             home: "Home",
             foods: "Food Library",
+            chinese: "Chinese Cuisine",
             game: "Nutrition Game"
         },
         
@@ -279,6 +307,7 @@ const i18nData = {
         
         // Navigation
         nav: {
+            title: "Nutrition Breakfast",
             home: "Home",
             foods: "Food Library",
             game: "Nutrition Game"
@@ -353,7 +382,7 @@ const i18nData = {
 };
 
 // 当前语言
-let currentLanguage = 'zh';
+let currentLanguage = 'en';
 
 // 获取翻译文本
 function getText(key) {
@@ -374,12 +403,20 @@ function getText(key) {
 
 // 切换语言
 function switchLanguage(lang) {
-    if (lang === currentLanguage) return;
+    console.log('切换语言到:', lang);
+    
+    if (lang === currentLanguage) {
+        console.log('语言已经是:', lang, '无需切换');
+        return;
+    }
     
     currentLanguage = lang;
+    console.log('当前语言设置为:', currentLanguage);
     
     // 更新所有带有 data-i18n 属性的元素
     const elements = document.querySelectorAll('[data-i18n]');
+    console.log('找到', elements.length, '个需要翻译的元素');
+    
     elements.forEach(element => {
         const key = element.getAttribute('data-i18n');
         const text = getText(key);
@@ -392,10 +429,18 @@ function switchLanguage(lang) {
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.remove('active');
     });
-    document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
+    
+    const activeBtn = document.querySelector(`[data-lang="${lang}"]`);
+    if (activeBtn) {
+        activeBtn.classList.add('active');
+        console.log('已激活按钮:', lang);
+    } else {
+        console.error('找不到语言按钮:', lang);
+    }
     
     // 保存语言偏好到本地存储
     localStorage.setItem('preferredLanguage', lang);
+    console.log('语言偏好已保存到本地存储');
     
     // 重新加载食物数据（如果需要）
     if (typeof loadFoodGrid === 'function') {
@@ -403,29 +448,41 @@ function switchLanguage(lang) {
     }
     
     // 更新营养建议
-    if (selectedFoods && selectedFoods.length > 0) {
-        updateNutritionAdvice(calculateTotalNutrition(selectedFoods));
+    if (typeof selectedFoods !== 'undefined' && selectedFoods && selectedFoods.length > 0) {
+        if (typeof updateNutritionAdvice === 'function' && typeof calculateTotalNutrition === 'function') {
+            updateNutritionAdvice(calculateTotalNutrition(selectedFoods));
+        }
     }
+    
+    console.log('语言切换完成');
 }
 
 // 初始化语言
 function initLanguage() {
+    console.log('开始初始化语言...');
+    
     // 从本地存储获取语言偏好
     const savedLang = localStorage.getItem('preferredLanguage');
     if (savedLang && (savedLang === 'zh' || savedLang === 'en')) {
         currentLanguage = savedLang;
+        console.log('从本地存储恢复语言偏好:', savedLang);
+    } else {
+        console.log('使用默认语言: en');
     }
     
     // 设置初始语言
     switchLanguage(currentLanguage);
     
-    // 绑定语言切换事件
+    // 绑定语言切换事件（备用方案）
     document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.addEventListener('click', () => {
             const lang = btn.getAttribute('data-lang');
+            console.log('按钮点击事件触发，语言:', lang);
             switchLanguage(lang);
         });
     });
+    
+    console.log('语言初始化完成');
 }
 
 // 页面加载完成后初始化语言

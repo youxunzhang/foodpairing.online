@@ -29,6 +29,7 @@ body {
     width: 100%;
     z-index: 1000;
     transition: all 0.3s ease;
+    border-bottom: 1px solid rgba(255, 107, 107, 0.1);
 }
 
 .nav-container {
@@ -44,6 +45,7 @@ body {
     color: #ff6b6b;
     font-size: 1.5rem;
     font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(255, 107, 107, 0.2);
 }
 
 .nav-menu {
@@ -303,23 +305,54 @@ body {
     color: white;
     padding: 100px 0 60px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="header-grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="60" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23header-grain)"/></svg>');
+    opacity: 0.3;
 }
 
 .page-header h1 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 2;
 }
 
 .page-header p {
     font-size: 1.1rem;
     opacity: 0.9;
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 /* 营养板块 */
 .nutrition-section {
     padding: 60px 0;
     background: white;
+    position: relative;
+}
+
+.nutrition-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 107, 0.3), transparent);
 }
 
 .section-title {
@@ -402,7 +435,7 @@ body {
 }
 
 .food-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.02);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     border-color: #ff6b6b;
 }
@@ -411,6 +444,17 @@ body {
     background: linear-gradient(135deg, #ff6b6b, #ffa500);
     color: white;
     transform: scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+    animation: selectedPulse 2s infinite;
+}
+
+@keyframes selectedPulse {
+    0%, 100% {
+        box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+    }
+    50% {
+        box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+    }
 }
 
 .food-card .emoji {
@@ -665,7 +709,7 @@ body {
 }
 
 .food-item-card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-10px) scale(1.02);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
@@ -1124,9 +1168,21 @@ body {
 
 /* 页脚 */
 .footer {
-    background: #2c3e50;
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
     color: white;
     padding: 3rem 0 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 107, 0.3), transparent);
 }
 
 .footer-content {
@@ -1165,7 +1221,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
     color: white;
     text-decoration: none;
     padding: 12px 20px;
@@ -1173,9 +1229,10 @@ body {
     font-weight: 600;
     font-size: 0.95rem;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
     position: relative;
     overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .ai-tools-link::before {
@@ -1191,7 +1248,7 @@ body {
 
 .ai-tools-link:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
     color: white;
 }
 
@@ -1251,6 +1308,11 @@ body {
     .nav-container {
         flex-direction: column;
         gap: 1rem;
+        padding: 1rem;
+    }
+    
+    .nav-logo h2 {
+        font-size: 1.3rem;
     }
     
     .nav-menu {
@@ -1269,6 +1331,14 @@ body {
     
     .hero-content h1 {
         font-size: 2.5rem;
+    }
+    
+    .page-header h1 {
+        font-size: 2rem;
+    }
+    
+    .page-header p {
+        font-size: 1rem;
     }
     
     .nutrition-calculator {
@@ -1391,6 +1461,53 @@ body {
 
 .fade-in-up {
     animation: fadeInUp 0.6s ease;
+}
+
+/* 卡片悬停效果增强 */
+.card-hover-effect {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover-effect:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* 按钮点击效果 */
+.btn-click-effect {
+    transition: all 0.2s ease;
+}
+
+.btn-click-effect:active {
+    transform: scale(0.95);
+}
+
+/* 渐变文字效果 */
+.gradient-text {
+    background: linear-gradient(135deg, #ff6b6b, #ffa500);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 玻璃态效果 */
+.glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* 阴影效果增强 */
+.enhanced-shadow {
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+.enhanced-shadow:hover {
+    box-shadow: 
+        0 10px 25px rgba(0, 0, 0, 0.15),
+        0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 /* 加载动画 */

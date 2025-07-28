@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>食物库测试 - 营养早餐</title>
+    <title>Food Library Test - Nutrition Breakfast</title>
     <link rel="stylesheet" href="styles.css">
     <style>
         .test-container {
@@ -34,14 +34,14 @@
 <body>
     <div class="test-container">
         <div class="test-header">
-            <h1>🍽️ 食物库测试页面</h1>
-            <p>用于快速验证食物库功能是否正常</p>
+            <h1>🍽️ Food Library Test Page</h1>
+            <p>For quick verification of food library functionality</p>
         </div>
 
         <div class="test-status" id="testStatus">
-            <h3>测试状态</h3>
+            <h3>Test Status</h3>
             <div id="statusContent">
-                <div class="status-item status-info">正在加载...</div>
+                <div class="status-item status-info">Loading...</div>
             </div>
         </div>
 
@@ -68,37 +68,37 @@
         }
 
         function testFoodsDisplay() {
-            updateStatus('开始测试食物显示...', 'info');
+            updateStatus('Starting food display test...', 'info');
             
             // 检查数据
             if (typeof foodsData === 'undefined') {
-                updateStatus('❌ foodsData 未定义', 'error');
+                updateStatus('❌ foodsData is undefined', 'error');
                 return;
             }
             
-            updateStatus(`✅ foodsData 已加载，共 ${foodsData.length} 种食物`, 'success');
+            updateStatus(`✅ foodsData loaded, total ${foodsData.length} foods`, 'success');
             
             // 检查函数
             if (typeof displayFoods === 'undefined') {
-                updateStatus('❌ displayFoods 函数未定义', 'error');
+                updateStatus('❌ displayFoods function is undefined', 'error');
                 return;
             }
             
-            updateStatus('✅ displayFoods 函数存在', 'success');
+            updateStatus('✅ displayFoods function exists', 'success');
             
             // 设置全局变量
             window.filteredFoods = foodsData;
             window.currentPage = 1;
             window.itemsPerPage = 12;
             
-            updateStatus('✅ 全局变量已设置', 'success');
+            updateStatus('✅ Global variables set', 'success');
             
             // 尝试显示食物
             try {
                 displayFoods();
-                updateStatus('✅ 食物显示函数执行成功', 'success');
+                updateStatus('✅ Food display function executed successfully', 'success');
             } catch (error) {
-                updateStatus(`❌ 食物显示失败: ${error.message}`, 'error');
+                updateStatus(`❌ Food display failed: ${error.message}`, 'error');
             }
         }
 

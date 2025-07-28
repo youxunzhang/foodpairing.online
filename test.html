@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>功能测试 - 营养早餐</title>
+    <title>Function Test - Nutrition Breakfast</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -38,38 +38,38 @@
     </style>
 </head>
 <body>
-    <h1>营养早餐网站功能测试</h1>
+    <h1>Nutrition Breakfast Website Function Test</h1>
     
     <div class="test-section">
-        <h2>基础功能测试</h2>
+        <h2>Basic Function Test</h2>
         <div id="basicTest">
-            <p>正在测试基础功能...</p>
+            <p>Testing basic functions...</p>
         </div>
-        <button onclick="runBasicTest()">重新测试</button>
+        <button onclick="runBasicTest()">Retest</button>
     </div>
     
     <div class="test-section">
-        <h2>数据加载测试</h2>
+        <h2>Data Loading Test</h2>
         <div id="dataTest">
-            <p>正在测试数据加载...</p>
+            <p>Testing data loading...</p>
         </div>
-        <button onclick="runDataTest()">重新测试</button>
+        <button onclick="runDataTest()">Retest</button>
     </div>
     
     <div class="test-section">
-        <h2>页面导航测试</h2>
+        <h2>Page Navigation Test</h2>
         <div id="navigationTest">
-            <p>正在测试页面导航...</p>
+            <p>Testing page navigation...</p>
         </div>
-        <button onclick="runNavigationTest()">重新测试</button>
+        <button onclick="runNavigationTest()">Retest</button>
     </div>
     
     <div class="test-section">
-        <h2>游戏功能测试</h2>
+        <h2>Game Function Test</h2>
         <div id="gameTest">
-            <p>正在测试游戏功能...</p>
+            <p>Testing game functions...</p>
         </div>
-        <button onclick="runGameTest()">重新测试</button>
+        <button onclick="runGameTest()">Retest</button>
     </div>
 
     <script src="foods-data.js"></script>
@@ -79,26 +79,26 @@
         // 基础功能测试
         function runBasicTest() {
             const testDiv = document.getElementById('basicTest');
-            testDiv.innerHTML = '<p>正在测试基础功能...</p>';
+            testDiv.innerHTML = '<p>Testing basic functions...</p>';
             
             try {
                 // 测试全局变量
                 if (typeof foodsData !== 'undefined') {
-                    testDiv.innerHTML += '<p class="success">✓ foodsData 数据加载成功</p>';
+                    testDiv.innerHTML += '<p class="success">✓ foodsData data loaded successfully</p>';
                 } else {
-                    testDiv.innerHTML += '<p class="error">✗ foodsData 数据加载失败</p>';
+                    testDiv.innerHTML += '<p class="error">✗ foodsData data loading failed</p>';
                 }
                 
                 if (typeof gameLevels !== 'undefined') {
-                    testDiv.innerHTML += '<p class="success">✓ gameLevels 数据加载成功</p>';
+                    testDiv.innerHTML += '<p class="success">✓ gameLevels data loaded successfully</p>';
                 } else {
-                    testDiv.innerHTML += '<p class="error">✗ gameLevels 数据加载失败</p>';
+                    testDiv.innerHTML += '<p class="error">✗ gameLevels data loading failed</p>';
                 }
                 
                 if (typeof i18nData !== 'undefined') {
-                    testDiv.innerHTML += '<p class="success">✓ i18nData 数据加载成功</p>';
+                    testDiv.innerHTML += '<p class="success">✓ i18nData data loaded successfully</p>';
                 } else {
-                    testDiv.innerHTML += '<p class="error">✗ i18nData 数据加载失败</p>';
+                    testDiv.innerHTML += '<p class="error">✗ i18nData data loading failed</p>';
                 }
                 
                 testDiv.innerHTML += '<p class="success">✓ 基础功能测试完成</p>';

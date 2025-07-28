@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语言切换功能测试 - 营养早餐</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 100px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .test-title {
+            text-align: center;
+            color: #ff6b6b;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        .test-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+        .test-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .language-demo {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .status-info {
+            background: #e8f5e8;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #28a745;
+        }
+        .status-error {
+            background: #f8d7da;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #dc3545;
+        }
+        .translation-test {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .translation-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #dee2e6;
+        }
+        .translation-key {
+            font-weight: 600;
+            color: #ff6b6b;
+            margin-bottom: 5px;
+        }
+        .translation-value {
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1 class="test-title">🌐 语言切换功能测试</h1>
+        
+        <div class="test-section">
+            <h3>🔧 语言切换按钮</h3>
+            <div class="language-demo">
+                <div class="language-switcher">
+                    <button class="lang-btn" data-lang="zh" onclick="switchLanguage('zh')">中文</button>
+                    <button class="lang-btn active" data-lang="en" onclick="switchLanguage('en')">English</button>
+                </div>
+            </div>
+            <div id="languageStatus" class="status-info">
+                当前语言: English (en)
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📝 翻译测试</h3>
+            <div class="translation-test">
+                <div class="translation-item">
+                    <div class="translation-key">导航标题</div>
+                    <div class="translation-value" data-i18n="nav.title">营养早餐</div>
+                </div>
+                <div class="translation-item">
+                    <div class="translation-key">页面标题</div>
+                    <div class="translation-value" data-i18n="header.title">营养早餐搭配计算器</div>
+                </div>
+                <div class="translation-item">
+                    <div class="translation-key">页面副标题</div>
+                    <div class="translation-value" data-i18n="header.subtitle">选择您喜欢的食物，查看营养信息并计算搭配效果</div>
+                </div>
+                <div class="translation-item">
+                    <div class="translation-key">计算器标题</div>
+                    <div class="translation-value" data-i18n="calculator.selectFood">选择食物</div>
+                </div>
+                <div class="translation-item">
+                    <div class="translation-key">营养分析</div>
+                    <div class="translation-value" data-i18n="calculator.nutritionAnalysis">营养分析</div>
+                </div>
+                <div class="translation-item">
+                    <div class="translation-key">特色功能标题</div>
+                    <div class="translation-value" data-i18n="features.title">为什么选择营养早餐？</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔍 功能状态</h3>
+            <div id="functionStatus">
+                <div class="status-info">正在检查功能状态...</div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔗 快速链接</h3>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                <a href="index.html" style="background: linear-gradient(135deg, #ff6b6b, #ffa500); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600;">首页</a>
+                <a href="foods.html" style="background: linear-gradient(135deg, #ff6b6b, #ffa500); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600;">食物库</a>
+                <a href="game.html" style="background: linear-gradient(135deg, #ff6b6b, #ffa500); color: white; padding: 10px 20px; border-radius: 25px; text-decoration: none; font-weight: 600;">营养游戏</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="i18n.js"></script>
+    <script>
+        // 测试脚本
+        function updateStatus(elementId, message, type = 'info') {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.className = `status-${type}`;
+                element.innerHTML = message;
+            }
+        }
+
+        function updateLanguageStatus() {
+            const statusElement = document.getElementById('languageStatus');
+            if (statusElement) {
+                const currentLang = typeof currentLanguage !== 'undefined' ? currentLanguage : 'en';
+                const langName = currentLang === 'zh' ? '中文' : 'English';
+                statusElement.innerHTML = `当前语言: ${langName} (${currentLang})`;
+            }
+        }
+
+        function testLanguageFunctions() {
+            console.log('开始测试语言功能...');
+            let functionStatus = '';
+            
+            // 测试关键函数
+            const functions = [
+                { name: 'switchLanguage', func: typeof switchLanguage },
+                { name: 'getText', func: typeof getText },
+                { name: 'initLanguage', func: typeof initLanguage }
+            ];
+            
+            functions.forEach(f => {
+                if (f.func === 'function') {
+                    functionStatus += `<div class="status-info">✅ ${f.name} 函数存在</div>`;
+                } else {
+                    functionStatus += `<div class="status-error">❌ ${f.name} 函数不存在</div>`;
+                }
+            });
+            
+            // 测试全局变量
+            if (typeof currentLanguage !== 'undefined') {
+                functionStatus += `<div class="status-info">✅ currentLanguage 变量存在 (当前值: ${currentLanguage})</div>`;
+            } else {
+                functionStatus += `<div class="status-error">❌ currentLanguage 变量不存在</div>`;
+            }
+            
+            if (typeof i18nData !== 'undefined') {
+                functionStatus += `<div class="status-info">✅ i18nData 数据存在</div>`;
+            } else {
+                functionStatus += `<div class="status-error">❌ i18nData 数据不存在</div>`;
+            }
+            
+            // 测试翻译键
+            const testKeys = ['nav.title', 'header.title', 'calculator.selectFood'];
+            testKeys.forEach(key => {
+                try {
+                    const text = getText(key);
+                    if (text && text !== key) {
+                        functionStatus += `<div class="status-info">✅ 翻译键 "${key}" 正常 (${text})</div>`;
+                    } else {
+                        functionStatus += `<div class="status-error">❌ 翻译键 "${key}" 返回原值</div>`;
+                    }
+                } catch (error) {
+                    functionStatus += `<div class="status-error">❌ 翻译键 "${key}" 出错: ${error.message}</div>`;
+                }
+            });
+            
+            document.getElementById('functionStatus').innerHTML = functionStatus;
+        }
+
+        // 页面加载完成后执行测试
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('语言测试页面加载完成');
+            
+            setTimeout(() => {
+                updateLanguageStatus();
+                testLanguageFunctions();
+                
+                console.log('语言测试完成');
+            }, 500);
+        });
+
+        // 监听语言切换
+        const originalSwitchLanguage = window.switchLanguage;
+        window.switchLanguage = function(lang) {
+            console.log('语言切换被调用:', lang);
+            if (originalSwitchLanguage) {
+                originalSwitchLanguage(lang);
+            }
+            setTimeout(() => {
+                updateLanguageStatus();
+            }, 100);
+        };
+    </script>
+</body>
+</html> 

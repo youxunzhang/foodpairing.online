@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chinese Cuisine - Regional Specialties - Nutrition Breakfast</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .region-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .region-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #ff6b6b;
+        }
+        
+        .region-title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .region-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+        }
+        
+        .dishes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .dish-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .dish-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: #ff6b6b;
+        }
+        
+        .dish-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .dish-emoji {
+            font-size: 2.5rem;
+            margin-right: 1rem;
+        }
+        
+        .dish-info h3 {
+            color: #333;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.3rem;
+        }
+        
+        .dish-info p {
+            color: #666;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        
+        .nutrition-info {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+        }
+        
+        .nutrition-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+        
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .nutrition-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .nutrition-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .nutrition-value {
+            color: #ff6b6b;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .dish-description {
+            color: #666;
+            line-height: 1.6;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .region-filter {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .region-btn {
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .region-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+        
+        .region-btn.active {
+            background: linear-gradient(135deg, #ffa500, #ff6b6b);
+        }
+        
+        .search-section {
+            text-align: center;
+            margin: 2rem 0;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 2rem;
+        }
+        
+        .search-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 1rem 1.5rem;
+            border: 2px solid #eee;
+            border-radius: 25px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+        
+        .search-input:focus {
+            border-color: #ff6b6b;
+        }
+        
+        .stats-section {
+            background: linear-gradient(135deg, #ff6b6b, #ffa500);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            margin: 2rem auto;
+            text-align: center;
+            max-width: 1200px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        
+        .stat-item h3 {
+            font-size: 2.5rem;
+            margin: 0 0 0.5rem 0;
+        }
+        
+        .stat-item p {
+            margin: 0;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 768px) {
+            .dishes-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .region-title {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .region-section {
+                margin: 2rem 1rem;
+                padding: 1.5rem;
+            }
+            
+            .search-section {
+                padding: 0 1rem;
+            }
+            
+            .region-filter {
+                gap: 0.5rem;
+            }
+            
+            .region-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .page-header h1 {
+                font-size: 2rem;
+            }
+            
+            .page-header p {
+                font-size: 1rem;
+            }
+            
+            .share-buttons {
+                gap: 0.3rem;
+            }
+            
+            .share-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
+        }
+        
+        /* AI工具链接样式 - 黑白色 */
+        .ai-tools-link-simple {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #000;
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            border: 1px solid #000;
+        }
+        
+        .ai-tools-link-simple:hover {
+            background: #fff;
+            color: #000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        .ai-tools-link-simple:active {
+            transform: translateY(0);
+        }
+        
+        /* 页面整体样式优化 */
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .page-header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* 分享按钮样式优化 */
+        .share-section {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .share-section h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .share-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+        
+        .share-btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🍳 <span data-i18n="nav.title">营养早餐</span></h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link" data-i18n="nav.home">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="foods.html" class="nav-link" data-i18n="nav.foods">食物库</a>
+                </li>
+                <li class="nav-item">
+                    <a href="chinese-foods.html" class="nav-link active" data-i18n="nav.chinese">中国美食</a>
+                </li>
+                <li class="nav-item">
+                    <a href="game.html" class="nav-link" data-i18n="nav.game">营养游戏</a>
+                </li>
+            </ul>
+            <div class="language-switcher">
+                <button class="lang-btn" data-lang="zh" onclick="switchLanguage('zh')">中文</button>
+                <button class="lang-btn active" data-lang="en" onclick="switchLanguage('en')">English</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面标题 -->
+    <header class="page-header">
+        <div class="header-container">
+            <h1 data-i18n="chinese.title">Chinese Regional Cuisine</h1>
+            <p data-i18n="chinese.subtitle">Explore the rich diversity of Chinese regional specialties and their nutritional information</p>
+            
+            <!-- 分享按钮 -->
+            <div class="share-section">
+                <h4 data-i18n="share.title">Share on Social Media</h4>
+                <div class="share-buttons">
+                    <button class="share-btn facebook" onclick="shareToFacebook()" title="Facebook">
+                        <span class="share-icon">📘</span>
+                        <span class="share-text" data-i18n="share.facebook">Facebook</span>
+                    </button>
+                    <button class="share-btn twitter" onclick="shareToTwitter()" title="Twitter">
+                        <span class="share-icon">🐦</span>
+                        <span class="share-text" data-i18n="share.twitter">Twitter</span>
+                    </button>
+                    <button class="share-btn linkedin" onclick="shareToLinkedIn()" title="LinkedIn">
+                        <span class="share-icon">💼</span>
+                        <span class="share-text" data-i18n="share.linkedin">LinkedIn</span>
+                    </button>
+                    <button class="share-btn whatsapp" onclick="shareToWhatsApp()" title="WhatsApp">
+                        <span class="share-icon">💬</span>
+                        <span class="share-text" data-i18n="share.whatsapp">WhatsApp</span>
+                    </button>
+                    <button class="share-btn telegram" onclick="shareToTelegram()" title="Telegram">
+                        <span class="share-icon">📱</span>
+                        <span class="share-text" data-i18n="share.telegram">Telegram</span>
+                    </button>
+                    <button class="share-btn email" onclick="shareToEmail()" title="Email">
+                        <span class="share-icon">📧</span>
+                        <span class="share-text" data-i18n="share.email">Email</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 统计信息 -->
+    <section class="stats-section">
+        <div class="container">
+            <h2>Chinese Cuisine Statistics</h2>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h3 id="totalDishes">0</h3>
+                    <p>Total Dishes</p>
+                </div>
+                <div class="stat-item">
+                    <h3 id="totalRegions">8</h3>
+                    <p>Culinary Regions</p>
+                </div>
+                <div class="stat-item">
+                    <h3 id="avgCalories">0</h3>
+                    <p>Avg Calories</p>
+                </div>
+                <div class="stat-item">
+                    <h3 id="avgProtein">0</h3>
+                    <p>Avg Protein (g)</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 搜索和筛选 -->
+    <section class="search-section">
+        <div class="container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Search for dishes..." data-i18n="chinese.searchPlaceholder">
+            
+            <div class="region-filter">
+                <button class="region-btn active" data-region="all" data-i18n="chinese.allRegions">All Regions</button>
+                <button class="region-btn" data-region="sichuan" data-i18n="chinese.sichuan">Sichuan</button>
+                <button class="region-btn" data-region="cantonese" data-i18n="chinese.cantonese">Cantonese</button>
+                <button class="region-btn" data-region="shandong" data-i18n="chinese.shandong">Shandong</button>
+                <button class="region-btn" data-region="jiangsu" data-i18n="chinese.jiangsu">Jiangsu</button>
+                <button class="region-btn" data-region="zhejiang" data-i18n="chinese.zhejiang">Zhejiang</button>
+                <button class="region-btn" data-region="fujian" data-i18n="chinese.fujian">Fujian</button>
+                <button class="region-btn" data-region="hunan" data-i18n="chinese.hunan">Hunan</button>
+                <button class="region-btn" data-region="anhui" data-i18n="chinese.anhui">Anhui</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 川菜 -->
+    <section class="region-section" data-region="sichuan">
+        <div class="region-header">
+            <h2 class="region-title">🌶️ Sichuan Cuisine (川菜)</h2>
+            <p class="region-subtitle">Known for its bold flavors, pungency and spiciness, resulting from liberal use of garlic and chili peppers</p>
+        </div>
+        <div class="dishes-grid" id="sichuanDishes">
+            <!-- 川菜数据将通过JavaScript动态加载 -->
+        </div>
+    </section>
+
+    <!-- 粤菜 -->
+    <section class="region-section" data-region="cantonese">
+        <div class="region-header">
+            <h2 class="region-title">🥘 Cantonese Cuisine (粤菜)</h2>
+            <p class="region-subtitle">Characterized by its delicate flavors, fresh ingredients, and emphasis on seafood and dim sum</p>
+        </div>
+        <div class="dishes-grid" id="cantoneseDishes">
+            <!-- 粤菜数据将通过JavaScript动态加载 -->
+        </div>
+    </section>
+
+    <!-- 鲁菜 -->
+    <section class="region-section" data-region="shandong">
+        <div class="region-header">
+            <h2 class="region-title">🍖 Shandong Cuisine (鲁菜)</h2>
+            <p class="region-subtitle">Known for its emphasis on freshness, saltiness, and crispness, with a focus on seafood and clear soups</p>
+        </div>
+        <div class="dishes-grid" id="shandongDishes">
+            <!-- 鲁菜数据将通过JavaScript动态加载 -->
+        </div>
+    </section>
+
+    <!-- 苏菜 -->
+    <section class="region-section" data-region="jiangsu">
+        <div class="region-header">
+            <h2 class="region-title">🦀 Jiangsu Cuisine (苏菜)</h2>
+            <p class="region-subtitle">Features fresh ingredients, elegant presentation, and a balance of sweet and savory flavors</p>
+        </div>
+        <div class="dishes-grid" id="jiangsuDishes">
+            <!-- 苏菜数据将通过JavaScript动态加载 -->
+        </div>
+    </section>
+
+    <!-- 浙菜 -->
+    <section class="region-section" data-region="zhejiang">
+        <div class="region-header">
+            <h2 class="region-title">🐟 Zhejiang Cuisine (浙菜)</h2>
+            <p class="region-subtitle">Known for its fresh, light, and delicate flavors, with an emphasis on seasonal ingredients</p>
+        </div>
+        <div class="dishes-grid" id="zhejiangDishes">
+            <!-- 浙菜数据将通过JavaScript动态加载 -->
+        </div>
+    </section>
+
+    <!-- 闽菜 -->
+    <section class="region-section" data-region="fujian">
+        <div class="region-header">
+            <h2 class="region-title">🦐 Fujian Cuisine (闽菜)</h2>
+            <p class="region-subtitle">Features light, fresh, and slightly sweet flavors, with a focus on seafood and soups</p>
+        </div>
+        <div class="dishes-grid" id="fujianDishes">
+            <!-- 闽菜数据将通过JavaScript动态加载 -->
+        </div>
+    </section>
+
+    <!-- 湘菜 -->
+    <section class="region-section" data-region="hunan">
+        <div class="region-header">
+            <h2 class="region-title">🔥 Hunan Cuisine (湘菜)</h2>
+            <p class="region-subtitle">Known for its hot and sour flavors, with liberal use of chili peppers and pickled vegetables</p>
+        </div>
+        <div class="dishes-grid" id="hunanDishes">
+            <!-- 湘菜数据将通过JavaScript动态加载 -->
+        </div>
+    </section>
+
+    <!-- 徽菜 -->
+    <section class="region-section" data-region="anhui">
+        <div class="region-header">
+            <h2 class="region-title">🏔️ Anhui Cuisine (徽菜)</h2>
+            <p class="region-subtitle">Features wild herbs, game, and preserved vegetables, with a focus on braising and stewing</p>
+        </div>
+        <div class="dishes-grid" id="anhuiDishes">
+            <!-- 徽菜数据将通过JavaScript动态加载 -->
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-i18n="footer.about">About Us</h3>
+                    <p data-i18n="footer.description">Professional nutrition breakfast matching tools to help you scientifically plan healthy breakfast.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer.contact">Contact Us</h3>
+                    <p><span data-i18n="footer.wechat">WeChat:</span> <span data-i18n="footer.wechatId">zhangyouxun2013</span></p>
+                    <p><span data-i18n="footer.phone">Phone:</span> <span data-i18n="footer.phoneNumber">0</span></p>
+                    <p><span data-i18n="footer.email">Email:</span> <span data-i18n="footer.emailAddress">0</span></p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer.quickLinks">Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+                        <li><a href="foods.html" data-i18n="nav.foods">Food Library</a></li>
+                        <li><a href="chinese-foods.html" data-i18n="nav.chinese">Chinese Cuisine</a></li>
+                        <li><a href="game.html" data-i18n="nav.game">Nutrition Game</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 <span data-i18n="footer.copyright">Nutrition Breakfast. All rights reserved.</span></p>
+                <p><a href="https://www.seodog.cn" target="_blank" rel="noopener noreferrer" class="ai-tools-link-simple" data-i18n="footer.aiTools">🔗 AI Tools Navigation - SEOdog.cn</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="i18n.js"></script>
+    <script src="chinese-foods-data.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // 中国美食页面特定的JavaScript
+        let currentRegion = 'all';
+        let searchQuery = '';
+        let allDishes = [];
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                try {
+                    initializeChineseFoodsPage();
+                } catch (error) {
+                    console.error('初始化中国美食页面时出错:', error);
+                }
+            }, 100);
+        });
+
+        // 初始化中国美食页面
+        function initializeChineseFoodsPage() {
+            console.log('开始初始化中国美食页面...');
+            
+            // 检查数据是否加载
+            if (typeof chineseFoodsData === 'undefined') {
+                console.error('chineseFoodsData 未定义！');
+                showToast('中国美食数据加载失败，请刷新页面重试');
+                return;
+            }
+            
+            console.log('中国美食数据已加载，共', chineseFoodsData.length, '道菜');
+            
+            allDishes = chineseFoodsData;
+            loadAllDishes();
+            setupSearchAndFilter();
+            updateStatistics();
+            
+            console.log('中国美食页面初始化完成');
+        }
+
+        // 加载所有菜品
+        function loadAllDishes() {
+            try {
+                console.log('开始加载所有菜品...');
+                
+                // 按地区分组显示菜品
+                const regions = ['sichuan', 'cantonese', 'shandong', 'jiangsu', 'zhejiang', 'fujian', 'hunan', 'anhui'];
+                
+                regions.forEach(region => {
+                    const regionDishes = chineseFoodsData.filter(dish => dish.region === region);
+                    displayRegionDishes(region, regionDishes);
+                });
+                
+                console.log('所有菜品加载完成');
+            } catch (error) {
+                console.error('加载菜品数据时出错:', error);
+                showToast('加载菜品数据失败');
+            }
+        }
+
+        // 显示地区菜品
+        function displayRegionDishes(region, dishes) {
+            const container = document.getElementById(region + 'Dishes');
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            if (dishes.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No dishes available for this region</p>';
+                return;
+            }
+            
+            dishes.forEach(dish => {
+                const dishCard = createDishCard(dish);
+                container.appendChild(dishCard);
+            });
+        }
+
+        // 创建菜品卡片
+        function createDishCard(dish) {
+            const card = document.createElement('div');
+            card.className = 'dish-card';
+            card.setAttribute('data-dish-id', dish.id);
+            
+            card.innerHTML = `
+                <div class="dish-header">
+                    <div class="dish-emoji">${dish.emoji}</div>
+                    <div class="dish-info">
+                        <h3>${dish.name}</h3>
+                        <p>${dish.chineseName} • ${dish.regionName}</p>
+                    </div>
+                </div>
+                
+                <div class="nutrition-info">
+                    <div class="nutrition-title">Nutrition Information (per serving)</div>
+                    <div class="nutrition-grid">
+                        <div class="nutrition-item">
+                            <span class="nutrition-label">Calories:</span>
+                            <span class="nutrition-value">${dish.nutrition.calories} kcal</span>
+                        </div>
+                        <div class="nutrition-item">
+                            <span class="nutrition-label">Protein:</span>
+                            <span class="nutrition-value">${dish.nutrition.protein}g</span>
+                        </div>
+                        <div class="nutrition-item">
+                            <span class="nutrition-label">Carbs:</span>
+                            <span class="nutrition-value">${dish.nutrition.carbs}g</span>
+                        </div>
+                        <div class="nutrition-item">
+                            <span class="nutrition-label">Fat:</span>
+                            <span class="nutrition-value">${dish.nutrition.fat}g</span>
+                        </div>
+                        <div class="nutrition-item">
+                            <span class="nutrition-label">Fiber:</span>
+                            <span class="nutrition-value">${dish.nutrition.fiber}g</span>
+                        </div>
+                        <div class="nutrition-item">
+                            <span class="nutrition-label">Sodium:</span>
+                            <span class="nutrition-value">${dish.nutrition.sodium}mg</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dish-description">
+                    ${dish.description}
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // 设置搜索和筛选
+        function setupSearchAndFilter() {
+            // 搜索功能
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    searchQuery = e.target.value;
+                    filterDishes();
+                });
+            }
+            
+            // 地区筛选
+            const regionBtns = document.querySelectorAll('.region-btn');
+            regionBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const region = btn.getAttribute('data-region');
+                    currentRegion = region;
+                    
+                    // 更新按钮状态
+                    regionBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    filterDishes();
+                });
+            });
+        }
+
+        // 筛选菜品
+        function filterDishes() {
+            let filteredDishes = allDishes;
+            
+            // 按地区筛选
+            if (currentRegion !== 'all') {
+                filteredDishes = filteredDishes.filter(dish => dish.region === currentRegion);
+            }
+            
+            // 按搜索关键词筛选
+            if (searchQuery) {
+                filteredDishes = filteredDishes.filter(dish => 
+                    dish.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    dish.chineseName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    dish.description.toLowerCase().includes(searchQuery.toLowerCase())
+                );
+            }
+            
+            // 显示筛选结果
+            displayFilteredDishes(filteredDishes);
+        }
+
+        // 显示筛选后的菜品
+        function displayFilteredDishes(dishes) {
+            // 隐藏所有地区部分
+            const regionSections = document.querySelectorAll('.region-section');
+            regionSections.forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            if (currentRegion === 'all' && !searchQuery) {
+                // 显示所有地区
+                regionSections.forEach(section => {
+                    section.style.display = 'block';
+                });
+            } else {
+                // 显示筛选结果
+                const resultsSection = document.createElement('section');
+                resultsSection.className = 'region-section';
+                resultsSection.innerHTML = `
+                    <div class="region-header">
+                        <h2 class="region-title">🔍 Search Results</h2>
+                        <p class="region-subtitle">Found ${dishes.length} dishes matching your criteria</p>
+                    </div>
+                    <div class="dishes-grid" id="searchResults">
+                    </div>
+                `;
+                
+                // 移除之前的搜索结果
+                const existingResults = document.querySelector('.region-section[data-region="search"]');
+                if (existingResults) {
+                    existingResults.remove();
+                }
+                
+                resultsSection.setAttribute('data-region', 'search');
+                document.querySelector('.search-section').after(resultsSection);
+                
+                const resultsContainer = document.getElementById('searchResults');
+                resultsContainer.innerHTML = '';
+                
+                dishes.forEach(dish => {
+                    const dishCard = createDishCard(dish);
+                    resultsContainer.appendChild(dishCard);
+                });
+            }
+        }
+
+        // 更新统计信息
+        function updateStatistics() {
+            const totalDishes = allDishes.length;
+            const totalRegions = new Set(allDishes.map(dish => dish.region)).size;
+            const avgCalories = Math.round(allDishes.reduce((sum, dish) => sum + dish.nutrition.calories, 0) / totalDishes);
+            const avgProtein = Math.round(allDishes.reduce((sum, dish) => sum + dish.nutrition.protein, 0) / totalDishes * 10) / 10;
+            
+            document.getElementById('totalDishes').textContent = totalDishes;
+            document.getElementById('totalRegions').textContent = totalRegions;
+            document.getElementById('avgCalories').textContent = avgCalories;
+            document.getElementById('avgProtein').textContent = avgProtein;
+        }
+    </script>
+</body>
+</html> 

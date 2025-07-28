@@ -55,6 +55,10 @@ function initializeApp() {
         case 'foods':
             initializeFoodsPage();
             break;
+        case 'chinese-foods.html':
+        case 'chinese-foods':
+            initializeChineseFoodsPage();
+            break;
         case 'game.html':
         case 'game':
             initializeGamePage();
@@ -122,6 +126,31 @@ function initializeGamePage() {
     loadGameLevel();
     setupGameFoodSelection();
     loadGameFoodSelection();
+}
+
+// 初始化中国美食页面
+function initializeChineseFoodsPage() {
+    try {
+        console.log('开始初始化中国美食页面...');
+        
+        // 检查数据是否加载
+        if (typeof chineseFoodsData === 'undefined') {
+            console.error('chineseFoodsData 未定义！');
+            showToast('中国美食数据加载失败，请刷新页面重试');
+            return;
+        }
+        
+        console.log('中国美食数据已加载，共', chineseFoodsData.length, '道菜');
+        
+        loadAllChineseDishes();
+        setupChineseSearchAndFilter();
+        updateChineseStatistics();
+        
+        console.log('中国美食页面初始化完成');
+    } catch (error) {
+        console.error('初始化中国美食页面时出错:', error);
+        showToast('页面初始化失败，请刷新页面重试');
+    }
 }
 
 // 加载食物分类
@@ -1114,6 +1143,11 @@ function getPageInfo() {
             title = '食物营养库 - 100种常见食物营养信息';
             description = '探索100种常见食物的详细营养信息，为您的健康早餐提供科学参考。';
             break;
+        case 'chinese-foods.html':
+        case 'chinese-foods':
+            title = '中国地方菜系 - 各地特色菜肴营养信息';
+            description = '探索中国八大菜系的特色菜肴，了解各地美食的营养价值和健康特点。';
+            break;
         case 'game.html':
         case 'game':
             title = '营养搭配挑战 - 学习健康饮食知识';
@@ -1248,4 +1282,209 @@ function showToast(message) {
             }
         }, 300);
     }, 3000);
+}
+
+// ==================== 中国美食页面功能 ====================
+
+// 加载所有中国菜品
+function loadAllChineseDishes() {
+    try {
+        console.log('开始加载所有中国菜品...');
+        
+        // 按地区分组显示菜品
+        const regions = ['sichuan', 'cantonese', 'shandong', 'jiangsu', 'zhejiang', 'fujian', 'hunan', 'anhui'];
+        
+        regions.forEach(region => {
+            const regionDishes = chineseFoodsData.filter(dish => dish.region === region);
+            displayRegionDishes(region, regionDishes);
+        });
+        
+        console.log('所有中国菜品加载完成');
+    } catch (error) {
+        console.error('加载中国菜品数据时出错:', error);
+        showToast('加载菜品数据失败');
+    }
+}
+
+// 显示地区菜品
+function displayRegionDishes(region, dishes) {
+    const container = document.getElementById(region + 'Dishes');
+    if (!container) return;
+    
+    container.innerHTML = '';
+    
+    if (dishes.length === 0) {
+        container.innerHTML = '<p style="text-align: center; color: #666; padding: 2rem;">No dishes available for this region</p>';
+        return;
+    }
+    
+    dishes.forEach(dish => {
+        const dishCard = createChineseDishCard(dish);
+        container.appendChild(dishCard);
+    });
+}
+
+// 创建中国菜品卡片
+function createChineseDishCard(dish) {
+    const card = document.createElement('div');
+    card.className = 'dish-card';
+    card.setAttribute('data-dish-id', dish.id);
+    
+    card.innerHTML = `
+        <div class="dish-header">
+            <div class="dish-emoji">${dish.emoji}</div>
+            <div class="dish-info">
+                <h3>${dish.name}</h3>
+                <p>${dish.chineseName} • ${dish.regionName}</p>
+            </div>
+        </div>
+        
+        <div class="nutrition-info">
+            <div class="nutrition-title">Nutrition Information (per serving)</div>
+            <div class="nutrition-grid">
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Calories:</span>
+                    <span class="nutrition-value">${dish.nutrition.calories} kcal</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Protein:</span>
+                    <span class="nutrition-value">${dish.nutrition.protein}g</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Carbs:</span>
+                    <span class="nutrition-value">${dish.nutrition.carbs}g</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Fat:</span>
+                    <span class="nutrition-value">${dish.nutrition.fat}g</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Fiber:</span>
+                    <span class="nutrition-value">${dish.nutrition.fiber}g</span>
+                </div>
+                <div class="nutrition-item">
+                    <span class="nutrition-label">Sodium:</span>
+                    <span class="nutrition-value">${dish.nutrition.sodium}mg</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dish-description">
+            ${dish.description}
+        </div>
+    `;
+    
+    return card;
+}
+
+// 设置中国美食搜索和筛选
+function setupChineseSearchAndFilter() {
+    // 搜索功能
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const searchQuery = e.target.value;
+            filterChineseDishes(searchQuery);
+        });
+    }
+    
+    // 地区筛选
+    const regionBtns = document.querySelectorAll('.region-btn');
+    regionBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const region = btn.getAttribute('data-region');
+            
+            // 更新按钮状态
+            regionBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+            filterChineseDishesByRegion(region);
+        });
+    });
+}
+
+// 筛选中国菜品
+function filterChineseDishes(searchQuery) {
+    let filteredDishes = chineseFoodsData;
+    
+    // 按搜索关键词筛选
+    if (searchQuery) {
+        filteredDishes = filteredDishes.filter(dish => 
+            dish.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            dish.chineseName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            dish.description.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+    }
+    
+    // 显示筛选结果
+    displayFilteredChineseDishes(filteredDishes);
+}
+
+// 按地区筛选中国菜品
+function filterChineseDishesByRegion(region) {
+    let filteredDishes = chineseFoodsData;
+    
+    // 按地区筛选
+    if (region !== 'all') {
+        filteredDishes = filteredDishes.filter(dish => dish.region === region);
+    }
+    
+    // 显示筛选结果
+    displayFilteredChineseDishes(filteredDishes);
+}
+
+// 显示筛选后的中国菜品
+function displayFilteredChineseDishes(dishes) {
+    // 隐藏所有地区部分
+    const regionSections = document.querySelectorAll('.region-section');
+    regionSections.forEach(section => {
+        section.style.display = 'none';
+    });
+    
+    // 显示筛选结果
+    const resultsSection = document.createElement('section');
+    resultsSection.className = 'region-section';
+    resultsSection.innerHTML = `
+        <div class="region-header">
+            <h2 class="region-title">🔍 Search Results</h2>
+            <p class="region-subtitle">Found ${dishes.length} dishes matching your criteria</p>
+        </div>
+        <div class="dishes-grid" id="searchResults">
+        </div>
+    `;
+    
+    // 移除之前的搜索结果
+    const existingResults = document.querySelector('.region-section[data-region="search"]');
+    if (existingResults) {
+        existingResults.remove();
+    }
+    
+    resultsSection.setAttribute('data-region', 'search');
+    document.querySelector('.search-section').after(resultsSection);
+    
+    const resultsContainer = document.getElementById('searchResults');
+    resultsContainer.innerHTML = '';
+    
+    dishes.forEach(dish => {
+        const dishCard = createChineseDishCard(dish);
+        resultsContainer.appendChild(dishCard);
+    });
+}
+
+// 更新中国美食统计信息
+function updateChineseStatistics() {
+    const totalDishes = chineseFoodsData.length;
+    const totalRegions = new Set(chineseFoodsData.map(dish => dish.region)).size;
+    const avgCalories = Math.round(chineseFoodsData.reduce((sum, dish) => sum + dish.nutrition.calories, 0) / totalDishes);
+    const avgProtein = Math.round(chineseFoodsData.reduce((sum, dish) => sum + dish.nutrition.protein, 0) / totalDishes * 10) / 10;
+    
+    const totalDishesElement = document.getElementById('totalDishes');
+    const totalRegionsElement = document.getElementById('totalRegions');
+    const avgCaloriesElement = document.getElementById('avgCalories');
+    const avgProteinElement = document.getElementById('avgProtein');
+    
+    if (totalDishesElement) totalDishesElement.textContent = totalDishes;
+    if (totalRegionsElement) totalRegionsElement.textContent = totalRegions;
+    if (avgCaloriesElement) avgCaloriesElement.textContent = avgCalories;
+    if (avgProteinElement) avgProteinElement.textContent = avgProtein;
 } 

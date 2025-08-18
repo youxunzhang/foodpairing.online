@@ -7,6 +7,7 @@ const i18nData = {
             home: "首页",
             foods: "食物库",
             chinese: "中国美食",
+            cityFoods: "城市美食",
             game: "营养游戏"
         },
         
@@ -166,6 +167,32 @@ const i18nData = {
             anhui: "Anhui"
         },
         
+        // 城市美食
+        cityFoods: {
+            title: "City Must-Eat Foods",
+            subtitle: "Explore the signature dishes of major Chinese cities and their food culture",
+            selectCity: "Select City",
+            allCities: "All Cities",
+            bestTime: "Best Time",
+            famousFor: "Famous For",
+            nutritionInfo: "Nutrition Info (per 100g)",
+            price: "Price",
+            location: "Location"
+        },
+        
+        // 城市美食
+        cityFoods: {
+            title: "City Must-Eat Foods",
+            subtitle: "Explore the signature dishes of major Chinese cities and their food culture",
+            selectCity: "Select City",
+            allCities: "All Cities",
+            bestTime: "Best Time",
+            famousFor: "Famous For",
+            nutritionInfo: "Nutrition Info (per 100g)",
+            price: "Price",
+            location: "Location"
+        },
+        
         // 营养信息
         nutrition: {
             calories: "热量",
@@ -214,6 +241,7 @@ const i18nData = {
             home: "Home",
             foods: "Food Library",
             chinese: "Chinese Cuisine",
+            cityFoods: "City Foods",
             game: "Nutrition Game"
         },
         

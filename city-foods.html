@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>City Must-Eat Foods - Nutrition Breakfast</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        .city-section {
+            margin: 3rem 0;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .city-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #ff6b6b;
+        }
+        
+        .city-title {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+        
+        .city-emoji {
+            font-size: 3rem;
+        }
+        
+        .city-subtitle {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .city-description {
+            font-size: 1rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .city-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 15px;
+        }
+        
+        .info-item {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .info-label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-value {
+            color: #666;
+        }
+        
+        .foods-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .food-card {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .food-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-color: #ff6b6b;
+        }
+        
+        .food-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .food-emoji {
+            font-size: 2.5rem;
+            margin-right: 1rem;
+        }
+        
+        .food-info h3 {
+            color: #333;
+            margin: 0 0 0.5rem 0;
+            font-size: 1.3rem;
+        }
+        
+        .food-info p {
+            color: #666;
+            margin: 0;
+            font-size: 0.9rem;
+        }
+        
+        .food-description {
+            color: #555;
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+        
+        .nutrition-info {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+        
+        .nutrition-title {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+        
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+        }
+        
+        .nutrition-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .nutrition-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .nutrition-value {
+            color: #333;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .food-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        
+        .detail-item {
+            background: white;
+            padding: 0.8rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .detail-label {
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+        
+        .detail-value {
+            font-size: 0.9rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .city-filter {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #ff6b6b;
+            background: white;
+            color: #ff6b6b;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .page-intro {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #ff6b6b, #ff8e8e);
+            color: white;
+            border-radius: 20px;
+        }
+        
+        .page-intro h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .page-intro p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .city-title {
+                font-size: 2rem;
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .foods-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .city-info {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>🍳 <span data-i18n="nav.title">营养早餐</span></h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link" data-i18n="nav.home">首页</a>
+                </li>
+                <li class="nav-item">
+                    <a href="foods.html" class="nav-link" data-i18n="nav.foods">食物库</a>
+                </li>
+                <li class="nav-item">
+                    <a href="chinese-foods.html" class="nav-link" data-i18n="nav.chinese">中国美食</a>
+                </li>
+                <li class="nav-item">
+                    <a href="city-foods.html" class="nav-link active" data-i18n="nav.cityFoods">城市美食</a>
+                </li>
+                <li class="nav-item">
+                    <a href="game.html" class="nav-link" data-i18n="nav.game">营养游戏</a>
+                </li>
+            </ul>
+            <div class="language-switcher">
+                <button class="lang-btn" data-lang="zh" onclick="switchLanguage('zh')">中文</button>
+                <button class="lang-btn active" data-lang="en" onclick="switchLanguage('en')">English</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 页面介绍 -->
+    <div class="page-intro">
+        <h1 data-i18n="cityFoods.title">🏙️ 城市必吃美食</h1>
+        <p data-i18n="cityFoods.subtitle">探索中国各大城市的特色美食，了解每个城市的饮食文化和必尝佳肴。从北京的烤鸭到成都的火锅，从上海的小笼包到西安的肉夹馍，发现最地道的美食体验。</p>
+    </div>
+
+    <!-- 城市筛选 -->
+    <div class="city-filter">
+        <h3 data-i18n="cityFoods.selectCity">选择城市</h3>
+        <div class="filter-buttons" id="cityFilterButtons">
+            <!-- 动态生成城市筛选按钮 -->
+        </div>
+    </div>
+
+    <!-- 城市美食展示区域 -->
+    <div id="cityFoodsContainer">
+        <!-- 动态生成城市美食内容 -->
+    </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 营养早餐. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 脚本 -->
+    <script src="i18n.js"></script>
+    <script src="city-foods-data.js"></script>
+    <script>
+        let currentLanguage = 'en';
+        let currentCityFilter = 'all';
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCityFilter();
+            displayCityFoods();
+            switchLanguage('en');
+        });
+
+        // 初始化城市筛选
+        function initializeCityFilter() {
+            const filterContainer = document.getElementById('cityFilterButtons');
+            
+            // 添加"全部"按钮
+            const allButton = document.createElement('button');
+            allButton.className = 'filter-btn active';
+            allButton.textContent = translations[currentLanguage]?.cityFoods?.allCities || '全部城市';
+            allButton.onclick = () => filterByCity('all');
+            filterContainer.appendChild(allButton);
+            
+            // 添加各个城市按钮
+            cityInfo.forEach(city => {
+                const button = document.createElement('button');
+                button.className = 'filter-btn';
+                button.textContent = `${city.emoji} ${city.chineseName}`;
+                button.onclick = () => filterByCity(city.id);
+                filterContainer.appendChild(button);
+            });
+        }
+
+        // 按城市筛选
+        function filterByCity(cityId) {
+            currentCityFilter = cityId;
+            
+            // 更新按钮状态
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            displayCityFoods();
+        }
+
+        // 显示城市美食
+        function displayCityFoods() {
+            const container = document.getElementById('cityFoodsContainer');
+            container.innerHTML = '';
+            
+            // 筛选城市
+            const filteredCities = currentCityFilter === 'all' 
+                ? cityInfo 
+                : cityInfo.filter(city => city.id === currentCityFilter);
+            
+            filteredCities.forEach(city => {
+                const cityFoods = cityFoodsData.filter(food => food.city === city.id);
+                if (cityFoods.length > 0) {
+                    const citySection = createCitySection(city, cityFoods);
+                    container.appendChild(citySection);
+                }
+            });
+        }
+
+        // 创建城市区域
+        function createCitySection(city, foods) {
+            const section = document.createElement('div');
+            section.className = 'city-section';
+            
+            section.innerHTML = `
+                <div class="city-header">
+                    <div class="city-title">
+                        <span class="city-emoji">${city.emoji}</span>
+                        <span>${city.chineseName} ${city.name}</span>
+                    </div>
+                    <div class="city-subtitle">${city.chineseDescription}</div>
+                    <div class="city-description">${city.englishDescription}</div>
+                </div>
+                
+                <div class="city-info">
+                    <div class="info-item">
+                        <div class="info-label">${translations[currentLanguage]?.cityFoods?.bestTime || '最佳时间'}</div>
+                        <div class="info-value">${city.bestTime}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">${translations[currentLanguage]?.cityFoods?.famousFor || '特色美食'}</div>
+                        <div class="info-value">${city.famousFor.join(', ')}</div>
+                    </div>
+                </div>
+                
+                <div class="foods-grid">
+                    ${foods.map(food => createFoodCard(food)).join('')}
+                </div>
+            `;
+            
+            return section;
+        }
+
+        // 创建美食卡片
+        function createFoodCard(food) {
+            return `
+                <div class="food-card">
+                    <div class="food-header">
+                        <div class="food-emoji">${food.emoji}</div>
+                        <div class="food-info">
+                            <h3>${food.chineseName}</h3>
+                            <p>${food.name}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="food-description">
+                        ${currentLanguage === 'zh' ? food.chineseDescription : food.englishDescription}
+                    </div>
+                    
+                    <div class="nutrition-info">
+                        <div class="nutrition-title">${translations[currentLanguage]?.cityFoods?.nutritionInfo || '营养信息 (每100g)'}</div>
+                        <div class="nutrition-grid">
+                            <div class="nutrition-item">
+                                <span class="nutrition-label">热量</span>
+                                <span class="nutrition-value">${food.nutrition.calories} kcal</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="nutrition-label">蛋白质</span>
+                                <span class="nutrition-value">${food.nutrition.protein}g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="nutrition-label">碳水化合物</span>
+                                <span class="nutrition-value">${food.nutrition.carbs}g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="nutrition-label">脂肪</span>
+                                <span class="nutrition-value">${food.nutrition.fat}g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="nutrition-label">膳食纤维</span>
+                                <span class="nutrition-value">${food.nutrition.fiber}g</span>
+                            </div>
+                            <div class="nutrition-item">
+                                <span class="nutrition-label">钠</span>
+                                <span class="nutrition-value">${food.nutrition.sodium}mg</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="food-details">
+                        <div class="detail-item">
+                            <div class="detail-label">${translations[currentLanguage]?.cityFoods?.price || '价格'}</div>
+                            <div class="detail-value">${food.price}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">${translations[currentLanguage]?.cityFoods?.bestTime || '最佳时间'}</div>
+                            <div class="detail-value">${food.bestTime}</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">${translations[currentLanguage]?.cityFoods?.location || '推荐地点'}</div>
+                            <div class="detail-value">${food.location}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // 语言切换
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // 更新按钮状态
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector(`[data-lang="${lang}"]`).classList.add('active');
+            
+            // 更新页面内容
+            updatePageContent();
+        }
+
+        // 更新页面内容
+        function updatePageContent() {
+            // 更新导航栏
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[currentLanguage] && translations[currentLanguage][key]) {
+                    element.textContent = translations[currentLanguage][key];
+                }
+            });
+            
+            // 重新显示城市美食（更新语言）
+            displayCityFoods();
+        }
+    </script>
+</body>
+</html>

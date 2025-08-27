@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食物大转盘 - 营养早餐搭配计算器</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .roulette-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .roulette-wheel {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            margin: 40px auto;
+            border-radius: 50%;
+            background: conic-gradient(
+                #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FFEAA7,
+                #DDA0DD, #98D8C8, #F7DC6F, #BB8FCE, #85C1E9
+            );
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+        }
+
+        .roulette-wheel.spinning {
+            animation: spin 3s ease-out;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(1440deg); }
+        }
+
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: #fff;
+            border-radius: 50%;
+            border: 4px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            z-index: 10;
+        }
+
+        .wheel-pointer {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-top: 40px solid #FF4757;
+            z-index: 5;
+        }
+
+        .spin-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .spin-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        .spin-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-container {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: none;
+        }
+
+        .result-container.show {
+            display: block;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .food-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        .food-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .food-emoji {
+            font-size: 48px;
+            margin-right: 20px;
+        }
+
+        .food-info h3 {
+            margin: 0 0 5px 0;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .food-description {
+            color: #666;
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .nutrition-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .nutrition-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+            margin: 0;
+        }
+
+        .nutrition-label {
+            font-size: 14px;
+            color: #666;
+            margin: 5px 0 0 0;
+        }
+
+        .category-filter {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .language-switch {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px 15px;
+            border-radius: 25px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .language-btn {
+            background: none;
+            border: none;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .language-btn.active {
+            background: #667eea;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .roulette-wheel {
+                width: 300px;
+                height: 300px;
+            }
+
+            .wheel-center {
+                width: 50px;
+                height: 50px;
+                font-size: 20px;
+            }
+
+            .nutrition-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .category-filter {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html" data-i18n="nav.title">营养早餐</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link" data-i18n="nav.home">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="foods.html" class="nav-link" data-i18n="nav.foods">食物库</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="chinese-foods.html" class="nav-link" data-i18n="nav.chinese">中国美食</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="city-foods.html" class="nav-link">城市美食</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="food-roulette.html" class="nav-link active">食物大转盘</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="lunch-roulette.html" class="nav-link">Lunch Roulette</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="game.html" class="nav-link" data-i18n="nav.game">营养游戏</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 语言切换 -->
+    <div class="language-switch">
+        <button class="language-btn active" onclick="switchLanguage('zh')">中文</button>
+        <button class="language-btn" onclick="switchLanguage('en')">English</button>
+    </div>
+
+    <!-- 主要内容 -->
+    <div class="roulette-container">
+        <h1 class="text-center mb-4" data-i18n="roulette.title">食物大转盘</h1>
+        <p class="text-center mb-5" data-i18n="roulette.subtitle">转动转盘，随机获得美食推荐和营养信息</p>
+
+        <!-- 分类筛选 -->
+        <div class="category-filter">
+            <button class="filter-btn active" onclick="filterByCategory('all')" data-i18n="roulette.allCategories">全部</button>
+            <button class="filter-btn" onclick="filterByCategory('grains')" data-i18n="roulette.grains">谷物类</button>
+            <button class="filter-btn" onclick="filterByCategory('protein')" data-i18n="roulette.protein">蛋白质类</button>
+            <button class="filter-btn" onclick="filterByCategory('dairy')" data-i18n="roulette.dairy">乳制品</button>
+            <button class="filter-btn" onclick="filterByCategory('fruits')" data-i18n="roulette.fruits">水果类</button>
+            <button class="filter-btn" onclick="filterByCategory('vegetables')" data-i18n="roulette.vegetables">蔬菜类</button>
+        </div>
+
+        <!-- 转盘 -->
+        <div class="roulette-wheel" id="rouletteWheel" onclick="spinWheel()">
+            <div class="wheel-pointer"></div>
+            <div class="wheel-center">🎯</div>
+        </div>
+
+        <!-- 转动按钮 -->
+        <button class="spin-button" id="spinButton" onclick="spinWheel()" data-i18n="roulette.spin">转动转盘</button>
+
+        <!-- 结果显示 -->
+        <div class="result-container" id="resultContainer">
+            <div class="food-card" id="foodCard">
+                <!-- 食物信息将通过JavaScript动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <script src="foods-data.js"></script>
+    <script src="city-foods-data.js"></script>
+    <script src="i18n.js"></script>
+    <script>
+        let currentLanguage = 'zh';
+        let currentCategory = 'all';
+        let isSpinning = false;
+        let allFoods = [];
+
+        // 初始化页面
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeFoods();
+            updatePageContent();
+        });
+
+        // 初始化食物数据
+        function initializeFoods() {
+            // 合并普通食物数据和城市美食数据
+            allFoods = [...foodsData];
+            
+            // 添加城市美食数据，转换为统一格式
+            cityFoodsData.forEach(cityFood => {
+                const foodItem = {
+                    id: cityFood.id + 1000, // 避免ID冲突
+                    name: cityFood.name,
+                    chineseName: cityFood.chineseName,
+                    emoji: cityFood.emoji,
+                    category: 'city-food',
+                    calories: cityFood.nutrition.calories,
+                    protein: cityFood.nutrition.protein,
+                    carbs: cityFood.nutrition.carbs,
+                    fat: cityFood.nutrition.fat,
+                    fiber: cityFood.nutrition.fiber,
+                    description: cityFood.chineseDescription,
+                    englishDescription: cityFood.englishDescription,
+                    city: cityFood.cityNameChinese,
+                    price: cityFood.price,
+                    location: cityFood.location
+                };
+                allFoods.push(foodItem);
+            });
+        }
+
+        // 转动转盘
+        function spinWheel() {
+            if (isSpinning) return;
+            
+            isSpinning = true;
+            const wheel = document.getElementById('rouletteWheel');
+            const button = document.getElementById('spinButton');
+            const resultContainer = document.getElementById('resultContainer');
+            
+            // 禁用按钮
+            button.disabled = true;
+            button.textContent = currentLanguage === 'zh' ? '转动中...' : 'Spinning...';
+            
+            // 隐藏之前的结果
+            resultContainer.classList.remove('show');
+            
+            // 添加转动动画
+            wheel.classList.add('spinning');
+            
+            // 3秒后停止并显示结果
+            setTimeout(() => {
+                wheel.classList.remove('spinning');
+                
+                // 随机选择食物
+                const selectedFood = getRandomFood();
+                
+                // 显示结果
+                displayFoodResult(selectedFood);
+                
+                // 恢复按钮
+                button.disabled = false;
+                button.textContent = currentLanguage === 'zh' ? '再次转动' : 'Spin Again';
+                isSpinning = false;
+            }, 3000);
+        }
+
+        // 获取随机食物
+        function getRandomFood() {
+            let filteredFoods = allFoods;
+            
+            // 根据当前分类筛选
+            if (currentCategory !== 'all') {
+                filteredFoods = allFoods.filter(food => food.category === currentCategory);
+            }
+            
+            // 如果没有符合条件的食物，返回所有食物
+            if (filteredFoods.length === 0) {
+                filteredFoods = allFoods;
+            }
+            
+            const randomIndex = Math.floor(Math.random() * filteredFoods.length);
+            return filteredFoods[randomIndex];
+        }
+
+        // 显示食物结果
+        function displayFoodResult(food) {
+            const resultContainer = document.getElementById('resultContainer');
+            const foodCard = document.getElementById('foodCard');
+            
+            const foodName = currentLanguage === 'zh' ? (food.chineseName || food.name) : food.name;
+            const foodDescription = currentLanguage === 'zh' ? food.description : (food.englishDescription || food.description);
+            
+            foodCard.innerHTML = `
+                <div class="food-header">
+                    <div class="food-emoji">${food.emoji}</div>
+                    <div class="food-info">
+                        <h3>${foodName}</h3>
+                        <p class="food-description">${foodDescription}</p>
+                        ${food.city ? `<p class="food-description">📍 ${food.city}</p>` : ''}
+                    </div>
+                </div>
+                
+                <div class="nutrition-grid">
+                    <div class="nutrition-item">
+                        <p class="nutrition-value">${food.calories}</p>
+                        <p class="nutrition-label">${currentLanguage === 'zh' ? '热量 (kcal)' : 'Calories (kcal)'}</p>
+                    </div>
+                    <div class="nutrition-item">
+                        <p class="nutrition-value">${food.protein}</p>
+                        <p class="nutrition-label">${currentLanguage === 'zh' ? '蛋白质 (g)' : 'Protein (g)'}</p>
+                    </div>
+                    <div class="nutrition-item">
+                        <p class="nutrition-value">${food.carbs}</p>
+                        <p class="nutrition-label">${currentLanguage === 'zh' ? '碳水化合物 (g)' : 'Carbs (g)'}</p>
+                    </div>
+                    <div class="nutrition-item">
+                        <p class="nutrition-value">${food.fat}</p>
+                        <p class="nutrition-label">${currentLanguage === 'zh' ? '脂肪 (g)' : 'Fat (g)'}</p>
+                    </div>
+                    <div class="nutrition-item">
+                        <p class="nutrition-value">${food.fiber}</p>
+                        <p class="nutrition-label">${currentLanguage === 'zh' ? '纤维 (g)' : 'Fiber (g)'}</p>
+                    </div>
+                </div>
+                
+                ${food.price ? `
+                <div style="margin-top: 20px; padding: 15px; background: #e8f5e8; border-radius: 10px;">
+                    <p style="margin: 0; color: #2d5a2d;"><strong>${currentLanguage === 'zh' ? '价格' : 'Price'}:</strong> ${food.price}</p>
+                    ${food.location ? `<p style="margin: 5px 0 0 0; color: #2d5a2d;"><strong>${currentLanguage === 'zh' ? '推荐地点' : 'Location'}:</strong> ${food.location}</p>` : ''}
+                </div>
+                ` : ''}
+            `;
+            
+            // 显示结果
+            setTimeout(() => {
+                resultContainer.classList.add('show');
+            }, 100);
+        }
+
+        // 按分类筛选
+        function filterByCategory(category) {
+            currentCategory = category;
+            
+            // 更新按钮状态
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+
+        // 切换语言
+        function switchLanguage(lang) {
+            currentLanguage = lang;
+            
+            // 更新语言按钮状态
+            document.querySelectorAll('.language-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // 更新页面内容
+            updatePageContent();
+        }
+
+        // 更新页面内容
+        function updatePageContent() {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                const translation = getTranslation(key, currentLanguage);
+                if (translation) {
+                    element.textContent = translation;
+                }
+            });
+        }
+
+        // 获取翻译
+        function getTranslation(key, lang) {
+            const keys = key.split('.');
+            let value = i18nData[lang];
+            
+            for (const k of keys) {
+                if (value && value[k]) {
+                    value = value[k];
+                } else {
+                    return null;
+                }
+            }
+            
+            return value;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What to Eat for Lunch Roulette - Food Pairing Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .lunch-roulette-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+        }
+
+        .lunch-roulette-wheel {
+            position: relative;
+            width: 450px;
+            height: 450px;
+            margin: 40px auto;
+            border-radius: 50%;
+            background: conic-gradient(
+                #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FFEAA7,
+                #DDA0DD, #98D8C8, #F7DC6F, #BB8FCE, #85C1E9,
+                #F8B195, #F67280, #C06C84, #6C5B7B, #355C7D
+            );
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            transition: transform 4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            cursor: pointer;
+        }
+
+        .lunch-roulette-wheel.spinning {
+            animation: lunchSpin 4s ease-out;
+        }
+
+        @keyframes lunchSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(1800deg); }
+        }
+
+        .lunch-wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: #fff;
+            border-radius: 50%;
+            border: 5px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            z-index: 10;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .lunch-wheel-pointer {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-top: 50px solid #FF4757;
+            z-index: 5;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .lunch-spin-button {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            font-size: 20px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 30px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .lunch-spin-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+        }
+
+        .lunch-spin-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .lunch-result-container {
+            margin-top: 50px;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            color: #333;
+            transform: translateY(50px);
+            opacity: 0;
+            transition: all 0.6s ease;
+        }
+
+        .lunch-result-container.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .lunch-food-card {
+            text-align: left;
+        }
+
+        .lunch-food-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .lunch-food-emoji {
+            font-size: 48px;
+            margin-right: 20px;
+        }
+
+        .lunch-food-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .lunch-food-subtitle {
+            font-size: 16px;
+            color: #7f8c8d;
+            font-style: italic;
+        }
+
+        .lunch-recommendation-reason {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .lunch-nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .lunch-nutrition-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #667eea;
+        }
+
+        .lunch-nutrition-label {
+            font-size: 12px;
+            color: #6c757d;
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .lunch-nutrition-value {
+            font-size: 18px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .lunch-food-description {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            line-height: 1.6;
+            border-left: 4px solid #28a745;
+        }
+
+        .lunch-category-filter {
+            margin: 30px 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .lunch-filter-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            backdrop-filter: blur(10px);
+        }
+
+        .lunch-filter-btn:hover,
+        .lunch-filter-btn.active {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        .lunch-page-title {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .lunch-page-subtitle {
+            font-size: 20px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        @media (max-width: 768px) {
+            .lunch-roulette-wheel {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .lunch-wheel-center {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+            }
+            
+            .lunch-page-title {
+                font-size: 36px;
+            }
+            
+            .lunch-result-container {
+                padding: 25px;
+                margin: 30px 10px;
+            }
+            
+            .lunch-nutrition-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span style="color: #667eea; font-weight: bold;">🍽️ Food Pairing Online</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a href="index.html" class="nav-link">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="foods.html" class="nav-link">Food Database</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="chinese-foods.html" class="nav-link">Chinese Foods</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="city-foods.html" class="nav-link">City Foods</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="food-roulette.html" class="nav-link">Food Roulette</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="lunch-roulette.html" class="nav-link active">Lunch Roulette</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="game.html" class="nav-link">Nutrition Game</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="lunch-roulette-container">
+        <h1 class="lunch-page-title">🍽️ What to Eat for Lunch?</h1>
+        <p class="lunch-page-subtitle">Spin the wheel and get personalized lunch recommendations with reasons!</p>
+        
+        <div class="lunch-category-filter">
+            <button class="lunch-filter-btn active" onclick="filterByCategory('all')">All Options</button>
+            <button class="lunch-filter-btn" onclick="filterByCategory('quick')">Quick Lunch</button>
+            <button class="lunch-filter-btn" onclick="filterByCategory('healthy')">Healthy Choice</button>
+            <button class="lunch-filter-btn" onclick="filterByCategory('comfort')">Comfort Food</button>
+            <button class="lunch-filter-btn" onclick="filterByCategory('international')">International</button>
+            <button class="lunch-filter-btn" onclick="filterByCategory('budget')">Budget Friendly</button>
+        </div>
+
+        <div class="lunch-roulette-wheel" id="lunchRouletteWheel" onclick="spinLunchWheel()">
+            <div class="lunch-wheel-pointer"></div>
+            <div class="lunch-wheel-center">🍽️</div>
+        </div>
+
+        <button class="lunch-spin-button" id="lunchSpinButton" onclick="spinLunchWheel()">
+            🎯 Spin for Lunch!
+        </button>
+
+        <div class="lunch-result-container" id="lunchResultContainer">
+            <div class="lunch-food-card" id="lunchFoodCard">
+                <!-- Lunch recommendation will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="foods-data.js"></script>
+    <script src="city-foods-data.js"></script>
+    <script>
+        let currentCategory = 'all';
+        let isSpinning = false;
+        let lunchFoods = [];
+
+        // Lunch-specific food data with reasons
+        const lunchFoodsData = [
+            {
+                id: 1,
+                name: "Grilled Chicken Salad",
+                emoji: "🥗",
+                category: "healthy",
+                calories: 320,
+                protein: 35,
+                carbs: 15,
+                fat: 12,
+                fiber: 8,
+                description: "A fresh and nutritious salad with grilled chicken breast, mixed greens, cherry tomatoes, and a light vinaigrette dressing.",
+                reason: "Perfect for a healthy midday meal! This protein-rich salad will keep you energized throughout the afternoon without the post-lunch slump. The lean protein helps maintain muscle mass while the fiber keeps you feeling full.",
+                price: "$8-12",
+                prepTime: "15 minutes"
+            },
+            {
+                id: 2,
+                name: "Pasta Carbonara",
+                emoji: "🍝",
+                category: "comfort",
+                calories: 650,
+                protein: 25,
+                carbs: 75,
+                fat: 28,
+                fiber: 3,
+                description: "Classic Italian pasta with eggs, cheese, pancetta, and black pepper. Creamy and satisfying comfort food.",
+                reason: "Sometimes you need a comforting, hearty meal to get through the day! This classic dish provides the perfect balance of carbs for energy and protein for satisfaction. Perfect for when you're craving something warm and filling.",
+                price: "$10-15",
+                prepTime: "20 minutes"
+            },
+            {
+                id: 3,
+                name: "Sushi Roll Combo",
+                emoji: "🍣",
+                category: "international",
+                calories: 450,
+                protein: 22,
+                carbs: 65,
+                fat: 8,
+                fiber: 2,
+                description: "Fresh sushi rolls with salmon, tuna, and avocado. Served with miso soup and edamame.",
+                reason: "Light yet satisfying! Sushi is perfect for lunch when you want something nutritious that won't weigh you down. The omega-3 fatty acids from the fish are great for brain health, and the rice provides steady energy release.",
+                price: "$12-18",
+                prepTime: "5 minutes (takeout)"
+            },
+            {
+                id: 4,
+                name: "Turkey Sandwich",
+                emoji: "🥪",
+                category: "quick",
+                calories: 380,
+                protein: 28,
+                carbs: 45,
+                fat: 12,
+                fiber: 6,
+                description: "Whole grain bread with turkey, lettuce, tomato, and mustard. Simple and satisfying.",
+                reason: "Quick, easy, and portable! This classic sandwich is perfect for busy workdays. The whole grains provide fiber for sustained energy, while the lean turkey protein helps you stay focused and alert.",
+                price: "$6-9",
+                prepTime: "5 minutes"
+            },
+            {
+                id: 5,
+                name: "Buddha Bowl",
+                emoji: "🥙",
+                category: "healthy",
+                calories: 420,
+                protein: 18,
+                carbs: 55,
+                fat: 15,
+                fiber: 12,
+                description: "Quinoa bowl with roasted vegetables, chickpeas, avocado, and tahini dressing. Plant-based and nutritious.",
+                reason: "A rainbow of nutrients in one bowl! This plant-based meal is packed with fiber, vitamins, and minerals. The combination of quinoa and chickpeas provides complete protein, while the colorful vegetables offer antioxidants.",
+                price: "$9-13",
+                prepTime: "25 minutes"
+            },
+            {
+                id: 6,
+                name: "Pizza Slice",
+                emoji: "🍕",
+                category: "comfort",
+                calories: 285,
+                protein: 12,
+                carbs: 35,
+                fat: 12,
+                fiber: 2,
+                description: "Fresh pizza slice with tomato sauce, mozzarella, and basil. Classic comfort food.",
+                reason: "Sometimes you just need pizza! This slice provides a good balance of carbs and protein. The tomato sauce offers lycopene, and the cheese provides calcium. Perfect for when you're craving something familiar and delicious.",
+                price: "$3-6",
+                prepTime: "2 minutes (heated)"
+            },
+            {
+                id: 7,
+                name: "Pho Noodle Soup",
+                emoji: "🍜",
+                category: "international",
+                calories: 350,
+                protein: 25,
+                carbs: 45,
+                fat: 8,
+                fiber: 3,
+                description: "Vietnamese noodle soup with beef, rice noodles, herbs, and bean sprouts in aromatic broth.",
+                reason: "Warm, comforting, and full of flavor! Pho is perfect for lunch when you want something satisfying but not heavy. The broth is hydrating, the noodles provide energy, and the herbs offer fresh flavors and nutrients.",
+                price: "$8-12",
+                prepTime: "10 minutes"
+            },
+            {
+                id: 8,
+                name: "Greek Yogurt with Berries",
+                emoji: "🥣",
+                category: "quick",
+                calories: 220,
+                protein: 20,
+                carbs: 25,
+                fat: 8,
+                fiber: 4,
+                description: "Creamy Greek yogurt topped with fresh berries, honey, and granola. Light and refreshing.",
+                reason: "Quick and nutritious! Greek yogurt is packed with protein and probiotics, while berries provide antioxidants and natural sweetness. This light meal is perfect when you want something refreshing and healthy.",
+                price: "$4-7",
+                prepTime: "3 minutes"
+            },
+            {
+                id: 9,
+                name: "Burrito Bowl",
+                emoji: "🌯",
+                category: "budget",
+                calories: 480,
+                protein: 22,
+                carbs: 65,
+                fat: 15,
+                fiber: 8,
+                description: "Rice bowl with beans, grilled chicken, salsa, guacamole, and cheese. Mexican-inspired flavors.",
+                reason: "Great value for money! This bowl is filling and nutritious, providing protein from chicken and beans, fiber from rice and vegetables, and healthy fats from avocado. Perfect for budget-conscious lunch choices.",
+                price: "$7-10",
+                prepTime: "15 minutes"
+            },
+            {
+                id: 10,
+                name: "Caesar Salad",
+                emoji: "🥬",
+                category: "healthy",
+                calories: 280,
+                protein: 15,
+                carbs: 12,
+                fat: 18,
+                fiber: 4,
+                description: "Romaine lettuce with Caesar dressing, croutons, parmesan cheese, and grilled chicken.",
+                reason: "Classic and satisfying! This salad provides a good balance of protein and healthy fats. The romaine lettuce is rich in vitamins A and K, while the dressing adds flavor without being too heavy.",
+                price: "$8-12",
+                prepTime: "10 minutes"
+            },
+            {
+                id: 11,
+                name: "Ramen Bowl",
+                emoji: "🍜",
+                category: "comfort",
+                calories: 520,
+                protein: 28,
+                carbs: 65,
+                fat: 18,
+                fiber: 4,
+                description: "Japanese ramen with noodles, pork, egg, and vegetables in rich broth. Warming and filling.",
+                reason: "Comfort in a bowl! Ramen is perfect for cold days or when you need something warming and satisfying. The combination of noodles, protein, and vegetables provides a complete meal that's both delicious and filling.",
+                price: "$9-14",
+                prepTime: "12 minutes"
+            },
+            {
+                id: 12,
+                name: "Falafel Wrap",
+                emoji: "🌯",
+                category: "international",
+                calories: 380,
+                protein: 12,
+                carbs: 45,
+                fat: 15,
+                fiber: 8,
+                description: "Whole wheat wrap with falafel, hummus, vegetables, and tahini sauce. Middle Eastern flavors.",
+                reason: "Plant-based protein power! Falafel is made from chickpeas, providing fiber and protein. This wrap is perfect for vegetarians or anyone looking for a meatless option that's still satisfying and nutritious.",
+                price: "$6-9",
+                prepTime: "5 minutes"
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeLunchFoods();
+        });
+
+        function initializeLunchFoods() {
+            lunchFoods = [...lunchFoodsData];
+        }
+
+        function spinLunchWheel() {
+            if (isSpinning) return;
+            
+            isSpinning = true;
+            const wheel = document.getElementById('lunchRouletteWheel');
+            const button = document.getElementById('lunchSpinButton');
+            
+            wheel.classList.add('spinning');
+            button.disabled = true;
+            button.textContent = '🎯 Spinning...';
+            
+            setTimeout(() => {
+                wheel.classList.remove('spinning');
+                const randomFood = getRandomLunchFood();
+                displayLunchResult(randomFood);
+                button.disabled = false;
+                button.textContent = '🎯 Spin for Lunch!';
+                isSpinning = false;
+            }, 4000);
+        }
+
+        function getRandomLunchFood() {
+            let filteredFoods = lunchFoods;
+            if (currentCategory !== 'all') {
+                filteredFoods = lunchFoods.filter(food => food.category === currentCategory);
+            }
+            
+            if (filteredFoods.length === 0) {
+                filteredFoods = lunchFoods; // Fallback to all foods if category is empty
+            }
+            
+            return filteredFoods[Math.floor(Math.random() * filteredFoods.length)];
+        }
+
+        function displayLunchResult(food) {
+            const resultContainer = document.getElementById('lunchResultContainer');
+            const foodCard = document.getElementById('lunchFoodCard');
+            
+            foodCard.innerHTML = `
+                <div class="lunch-food-header">
+                    <div class="lunch-food-emoji">${food.emoji}</div>
+                    <div>
+                        <div class="lunch-food-title">${food.name}</div>
+                        <div class="lunch-food-subtitle">${food.prepTime} • ${food.price}</div>
+                    </div>
+                </div>
+                
+                <div class="lunch-recommendation-reason">
+                    <strong>💡 Why this lunch?</strong><br>
+                    ${food.reason}
+                </div>
+                
+                <div class="lunch-food-description">
+                    <strong>🍽️ What's included:</strong><br>
+                    ${food.description}
+                </div>
+                
+                <div class="lunch-nutrition-grid">
+                    <div class="lunch-nutrition-item">
+                        <div class="lunch-nutrition-label">Calories</div>
+                        <div class="lunch-nutrition-value">${food.calories}</div>
+                    </div>
+                    <div class="lunch-nutrition-item">
+                        <div class="lunch-nutrition-label">Protein</div>
+                        <div class="lunch-nutrition-value">${food.protein}g</div>
+                    </div>
+                    <div class="lunch-nutrition-item">
+                        <div class="lunch-nutrition-label">Carbs</div>
+                        <div class="lunch-nutrition-value">${food.carbs}g</div>
+                    </div>
+                    <div class="lunch-nutrition-item">
+                        <div class="lunch-nutrition-label">Fat</div>
+                        <div class="lunch-nutrition-value">${food.fat}g</div>
+                    </div>
+                    <div class="lunch-nutrition-item">
+                        <div class="lunch-nutrition-label">Fiber</div>
+                        <div class="lunch-nutrition-value">${food.fiber}g</div>
+                    </div>
+                </div>
+            `;
+            
+            resultContainer.classList.add('show');
+        }
+
+        function filterByCategory(category) {
+            currentCategory = category;
+            
+            // Update active button
+            document.querySelectorAll('.lunch-filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -231,6 +231,19 @@ const i18nData = {
             highFiber: "膳食纤维充足，有助于肠道健康",
             balanced: "营养搭配均衡，是理想的早餐选择！",
             perfect: "完美搭配！营养全面且均衡，为一天提供充足能量。"
+        },
+        
+        // 食物大转盘
+        roulette: {
+            title: "食物大转盘",
+            subtitle: "转动转盘，随机获得美食推荐和营养信息",
+            spin: "转动转盘",
+            allCategories: "全部",
+            grains: "谷物类",
+            protein: "蛋白质类",
+            dairy: "乳制品",
+            fruits: "水果类",
+            vegetables: "蔬菜类"
         }
     },
     
@@ -405,6 +418,19 @@ const i18nData = {
             highFiber: "Dietary fiber is adequate, good for intestinal health",
             balanced: "Nutrition combination is balanced, an ideal breakfast choice!",
             perfect: "Perfect combination! Comprehensive and balanced nutrition provides sufficient energy for the day."
+        },
+        
+        // Food Roulette
+        roulette: {
+            title: "Food Roulette",
+            subtitle: "Spin the wheel to get random food recommendations and nutrition information",
+            spin: "Spin the Wheel",
+            allCategories: "All",
+            grains: "Grains",
+            protein: "Protein",
+            dairy: "Dairy",
+            fruits: "Fruits",
+            vegetables: "Vegetables"
         }
     }
 };

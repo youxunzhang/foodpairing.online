@@ -338,6 +338,105 @@ body {
     margin: 0 auto;
 }
 
+/* 收藏按钮样式 */
+.bookmark-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 10;
+}
+
+.bookmark-btn {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.bookmark-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.bookmark-btn.active {
+    background: linear-gradient(135deg, #ffd700, #ffed4e);
+    border-color: #ffd700;
+    color: #333;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+.bookmark-btn.active:hover {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
+}
+
+.bookmark-icon {
+    font-size: 16px;
+    transition: transform 0.3s ease;
+}
+
+.bookmark-btn.active .bookmark-icon {
+    transform: scale(1.1);
+}
+
+.bookmark-text {
+    font-weight: 500;
+}
+
+/* 移动端收藏按钮样式 */
+@media (max-width: 768px) {
+    .bookmark-container {
+        top: 15px;
+        right: 15px;
+    }
+    
+    .bookmark-btn {
+        padding: 10px 15px;
+        font-size: 12px;
+        gap: 6px;
+    }
+    
+    .bookmark-icon {
+        font-size: 14px;
+    }
+    
+    .bookmark-text {
+        display: none; /* 在移动端只显示图标 */
+    }
+    
+    .bookmark-btn:hover .bookmark-text {
+        display: inline; /* 悬停时显示文字 */
+    }
+}
+
+@media (max-width: 480px) {
+    .bookmark-container {
+        top: 10px;
+        right: 10px;
+    }
+    
+    .bookmark-btn {
+        padding: 8px 12px;
+        border-radius: 20px;
+    }
+    
+    .bookmark-icon {
+        font-size: 12px;
+    }
+}
+
 /* 营养板块 */
 .nutrition-section {
     padding: 60px 0;

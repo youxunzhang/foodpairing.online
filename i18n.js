@@ -86,6 +86,14 @@ const i18nData = {
             email: "Email"
         },
         
+        // 收藏功能
+        bookmark: {
+            add: "收藏",
+            remove: "取消收藏",
+            added: "已收藏",
+            removed: "已取消收藏"
+        },
+        
         // 食物库页面
         foods: {
             title: "食物营养库",
@@ -322,6 +330,14 @@ const i18nData = {
             whatsapp: "WhatsApp",
             telegram: "Telegram",
             email: "Email"
+        },
+        
+        // Bookmark
+        bookmark: {
+            add: "Bookmark",
+            remove: "Remove Bookmark",
+            added: "Bookmarked",
+            removed: "Removed from bookmarks"
         },
         
         // Food Library

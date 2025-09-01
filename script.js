@@ -11,6 +11,139 @@ let gameTimer = null;
 let gameTimeLeft = 60;
 let isGameActive = false;
 let gameSelectedFoods = [];
+let isBookmarked = false;
+
+// 收藏功能
+function toggleBookmark() {
+    const bookmarkBtn = document.getElementById('bookmarkBtn');
+    const bookmarkIcon = document.getElementById('bookmarkIcon');
+    const bookmarkText = document.querySelector('.bookmark-text');
+    
+    if (!bookmarkBtn) return;
+    
+    isBookmarked = !isBookmarked;
+    
+    if (isBookmarked) {
+        // 添加到收藏
+        bookmarkBtn.classList.add('active');
+        bookmarkIcon.textContent = '⭐';
+        bookmarkText.textContent = getCurrentLanguage() === 'zh' ? i18nData.zh.bookmark.added : i18nData.en.bookmark.added;
+        
+        // 保存到本地存储
+        saveBookmark();
+        
+        // 显示成功提示
+        showBookmarkNotification(true);
+    } else {
+        // 取消收藏
+        bookmarkBtn.classList.remove('active');
+        bookmarkIcon.textContent = '🔖';
+        bookmarkText.textContent = getCurrentLanguage() === 'zh' ? i18nData.zh.bookmark.add : i18nData.en.bookmark.add;
+        
+        // 从本地存储移除
+        removeBookmark();
+        
+        // 显示取消提示
+        showBookmarkNotification(false);
+    }
+}
+
+// 保存收藏到本地存储
+function saveBookmark() {
+    const bookmarks = JSON.parse(localStorage.getItem('foodpairing_bookmarks') || '[]');
+    const currentPage = window.location.href;
+    const pageTitle = document.title;
+    
+    if (!bookmarks.find(bookmark => bookmark.url === currentPage)) {
+        bookmarks.push({
+            url: currentPage,
+            title: pageTitle,
+            timestamp: new Date().toISOString()
+        });
+        localStorage.setItem('foodpairing_bookmarks', JSON.stringify(bookmarks));
+    }
+}
+
+// 从本地存储移除收藏
+function removeBookmark() {
+    const bookmarks = JSON.parse(localStorage.getItem('foodpairing_bookmarks') || '[]');
+    const currentPage = window.location.href;
+    
+    const updatedBookmarks = bookmarks.filter(bookmark => bookmark.url !== currentPage);
+    localStorage.setItem('foodpairing_bookmarks', JSON.stringify(updatedBookmarks));
+}
+
+// 检查当前页面是否已收藏
+function checkBookmarkStatus() {
+    const bookmarks = JSON.parse(localStorage.getItem('foodpairing_bookmarks') || '[]');
+    const currentPage = window.location.href;
+    
+    isBookmarked = bookmarks.some(bookmark => bookmark.url === currentPage);
+    
+    const bookmarkBtn = document.getElementById('bookmarkBtn');
+    const bookmarkIcon = document.getElementById('bookmarkIcon');
+    const bookmarkText = document.querySelector('.bookmark-text');
+    
+    if (bookmarkBtn) {
+        if (isBookmarked) {
+            bookmarkBtn.classList.add('active');
+            bookmarkIcon.textContent = '⭐';
+            bookmarkText.textContent = getCurrentLanguage() === 'zh' ? i18nData.zh.bookmark.added : i18nData.en.bookmark.added;
+        } else {
+            bookmarkBtn.classList.remove('active');
+            bookmarkIcon.textContent = '🔖';
+            bookmarkText.textContent = getCurrentLanguage() === 'zh' ? i18nData.zh.bookmark.add : i18nData.en.bookmark.add;
+        }
+    }
+}
+
+// 显示收藏提示
+function showBookmarkNotification(isAdded) {
+    const notification = document.createElement('div');
+    notification.className = 'bookmark-notification';
+    notification.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: ${isAdded ? 'linear-gradient(135deg, #4CAF50, #45a049)' : 'linear-gradient(135deg, #ff6b6b, #ff5252)'};
+        color: white;
+        padding: 15px 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        z-index: 10000;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+        font-weight: 500;
+        max-width: 200px;
+    `;
+    
+    notification.textContent = isAdded ? 
+        (getCurrentLanguage() === 'zh' ? '✅ ' + i18nData.zh.bookmark.added : '✅ ' + i18nData.en.bookmark.added) :
+        (getCurrentLanguage() === 'zh' ? '❌ ' + i18nData.zh.bookmark.removed : '❌ ' + i18nData.en.bookmark.removed);
+    
+    document.body.appendChild(notification);
+    
+    // 显示动画
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    // 自动隐藏
+    setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 2000);
+}
+
+// 获取当前语言
+function getCurrentLanguage() {
+    const activeLangBtn = document.querySelector('.lang-btn.active');
+    return activeLangBtn ? activeLangBtn.getAttribute('data-lang') : 'zh';
+}
 
 // 页面加载完成后初始化
 document.addEventListener('DOMContentLoaded', function() {
@@ -86,6 +219,9 @@ function initializeCommonFeatures() {
             navbar.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
         }
     });
+    
+    // 检查收藏状态
+    checkBookmarkStatus();
 }
 
 // 初始化首页

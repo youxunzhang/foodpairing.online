@@ -61,6 +61,14 @@
     <!-- 页面标题 -->
     <header class="page-header">
         <div class="container">
+            <!-- 收藏按钮 -->
+            <div class="bookmark-container">
+                <button class="bookmark-btn" id="bookmarkBtn" onclick="toggleBookmark()" title="收藏此页面">
+                    <span class="bookmark-icon" id="bookmarkIcon">🔖</span>
+                    <span class="bookmark-text" data-i18n="bookmark.add">收藏</span>
+                </button>
+            </div>
+            
             <h1 data-i18n="header.title">营养早餐搭配计算器</h1>
             <p data-i18n="header.subtitle">选择您喜欢的食物，查看营养信息并计算搭配效果</p>
             

@@ -289,10 +289,47 @@
     </nav>
 
 
+    <!-- 页面标题 -->
+    <header class="page-header">
+        <div class="header-container">
+            <h1 data-i18n="roulette.title">食物大转盘</h1>
+            <p data-i18n="roulette.subtitle">转动转盘，随机获得美食推荐和营养信息</p>
+            
+            <!-- 分享按钮 -->
+            <div class="share-section">
+                <h4 data-i18n="share.title">分享到社交媒体</h4>
+                <div class="share-buttons">
+                    <button class="share-btn facebook" onclick="shareToFacebook()" title="Facebook">
+                        <span class="share-icon">📘</span>
+                        <span class="share-text" data-i18n="share.facebook">Facebook</span>
+                    </button>
+                    <button class="share-btn twitter" onclick="shareToTwitter()" title="Twitter">
+                        <span class="share-icon">🐦</span>
+                        <span class="share-text" data-i18n="share.twitter">Twitter</span>
+                    </button>
+                    <button class="share-btn linkedin" onclick="shareToLinkedIn()" title="LinkedIn">
+                        <span class="share-icon">💼</span>
+                        <span class="share-text" data-i18n="share.linkedin">LinkedIn</span>
+                    </button>
+                    <button class="share-btn whatsapp" onclick="shareToWhatsApp()" title="WhatsApp">
+                        <span class="share-icon">💬</span>
+                        <span class="share-text" data-i18n="share.whatsapp">WhatsApp</span>
+                    </button>
+                    <button class="share-btn telegram" onclick="shareToTelegram()" title="Telegram">
+                        <span class="share-icon">📱</span>
+                        <span class="share-text" data-i18n="share.telegram">Telegram</span>
+                    </button>
+                    <button class="share-btn email" onclick="shareToEmail()" title="Email">
+                        <span class="share-icon">📧</span>
+                        <span class="share-text" data-i18n="share.email">Email</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <!-- 主要内容 -->
     <div class="roulette-container">
-        <h1 class="text-center mb-4" data-i18n="roulette.title">食物大转盘</h1>
-        <p class="text-center mb-5" data-i18n="roulette.subtitle">转动转盘，随机获得美食推荐和营养信息</p>
 
         <!-- 分类筛选 -->
         <div class="category-filter">
@@ -320,6 +357,37 @@
             </div>
         </div>
     </div>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3 data-i18n="footer.about">About Us</h3>
+                    <p data-i18n="footer.description">Professional nutrition breakfast matching tools to help you scientifically plan healthy breakfast.</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer.contact">Contact Us</h3>
+                    <p><span data-i18n="footer.wechat">WeChat:</span> <span data-i18n="footer.wechatId">zhangyouxun2013</span></p>
+                    <p><span data-i18n="footer.phone">Phone:</span> <span data-i18n="footer.phoneNumber">0</span></p>
+                    <p><span data-i18n="footer.email">Email:</span> <span data-i18n="footer.emailAddress">0</span></p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-i18n="footer.quickLinks">Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html" data-i18n="nav.home">Home</a></li>
+                        <li><a href="foods.html" data-i18n="nav.foods">Food Library</a></li>
+                        <li><a href="chinese-foods.html" data-i18n="nav.chinese">Chinese Cuisine</a></li>
+                        <li><a href="game.html" data-i18n="nav.game">Nutrition Game</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 <span data-i18n="footer.copyright">Nutrition Breakfast. All rights reserved.</span></p>
+                <p><a href="https://www.seodog.cn" target="_blank" rel="noopener noreferrer" class="ai-tools-link-simple" data-i18n="footer.aiTools">🔗 AI Tools Navigation - SEOdog.cn</a></p>
+            </div>
+        </div>
+    </footer>
 
     <script src="foods-data.js"></script>
     <script src="i18n.js"></script>
@@ -393,7 +461,7 @@
 
         // 转动转盘
         function spinWheel() {
-            if (isSpinning) return;
+            if (isSpinning || allFoods.length === 0) return;
             
             isSpinning = true;
             const wheel = document.getElementById('rouletteWheel');
@@ -402,7 +470,8 @@
             
             // 禁用按钮
             button.disabled = true;
-            button.textContent = currentLanguage === 'zh' ? '转动中...' : 'Spinning...';
+            const currentLang = getCurrentLanguage();
+            button.textContent = currentLang === 'zh' ? '转动中...' : 'Spinning...';
             
             // 隐藏之前的结果
             resultContainer.classList.remove('show');
@@ -414,21 +483,33 @@
             setTimeout(() => {
                 wheel.classList.remove('spinning');
                 
-                // 随机选择食物
-                const selectedFood = getRandomFood();
+                try {
+                    // 随机选择食物
+                    const selectedFood = getRandomFood();
+                    
+                    // 显示结果
+                    displayFoodResult(selectedFood);
+                    
+                    // 恢复按钮
+                    button.disabled = false;
+                    button.textContent = currentLang === 'zh' ? '再次转动' : 'Spin Again';
+                } catch (error) {
+                    console.error('显示结果时出错:', error);
+                    showError('显示结果失败');
+                    button.disabled = false;
+                    button.textContent = currentLang === 'zh' ? '转动转盘' : 'Spin the Wheel';
+                }
                 
-                // 显示结果
-                displayFoodResult(selectedFood);
-                
-                // 恢复按钮
-                button.disabled = false;
-                button.textContent = currentLanguage === 'zh' ? '再次转动' : 'Spin Again';
                 isSpinning = false;
             }, 3000);
         }
 
         // 获取随机食物
         function getRandomFood() {
+            if (allFoods.length === 0) {
+                throw new Error('没有可用的食物数据');
+            }
+            
             let filteredFoods = allFoods;
             
             // 根据当前分类筛选
@@ -450,46 +531,51 @@
             const resultContainer = document.getElementById('resultContainer');
             const foodCard = document.getElementById('foodCard');
             
-            const foodName = currentLanguage === 'zh' ? (food.chineseName || food.name) : food.name;
-            const foodDescription = currentLanguage === 'zh' ? food.description : (food.englishDescription || food.description);
+            if (!resultContainer || !foodCard) {
+                throw new Error('找不到结果显示容器');
+            }
+            
+            const currentLang = getCurrentLanguage();
+            const foodName = currentLang === 'zh' ? (food.chineseName || food.name) : food.name;
+            const foodDescription = currentLang === 'zh' ? food.description : (food.englishDescription || food.description);
             
             foodCard.innerHTML = `
                 <div class="food-header">
-                    <div class="food-emoji">${food.emoji}</div>
+                    <div class="food-emoji">${food.emoji || '🍽️'}</div>
                     <div class="food-info">
                         <h3>${foodName}</h3>
-                        <p class="food-description">${foodDescription}</p>
+                        <p class="food-description">${foodDescription || ''}</p>
                         ${food.city ? `<p class="food-description">📍 ${food.city}</p>` : ''}
                     </div>
                 </div>
                 
                 <div class="nutrition-grid">
                     <div class="nutrition-item">
-                        <p class="nutrition-value">${food.calories}</p>
-                        <p class="nutrition-label">${currentLanguage === 'zh' ? '热量 (kcal)' : 'Calories (kcal)'}</p>
+                        <p class="nutrition-value">${food.calories || 0}</p>
+                        <p class="nutrition-label">${currentLang === 'zh' ? '热量 (kcal)' : 'Calories (kcal)'}</p>
                     </div>
                     <div class="nutrition-item">
-                        <p class="nutrition-value">${food.protein}</p>
-                        <p class="nutrition-label">${currentLanguage === 'zh' ? '蛋白质 (g)' : 'Protein (g)'}</p>
+                        <p class="nutrition-value">${food.protein || 0}</p>
+                        <p class="nutrition-label">${currentLang === 'zh' ? '蛋白质 (g)' : 'Protein (g)'}</p>
                     </div>
                     <div class="nutrition-item">
-                        <p class="nutrition-value">${food.carbs}</p>
-                        <p class="nutrition-label">${currentLanguage === 'zh' ? '碳水化合物 (g)' : 'Carbs (g)'}</p>
+                        <p class="nutrition-value">${food.carbs || 0}</p>
+                        <p class="nutrition-label">${currentLang === 'zh' ? '碳水化合物 (g)' : 'Carbs (g)'}</p>
                     </div>
                     <div class="nutrition-item">
-                        <p class="nutrition-value">${food.fat}</p>
-                        <p class="nutrition-label">${currentLanguage === 'zh' ? '脂肪 (g)' : 'Fat (g)'}</p>
+                        <p class="nutrition-value">${food.fat || 0}</p>
+                        <p class="nutrition-label">${currentLang === 'zh' ? '脂肪 (g)' : 'Fat (g)'}</p>
                     </div>
                     <div class="nutrition-item">
-                        <p class="nutrition-value">${food.fiber}</p>
-                        <p class="nutrition-label">${currentLanguage === 'zh' ? '纤维 (g)' : 'Fiber (g)'}</p>
+                        <p class="nutrition-value">${food.fiber || 0}</p>
+                        <p class="nutrition-label">${currentLang === 'zh' ? '纤维 (g)' : 'Fiber (g)'}</p>
                     </div>
                 </div>
                 
                 ${food.price ? `
                 <div style="margin-top: 20px; padding: 15px; background: #e8f5e8; border-radius: 10px;">
-                    <p style="margin: 0; color: #2d5a2d;"><strong>${currentLanguage === 'zh' ? '价格' : 'Price'}:</strong> ${food.price}</p>
-                    ${food.location ? `<p style="margin: 5px 0 0 0; color: #2d5a2d;"><strong>${currentLanguage === 'zh' ? '推荐地点' : 'Location'}:</strong> ${food.location}</p>` : ''}
+                    <p style="margin: 0; color: #2d5a2d;"><strong>${currentLang === 'zh' ? '价格' : 'Price'}:</strong> ${food.price}</p>
+                    ${food.location ? `<p style="margin: 5px 0 0 0; color: #2d5a2d;"><strong>${currentLang === 'zh' ? '推荐地点' : 'Location'}:</strong> ${food.location}</p>` : ''}
                 </div>
                 ` : ''}
             `;
@@ -508,7 +594,14 @@
             document.querySelectorAll('.filter-btn').forEach(btn => {
                 btn.classList.remove('active');
             });
-            event.target.classList.add('active');
+            
+            // 找到对应的按钮并激活
+            const targetBtn = document.querySelector(`[onclick="filterByCategory('${category}')"]`);
+            if (targetBtn) {
+                targetBtn.classList.add('active');
+            }
+            
+            console.log('筛选分类:', category);
         }
 
         // 更新页面内容

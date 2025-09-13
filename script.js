@@ -142,7 +142,7 @@ function showBookmarkNotification(isAdded) {
 // 获取当前语言
 function getCurrentLanguage() {
     const activeLangBtn = document.querySelector('.lang-btn.active');
-    return activeLangBtn ? activeLangBtn.getAttribute('data-lang') : 'zh';
+    return activeLangBtn ? activeLangBtn.getAttribute('data-lang') : 'en';
 }
 
 // 页面加载完成后初始化

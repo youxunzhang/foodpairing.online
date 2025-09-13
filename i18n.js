@@ -258,27 +258,27 @@ const i18nData = {
     en: {
         // Navigation
         nav: {
-            title: "Nutrition Breakfast",
+            title: "Healthy Breakfast",
             home: "Home",
-            foods: "Food Library",
+            foods: "Food Database",
             chinese: "Chinese Cuisine",
-            cityFoods: "City Foods",
+            cityFoods: "City Specialties",
             game: "Nutrition Game"
         },
         
         // Header
         header: {
-            title: "Nutrition Breakfast Calculator",
-            subtitle: "Choose your favorite foods, view nutrition information and calculate combination effects"
+            title: "Healthy Breakfast Nutrition Calculator",
+            subtitle: "Discover the perfect breakfast combinations with detailed nutrition analysis and personalized recommendations"
         },
         
         // Calculator
         calculator: {
-            selectFood: "Select Foods",
-            nutritionAnalysis: "Nutrition Analysis",
-            selectFoodToStart: "Please select foods to start calculating nutrition",
-            nutritionAdvice: "Nutrition Advice",
-            selectFoodForAdvice: "Select foods to view personalized nutrition advice"
+            selectFood: "Choose Your Foods",
+            nutritionAnalysis: "Nutrition Breakdown",
+            selectFoodToStart: "Select foods to begin your nutrition analysis",
+            nutritionAdvice: "Nutritional Insights",
+            selectFoodForAdvice: "Choose foods to get personalized nutrition recommendations"
         },
         
         // Categories
@@ -302,22 +302,22 @@ const i18nData = {
         
         // Features
         features: {
-            title: "Why Choose a Nutritious Breakfast?",
+            title: "Why Choose a Healthy Breakfast?",
             card1: {
-                title: "Start Your Day Right",
-                desc: "A balanced breakfast provides you with sufficient energy to start your day with vitality"
+                title: "Fuel Your Day",
+                desc: "A well-balanced breakfast gives you the energy and nutrients you need to power through your morning"
             },
             card2: {
-                title: "Enhance Cognitive Ability",
-                desc: "High-quality protein and complex carbohydrates help improve memory and concentration"
+                title: "Boost Brain Power",
+                desc: "Quality protein and complex carbs enhance focus, memory, and mental performance throughout the day"
             },
             card3: {
-                title: "Boost Immunity",
-                desc: "Rich vitamins and minerals help strengthen your body's resistance and prevent diseases"
+                title: "Strengthen Immunity",
+                desc: "Essential vitamins and minerals from a nutritious breakfast help build your body's natural defenses"
             },
             card4: {
-                title: "Maintain Healthy Weight",
-                desc: "Scientifically balanced breakfast helps control appetite and maintain healthy weight management"
+                title: "Manage Weight Wisely",
+                desc: "A healthy breakfast helps regulate appetite and supports sustainable weight management goals"
             }
         },
         
@@ -342,17 +342,17 @@ const i18nData = {
         
         // Food Library
         foods: {
-            title: "Food Nutrition Library",
-            subtitle: "Explore detailed nutrition information of 100 common foods for your healthy breakfast",
-            categoryFilter: "Category Filter:",
-            allCategories: "All",
-            grains: "Grains",
-            protein: "Protein",
-            dairy: "Dairy",
-            fruits: "Fruits",
+            title: "Comprehensive Food Database",
+            subtitle: "Explore detailed nutrition facts for 100+ breakfast foods to make informed dietary choices",
+            categoryFilter: "Filter by Category:",
+            allCategories: "All Foods",
+            grains: "Grains & Cereals",
+            protein: "Protein Sources",
+            dairy: "Dairy Products",
+            fruits: "Fresh Fruits",
             vegetables: "Vegetables",
-            nuts: "Nuts",
-            drinks: "Drinks",
+            nuts: "Nuts & Seeds",
+            drinks: "Beverages",
             sortBy: "Sort by:",
             sortByName: "By Name",
             sortByCalories: "By Calories",

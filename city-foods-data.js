@@ -616,6 +616,342 @@ const cityFoodsData = [
         price: "¥15-25",
         bestTime: "Snack",
         location: "Various snack shops"
+    },
+    
+    // 深圳 (Shenzhen)
+    {
+        id: 27,
+        name: "Cantonese Dim Sum",
+        chineseName: "广式点心",
+        city: "shenzhen",
+        cityName: "Shenzhen",
+        cityNameChinese: "深圳",
+        emoji: "🥟",
+        description: "Traditional Cantonese dim sum with delicate flavors and beautiful presentation, perfect for brunch.",
+        englishDescription: "Traditional Cantonese dim sum with delicate flavors and beautiful presentation, perfect for brunch.",
+        chineseDescription: "传统广式点心，口味清淡，造型精美，是早茶的完美选择。",
+        nutrition: {
+            calories: 180,
+            protein: 6,
+            carbs: 28,
+            fat: 5,
+            fiber: 2,
+            sodium: 450
+        },
+        price: "¥25-45",
+        bestTime: "Brunch",
+        location: "Luk Yu Tea House, Tao Tao Ju"
+    },
+    {
+        id: 28,
+        name: "Seafood Hotpot",
+        chineseName: "海鲜火锅",
+        city: "shenzhen",
+        cityName: "Shenzhen",
+        cityNameChinese: "深圳",
+        emoji: "🦐",
+        description: "Fresh seafood hotpot featuring local catches from the South China Sea, served with light broth.",
+        englishDescription: "Fresh seafood hotpot featuring local catches from the South China Sea, served with light broth.",
+        chineseDescription: "新鲜海鲜火锅，选用南海本地海鲜，配以清淡汤底。",
+        nutrition: {
+            calories: 220,
+            protein: 25,
+            carbs: 8,
+            fat: 8,
+            fiber: 1,
+            sodium: 680
+        },
+        price: "¥88-168",
+        bestTime: "Dinner",
+        location: "Hai Di Lao, Xiao Fei Yang"
+    },
+    
+    // 苏州 (Suzhou)
+    {
+        id: 29,
+        name: "Suzhou Noodles",
+        chineseName: "苏州面条",
+        city: "suzhou",
+        cityName: "Suzhou",
+        cityNameChinese: "苏州",
+        emoji: "🍜",
+        description: "Delicate Suzhou-style noodles with light, clear broth and fresh seasonal ingredients.",
+        englishDescription: "Delicate Suzhou-style noodles with light, clear broth and fresh seasonal ingredients.",
+        chineseDescription: "精致的苏式面条，汤清味鲜，配以时令食材。",
+        nutrition: {
+            calories: 280,
+            protein: 12,
+            carbs: 45,
+            fat: 6,
+            fiber: 3,
+            sodium: 520
+        },
+        price: "¥18-35",
+        bestTime: "Lunch",
+        location: "Song He Lou, De Yue Lou"
+    },
+    {
+        id: 30,
+        name: "Suzhou Mooncakes",
+        chineseName: "苏式月饼",
+        city: "suzhou",
+        cityName: "Suzhou",
+        cityNameChinese: "苏州",
+        emoji: "🥮",
+        description: "Traditional Suzhou-style mooncakes with flaky pastry and sweet fillings, especially popular during Mid-Autumn Festival.",
+        englishDescription: "Traditional Suzhou-style mooncakes with flaky pastry and sweet fillings, especially popular during Mid-Autumn Festival.",
+        chineseDescription: "传统苏式月饼，酥皮层次分明，馅料香甜，中秋佳节必备。",
+        nutrition: {
+            calories: 320,
+            protein: 5,
+            carbs: 45,
+            fat: 15,
+            fiber: 2,
+            sodium: 180
+        },
+        price: "¥8-25",
+        bestTime: "Snack",
+        location: "Cai Zhi Zhai, Guan Sheng Yuan"
+    },
+    
+    // 青岛 (Qingdao)
+    {
+        id: 31,
+        name: "Qingdao Beer",
+        chineseName: "青岛啤酒",
+        city: "qingdao",
+        cityName: "Qingdao",
+        cityNameChinese: "青岛",
+        emoji: "🍺",
+        description: "World-famous Qingdao beer, best enjoyed with fresh seafood and grilled skewers by the seaside.",
+        englishDescription: "World-famous Qingdao beer, best enjoyed with fresh seafood and grilled skewers by the seaside.",
+        chineseDescription: "世界闻名的青岛啤酒，配以新鲜海鲜和烤串，海边享用最佳。",
+        nutrition: {
+            calories: 150,
+            protein: 1,
+            carbs: 12,
+            fat: 0,
+            fiber: 0,
+            sodium: 10
+        },
+        price: "¥8-25",
+        bestTime: "Evening",
+        location: "Tsingtao Beer Museum, Beer Street"
+    },
+    {
+        id: 32,
+        name: "Seafood Barbecue",
+        chineseName: "海鲜烧烤",
+        city: "qingdao",
+        cityName: "Qingdao",
+        cityNameChinese: "青岛",
+        emoji: "🦑",
+        description: "Fresh seafood grilled to perfection, featuring local catches like squid, shrimp, and fish.",
+        englishDescription: "Fresh seafood grilled to perfection, featuring local catches like squid, shrimp, and fish.",
+        chineseDescription: "新鲜海鲜烧烤，选用本地鱿鱼、虾类和鱼类，烤制完美。",
+        nutrition: {
+            calories: 200,
+            protein: 22,
+            carbs: 5,
+            fat: 10,
+            fiber: 0,
+            sodium: 450
+        },
+        price: "¥35-88",
+        bestTime: "Dinner",
+        location: "Taidong Night Market, Beer Street"
+    },
+    
+    // 大连 (Dalian)
+    {
+        id: 33,
+        name: "Dalian Seafood",
+        chineseName: "大连海鲜",
+        city: "dalian",
+        cityName: "Dalian",
+        cityNameChinese: "大连",
+        emoji: "🦀",
+        description: "Premium seafood from the Bohai Sea, featuring fresh crabs, sea urchins, and abalone.",
+        englishDescription: "Premium seafood from the Bohai Sea, featuring fresh crabs, sea urchins, and abalone.",
+        chineseDescription: "渤海湾优质海鲜，新鲜螃蟹、海胆和鲍鱼是特色。",
+        nutrition: {
+            calories: 180,
+            protein: 28,
+            carbs: 3,
+            fat: 6,
+            fiber: 0,
+            sodium: 380
+        },
+        price: "¥68-188",
+        bestTime: "Dinner",
+        location: "Dalian Seafood Market, Xinghai Square"
+    },
+    {
+        id: 34,
+        name: "Dalian Dumplings",
+        chineseName: "大连饺子",
+        city: "dalian",
+        cityName: "Dalian",
+        cityNameChinese: "大连",
+        emoji: "🥟",
+        description: "Dalian-style dumplings with seafood fillings, known for their thin skin and generous portions.",
+        englishDescription: "Dalian-style dumplings with seafood fillings, known for their thin skin and generous portions.",
+        chineseDescription: "大连特色海鲜饺子，皮薄馅大，海鲜馅料丰富。",
+        nutrition: {
+            calories: 250,
+            protein: 15,
+            carbs: 35,
+            fat: 8,
+            fiber: 2,
+            sodium: 580
+        },
+        price: "¥25-45",
+        bestTime: "Lunch/Dinner",
+        location: "Hai Yun Jiaozi, Da Lian Jiaozi Guan"
+    },
+    
+    // 厦门 (Xiamen)
+    {
+        id: 35,
+        name: "Xiamen Oyster Omelet",
+        chineseName: "厦门蚵仔煎",
+        city: "xiamen",
+        cityName: "Xiamen",
+        cityNameChinese: "厦门",
+        emoji: "🦪",
+        description: "Famous Xiamen street food featuring fresh oysters cooked with eggs and sweet potato starch.",
+        englishDescription: "Famous Xiamen street food featuring fresh oysters cooked with eggs and sweet potato starch.",
+        chineseDescription: "厦门著名街头小吃，新鲜牡蛎配鸡蛋和地瓜粉煎制。",
+        nutrition: {
+            calories: 220,
+            protein: 12,
+            carbs: 18,
+            fat: 12,
+            fiber: 2,
+            sodium: 420
+        },
+        price: "¥15-25",
+        bestTime: "Snack",
+        location: "Zhongshan Road, Gulangyu Island"
+    },
+    {
+        id: 36,
+        name: "Fujian Tea",
+        chineseName: "福建茶",
+        city: "xiamen",
+        cityName: "Xiamen",
+        cityNameChinese: "厦门",
+        emoji: "🍵",
+        description: "Premium Fujian tea varieties including Tieguanyin and Wuyi rock tea, perfect for tea ceremonies.",
+        englishDescription: "Premium Fujian tea varieties including Tieguanyin and Wuyi rock tea, perfect for tea ceremonies.",
+        chineseDescription: "优质福建茶叶，包括铁观音和武夷岩茶，适合茶艺品鉴。",
+        nutrition: {
+            calories: 2,
+            protein: 0,
+            carbs: 0,
+            fat: 0,
+            fiber: 0,
+            sodium: 1
+        },
+        price: "¥20-100",
+        bestTime: "Anytime",
+        location: "Tea Houses in Gulangyu, Wuyi Square"
+    },
+    
+    // 长沙 (Changsha)
+    {
+        id: 37,
+        name: "Stinky Tofu",
+        chineseName: "臭豆腐",
+        city: "changsha",
+        cityName: "Changsha",
+        cityNameChinese: "长沙",
+        emoji: "🧀",
+        description: "Changsha's famous stinky tofu, deep-fried and served with spicy sauce and pickled vegetables.",
+        englishDescription: "Changsha's famous stinky tofu, deep-fried and served with spicy sauce and pickled vegetables.",
+        chineseDescription: "长沙著名臭豆腐，油炸后配以辣酱和腌菜。",
+        nutrition: {
+            calories: 180,
+            protein: 8,
+            carbs: 12,
+            fat: 12,
+            fiber: 2,
+            sodium: 650
+        },
+        price: "¥8-15",
+        bestTime: "Snack",
+        location: "Pozi Street, Huangxing Road"
+    },
+    {
+        id: 38,
+        name: "Hunan Spicy Crayfish",
+        chineseName: "湖南麻辣小龙虾",
+        city: "changsha",
+        cityName: "Changsha",
+        cityNameChinese: "长沙",
+        emoji: "🦞",
+        description: "Spicy crayfish cooked with Hunan chili peppers and aromatic spices, a summer favorite.",
+        englishDescription: "Spicy crayfish cooked with Hunan chili peppers and aromatic spices, a summer favorite.",
+        chineseDescription: "湖南辣椒和香料烹制的小龙虾，夏季最受欢迎。",
+        nutrition: {
+            calories: 150,
+            protein: 18,
+            carbs: 5,
+            fat: 6,
+            fiber: 1,
+            sodium: 580
+        },
+        price: "¥35-68",
+        bestTime: "Dinner",
+        location: "Wenheyou, Pozi Street"
+    },
+    
+    // 哈尔滨 (Harbin)
+    {
+        id: 39,
+        name: "Harbin Sausage",
+        chineseName: "哈尔滨红肠",
+        city: "harbin",
+        cityName: "Harbin",
+        cityNameChinese: "哈尔滨",
+        emoji: "🌭",
+        description: "Famous Harbin red sausage with Russian influence, smoked and seasoned with garlic and spices.",
+        englishDescription: "Famous Harbin red sausage with Russian influence, smoked and seasoned with garlic and spices.",
+        chineseDescription: "哈尔滨著名红肠，受俄罗斯影响，烟熏制作，蒜香浓郁。",
+        nutrition: {
+            calories: 280,
+            protein: 15,
+            carbs: 8,
+            fat: 22,
+            fiber: 0,
+            sodium: 850
+        },
+        price: "¥25-45",
+        bestTime: "Snack",
+        location: "Central Street, Harbin Sausage Factory"
+    },
+    {
+        id: 40,
+        name: "Dongbei Dumplings",
+        chineseName: "东北饺子",
+        city: "harbin",
+        cityName: "Harbin",
+        cityNameChinese: "哈尔滨",
+        emoji: "🥟",
+        description: "Large Northeastern-style dumplings with hearty fillings, perfect for cold winter days.",
+        englishDescription: "Large Northeastern-style dumplings with hearty fillings, perfect for cold winter days.",
+        chineseDescription: "东北大饺子，馅料丰富，适合寒冷的冬日享用。",
+        nutrition: {
+            calories: 320,
+            protein: 18,
+            carbs: 42,
+            fat: 12,
+            fiber: 3,
+            sodium: 680
+        },
+        price: "¥20-35",
+        bestTime: "Lunch/Dinner",
+        location: "Dongbei Dumpling House, Central Street"
     }
 ];
 
@@ -730,5 +1066,82 @@ const cityInfo = [
         chineseDescription: "华中重镇，以独特的早餐文化和麻辣小吃闻名。",
         bestTime: "All year round",
         famousFor: ["Hot Dry Noodles", "Duck Neck"]
+    },
+    {
+        id: "shenzhen",
+        name: "Shenzhen",
+        chineseName: "深圳",
+        emoji: "🏙️",
+        description: "Modern metropolis with diverse international cuisine and fresh seafood.",
+        englishDescription: "Modern metropolis with diverse international cuisine and fresh seafood.",
+        chineseDescription: "现代化大都市，拥有多元化的国际美食和新鲜海鲜。",
+        bestTime: "All year round",
+        famousFor: ["Cantonese Dim Sum", "Seafood Hotpot"]
+    },
+    {
+        id: "suzhou",
+        name: "Suzhou",
+        chineseName: "苏州",
+        emoji: "🏮",
+        description: "Ancient water town famous for its delicate Jiangnan cuisine and traditional pastries.",
+        englishDescription: "Ancient water town famous for its delicate Jiangnan cuisine and traditional pastries.",
+        chineseDescription: "江南水乡，以精致的江南菜和传统糕点闻名。",
+        bestTime: "Spring and Autumn",
+        famousFor: ["Suzhou Noodles", "Suzhou Mooncakes"]
+    },
+    {
+        id: "qingdao",
+        name: "Qingdao",
+        chineseName: "青岛",
+        emoji: "🌊",
+        description: "Coastal city famous for its beer culture and fresh seafood.",
+        englishDescription: "Coastal city famous for its beer culture and fresh seafood.",
+        chineseDescription: "海滨城市，以啤酒文化和新鲜海鲜闻名。",
+        bestTime: "Summer",
+        famousFor: ["Qingdao Beer", "Seafood Barbecue"]
+    },
+    {
+        id: "dalian",
+        name: "Dalian",
+        chineseName: "大连",
+        emoji: "🏖️",
+        description: "Beautiful coastal city with premium seafood from the Bohai Sea.",
+        englishDescription: "Beautiful coastal city with premium seafood from the Bohai Sea.",
+        chineseDescription: "美丽的海滨城市，以渤海湾优质海鲜闻名。",
+        bestTime: "Summer and Autumn",
+        famousFor: ["Dalian Seafood", "Dalian Dumplings"]
+    },
+    {
+        id: "xiamen",
+        name: "Xiamen",
+        chineseName: "厦门",
+        emoji: "🏝️",
+        description: "Island city with unique Fujian cuisine and tea culture.",
+        englishDescription: "Island city with unique Fujian cuisine and tea culture.",
+        chineseDescription: "海岛城市，以独特的闽菜和茶文化闻名。",
+        bestTime: "Spring and Autumn",
+        famousFor: ["Xiamen Oyster Omelet", "Fujian Tea"]
+    },
+    {
+        id: "changsha",
+        name: "Changsha",
+        chineseName: "长沙",
+        emoji: "🌶️",
+        description: "Capital of Hunan Province, famous for its spicy cuisine and street food.",
+        englishDescription: "Capital of Hunan Province, famous for its spicy cuisine and street food.",
+        chineseDescription: "湖南省会，以辣味美食和街头小吃闻名。",
+        bestTime: "All year round",
+        famousFor: ["Stinky Tofu", "Hunan Spicy Crayfish"]
+    },
+    {
+        id: "harbin",
+        name: "Harbin",
+        chineseName: "哈尔滨",
+        emoji: "❄️",
+        description: "Northern city with Russian-influenced cuisine and hearty Northeastern dishes.",
+        englishDescription: "Northern city with Russian-influenced cuisine and hearty Northeastern dishes.",
+        chineseDescription: "北方城市，以俄式风味和丰盛的东北菜闻名。",
+        bestTime: "Winter",
+        famousFor: ["Harbin Sausage", "Dongbei Dumplings"]
     }
 ];

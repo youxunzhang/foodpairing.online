@@ -15,7 +15,7 @@
             width: 100%;
             overflow: hidden;
         }
-
+        
         .nutrition-item {
             display: flex;
             justify-content: space-between;
@@ -25,7 +25,7 @@
             min-height: 1.5rem;
             word-wrap: break-word;
         }
-
+        
         .nutrition-label {
             color: #666;
             font-size: 0.9rem;
@@ -33,7 +33,7 @@
             margin-right: 0.5rem;
             word-wrap: break-word;
         }
-
+        
         .nutrition-value {
             color: #ff6b6b;
             font-weight: 600;
@@ -63,7 +63,7 @@
             box-sizing: border-box;
             overflow: hidden;
         }
-
+        
         .dish-description {
             color: #666;
             line-height: 1.6;
@@ -106,29 +106,29 @@
     <nav class="navbar">
         <div class="nav-container">
             <div class="nav-logo">
-                <h2>🍳 <span data-i18n="nav.title">营养早餐</span></h2>
+                <h2>🍳 <span data-i18n="nav.title">Healthy Breakfast</span></h2>
             </div>
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="index.html" class="nav-link" data-i18n="nav.home">首页</a>
+                    <a href="index.html" class="nav-link" data-i18n="nav.home">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a href="foods.html" class="nav-link" data-i18n="nav.foods">食物库</a>
+                    <a href="foods.html" class="nav-link" data-i18n="nav.foods">Food Database</a>
                 </li>
                 <li class="nav-item">
-                    <a href="chinese-foods.html" class="nav-link active" data-i18n="nav.chinese">中国美食</a>
+                    <a href="chinese-foods.html" class="nav-link active" data-i18n="nav.chinese">Chinese Cuisine</a>
                 </li>
                 <li class="nav-item">
-                    <a href="city-foods.html" class="nav-link">城市美食</a>
+                    <a href="city-foods.html" class="nav-link" data-i18n="nav.cityFoods">City Specialties</a>
                 </li>
                 <li class="nav-item">
-                    <a href="food-roulette.html" class="nav-link">食物大转盘</a>
+                    <a href="food-roulette.html" class="nav-link" data-i18n="nav.foodRoulette">Food Roulette</a>
                 </li>
                 <li class="nav-item">
-                    <a href="lunch-roulette.html" class="nav-link">Lunch Roulette</a>
+                    <a href="lunch-roulette.html" class="nav-link" data-i18n="nav.lunchRoulette">Lunch Roulette</a>
                 </li>
                 <li class="nav-item">
-                    <a href="game.html" class="nav-link" data-i18n="nav.game">营养游戏</a>
+                    <a href="game.html" class="nav-link" data-i18n="nav.game">Nutrition Game</a>
                 </li>
             </ul>
             <div class="language-switcher">
@@ -221,93 +221,93 @@
         </div>
     </section>
 
-        <!-- 川菜 -->
-        <section class="region-section" data-region="sichuan">
-            <div class="region-header">
-                <h2 class="region-title">🌶️ Sichuan Cuisine (川菜)</h2>
-                <p class="region-subtitle">Known for its bold flavors, pungency and spiciness, resulting from liberal use of garlic and chili peppers</p>
-            </div>
-            <div class="dishes-grid" id="sichuanDishes">
-                <!-- 川菜数据将通过JavaScript动态加载 -->
-            </div>
-        </section>
+    <!-- 川菜 -->
+    <section class="region-section" data-region="sichuan">
+        <div class="region-header">
+            <h2 class="region-title">🌶️ Sichuan Cuisine (川菜)</h2>
+            <p class="region-subtitle">Known for its bold flavors, pungency and spiciness, resulting from liberal use of garlic and chili peppers</p>
+        </div>
+        <div class="dishes-grid" id="sichuanDishes">
+            <!-- 川菜数据将通过JavaScript动态加载 -->
+        </div>
+    </section>
 
-        <!-- 粤菜 -->
-        <section class="region-section" data-region="cantonese">
-            <div class="region-header">
-                <h2 class="region-title">🥘 Cantonese Cuisine (粤菜)</h2>
-                <p class="region-subtitle">Characterized by its delicate flavors, fresh ingredients, and emphasis on seafood and dim sum</p>
-            </div>
-            <div class="dishes-grid" id="cantoneseDishes">
-                <!-- 粤菜数据将通过JavaScript动态加载 -->
-            </div>
-        </section>
+    <!-- 粤菜 -->
+    <section class="region-section" data-region="cantonese">
+        <div class="region-header">
+            <h2 class="region-title">🥘 Cantonese Cuisine (粤菜)</h2>
+            <p class="region-subtitle">Characterized by its delicate flavors, fresh ingredients, and emphasis on seafood and dim sum</p>
+        </div>
+        <div class="dishes-grid" id="cantoneseDishes">
+            <!-- 粤菜数据将通过JavaScript动态加载 -->
+        </div>
+    </section>
 
-        <!-- 鲁菜 -->
-        <section class="region-section" data-region="shandong">
-            <div class="region-header">
-                <h2 class="region-title">🍖 Shandong Cuisine (鲁菜)</h2>
-                <p class="region-subtitle">Known for its emphasis on freshness, saltiness, and crispness, with a focus on seafood and clear soups</p>
-            </div>
-            <div class="dishes-grid" id="shandongDishes">
-                <!-- 鲁菜数据将通过JavaScript动态加载 -->
-            </div>
-        </section>
+    <!-- 鲁菜 -->
+    <section class="region-section" data-region="shandong">
+        <div class="region-header">
+            <h2 class="region-title">🍖 Shandong Cuisine (鲁菜)</h2>
+            <p class="region-subtitle">Known for its emphasis on freshness, saltiness, and crispness, with a focus on seafood and clear soups</p>
+        </div>
+        <div class="dishes-grid" id="shandongDishes">
+            <!-- 鲁菜数据将通过JavaScript动态加载 -->
+        </div>
+    </section>
 
-        <!-- 苏菜 -->
-        <section class="region-section" data-region="jiangsu">
-            <div class="region-header">
-                <h2 class="region-title">🦀 Jiangsu Cuisine (苏菜)</h2>
-                <p class="region-subtitle">Features fresh ingredients, elegant presentation, and a balance of sweet and savory flavors</p>
-            </div>
-            <div class="dishes-grid" id="jiangsuDishes">
-                <!-- 苏菜数据将通过JavaScript动态加载 -->
-            </div>
-        </section>
+    <!-- 苏菜 -->
+    <section class="region-section" data-region="jiangsu">
+        <div class="region-header">
+            <h2 class="region-title">🦀 Jiangsu Cuisine (苏菜)</h2>
+            <p class="region-subtitle">Features fresh ingredients, elegant presentation, and a balance of sweet and savory flavors</p>
+        </div>
+        <div class="dishes-grid" id="jiangsuDishes">
+            <!-- 苏菜数据将通过JavaScript动态加载 -->
+        </div>
+    </section>
 
-        <!-- 浙菜 -->
-        <section class="region-section" data-region="zhejiang">
-            <div class="region-header">
-                <h2 class="region-title">🐟 Zhejiang Cuisine (浙菜)</h2>
-                <p class="region-subtitle">Known for its fresh, light, and delicate flavors, with an emphasis on seasonal ingredients</p>
-            </div>
-            <div class="dishes-grid" id="zhejiangDishes">
-                <!-- 浙菜数据将通过JavaScript动态加载 -->
-            </div>
-        </section>
+    <!-- 浙菜 -->
+    <section class="region-section" data-region="zhejiang">
+        <div class="region-header">
+            <h2 class="region-title">🐟 Zhejiang Cuisine (浙菜)</h2>
+            <p class="region-subtitle">Known for its fresh, light, and delicate flavors, with an emphasis on seasonal ingredients</p>
+        </div>
+        <div class="dishes-grid" id="zhejiangDishes">
+            <!-- 浙菜数据将通过JavaScript动态加载 -->
+        </div>
+    </section>
 
-        <!-- 闽菜 -->
-        <section class="region-section" data-region="fujian">
-            <div class="region-header">
-                <h2 class="region-title">🦐 Fujian Cuisine (闽菜)</h2>
-                <p class="region-subtitle">Features light, fresh, and slightly sweet flavors, with a focus on seafood and soups</p>
-            </div>
-            <div class="dishes-grid" id="fujianDishes">
-                <!-- 闽菜数据将通过JavaScript动态加载 -->
-            </div>
-        </section>
+    <!-- 闽菜 -->
+    <section class="region-section" data-region="fujian">
+        <div class="region-header">
+            <h2 class="region-title">🦐 Fujian Cuisine (闽菜)</h2>
+            <p class="region-subtitle">Features light, fresh, and slightly sweet flavors, with a focus on seafood and soups</p>
+        </div>
+        <div class="dishes-grid" id="fujianDishes">
+            <!-- 闽菜数据将通过JavaScript动态加载 -->
+        </div>
+    </section>
 
-        <!-- 湘菜 -->
-        <section class="region-section" data-region="hunan">
-            <div class="region-header">
-                <h2 class="region-title">🔥 Hunan Cuisine (湘菜)</h2>
-                <p class="region-subtitle">Known for its hot and sour flavors, with liberal use of chili peppers and pickled vegetables</p>
-            </div>
-            <div class="dishes-grid" id="hunanDishes">
-                <!-- 湘菜数据将通过JavaScript动态加载 -->
-            </div>
-        </section>
+    <!-- 湘菜 -->
+    <section class="region-section" data-region="hunan">
+        <div class="region-header">
+            <h2 class="region-title">🔥 Hunan Cuisine (湘菜)</h2>
+            <p class="region-subtitle">Known for its hot and sour flavors, with liberal use of chili peppers and pickled vegetables</p>
+        </div>
+        <div class="dishes-grid" id="hunanDishes">
+            <!-- 湘菜数据将通过JavaScript动态加载 -->
+        </div>
+    </section>
 
-        <!-- 徽菜 -->
-        <section class="region-section" data-region="anhui">
-            <div class="region-header">
-                <h2 class="region-title">🏔️ Anhui Cuisine (徽菜)</h2>
-                <p class="region-subtitle">Features wild herbs, game, and preserved vegetables, with a focus on braising and stewing</p>
-            </div>
-            <div class="dishes-grid" id="anhuiDishes">
-                <!-- 徽菜数据将通过JavaScript动态加载 -->
-            </div>
-        </section>
+    <!-- 徽菜 -->
+    <section class="region-section" data-region="anhui">
+        <div class="region-header">
+            <h2 class="region-title">🏔️ Anhui Cuisine (徽菜)</h2>
+            <p class="region-subtitle">Features wild herbs, game, and preserved vegetables, with a focus on braising and stewing</p>
+        </div>
+        <div class="dishes-grid" id="anhuiDishes">
+            <!-- 徽菜数据将通过JavaScript动态加载 -->
+        </div>
+    </section>
     </main>
 
     <!-- 页脚 -->

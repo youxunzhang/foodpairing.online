@@ -8,6 +8,8 @@ const i18nData = {
             foods: "食物库",
             chinese: "中国美食",
             cityFoods: "城市美食",
+            foodRoulette: "食物大转盘",
+            lunchRoulette: "午餐转盘",
             game: "营养游戏"
         },
         
@@ -263,6 +265,8 @@ const i18nData = {
             foods: "Food Database",
             chinese: "Chinese Cuisine",
             cityFoods: "City Specialties",
+            foodRoulette: "Food Roulette",
+            lunchRoulette: "Lunch Roulette",
             game: "Nutrition Game"
         },
         

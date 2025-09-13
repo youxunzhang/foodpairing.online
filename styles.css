@@ -1715,4 +1715,256 @@ body {
     padding: 1rem;
     border-radius: 10px;
     margin: 1rem 0;
+}
+
+/* 中国美食页面专用样式 */
+.stats-section {
+    background: white;
+    padding: 3rem 0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.stats-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    text-align: center;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.stat-item h3 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #ff6b6b;
+    margin-bottom: 0.5rem;
+}
+
+.stat-item p {
+    color: #666;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+/* 搜索和筛选区域 */
+.search-section {
+    background: white;
+    padding: 2rem 0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.search-input {
+    width: 100%;
+    max-width: 500px;
+    padding: 1rem;
+    border: 2px solid #e9ecef;
+    border-radius: 25px;
+    font-size: 1rem;
+    margin: 0 auto 2rem;
+    display: block;
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #ff6b6b;
+    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
+}
+
+.region-filter {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.region-btn {
+    background: white;
+    border: 2px solid #e9ecef;
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.region-btn:hover,
+.region-btn.active {
+    background: linear-gradient(135deg, #ff6b6b, #ffa500);
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+}
+
+/* 地区部分样式 */
+.region-section {
+    padding: 3rem 0;
+    background: #f8f9fa;
+}
+
+.region-section:nth-child(even) {
+    background: white;
+}
+
+.region-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.region-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.region-subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.dishes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* 菜品卡片样式 */
+.dish-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.dish-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-color: #ff6b6b;
+}
+
+.dish-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.dish-emoji {
+    font-size: 3rem;
+    margin-right: 1rem;
+}
+
+.dish-info h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.dish-info p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.nutrition-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .stat-item {
+        padding: 1rem;
+    }
+    
+    .stat-item h3 {
+        font-size: 2rem;
+    }
+    
+    .region-title {
+        font-size: 2rem;
+    }
+    
+    .dishes-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .dish-card {
+        padding: 1.5rem;
+    }
+    
+    .dish-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .dish-emoji {
+        margin-right: 0;
+        margin-bottom: 1rem;
+    }
+    
+    .region-filter {
+        gap: 0.5rem;
+    }
+    
+    .region-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .region-title {
+        font-size: 1.8rem;
+    }
+    
+    .dish-card {
+        padding: 1rem;
+    }
+    
+    .search-input {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+    }
 } 

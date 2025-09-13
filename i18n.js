@@ -163,18 +163,25 @@ const i18nData = {
         
         // 中国美食
         chinese: {
-            title: "Chinese Regional Cuisine",
-            subtitle: "Explore the rich diversity of Chinese regional specialties and their nutritional information",
-            searchPlaceholder: "Search for dishes...",
-            allRegions: "All Regions",
-            sichuan: "Sichuan",
-            cantonese: "Cantonese",
-            shandong: "Shandong",
-            jiangsu: "Jiangsu",
-            zhejiang: "Zhejiang",
-            fujian: "Fujian",
-            hunan: "Hunan",
-            anhui: "Anhui"
+            title: "中国地方菜系",
+            subtitle: "探索中国八大菜系的特色菜肴，了解各地美食的营养价值和健康特点",
+            searchPlaceholder: "搜索菜品...",
+            allRegions: "全部地区",
+            sichuan: "川菜",
+            cantonese: "粤菜",
+            shandong: "鲁菜",
+            jiangsu: "苏菜",
+            zhejiang: "浙菜",
+            fujian: "闽菜",
+            hunan: "湘菜",
+            anhui: "徽菜",
+            stats: {
+                title: "中国菜系统计",
+                totalDishes: "总菜品数",
+                regions: "菜系数量",
+                avgCalories: "平均热量",
+                avgProtein: "平均蛋白质(g)"
+            }
         },
         
         // 城市美食
@@ -406,6 +413,29 @@ const i18nData = {
             instruction4: {
                 title: "Complete Challenge",
                 desc: "Click check target to see if nutrition requirements are met"
+            }
+        },
+        
+        // Chinese Cuisine
+        chinese: {
+            title: "Chinese Regional Cuisine",
+            subtitle: "Explore the rich diversity of Chinese regional specialties and their nutritional information",
+            searchPlaceholder: "Search for dishes...",
+            allRegions: "All Regions",
+            sichuan: "Sichuan",
+            cantonese: "Cantonese",
+            shandong: "Shandong",
+            jiangsu: "Jiangsu",
+            zhejiang: "Zhejiang",
+            fujian: "Fujian",
+            hunan: "Hunan",
+            anhui: "Anhui",
+            stats: {
+                title: "Chinese Cuisine Statistics",
+                totalDishes: "Total Dishes",
+                regions: "Culinary Regions",
+                avgCalories: "Avg Calories",
+                avgProtein: "Avg Protein (g)"
             }
         },
         

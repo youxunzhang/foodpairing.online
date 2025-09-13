@@ -7,15 +7,29 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
+        /* 页面整体布局优化 */
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Noto Sans SC', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
         .region-section {
-            margin: 3rem 0;
+            margin: 2rem 0;
             padding: 2rem;
             background: white;
             border-radius: 20px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
+            width: 100%;
+            box-sizing: border-box;
         }
         
         .region-header {
@@ -175,11 +189,12 @@
         
         .search-section {
             text-align: center;
-            margin: 2rem 0;
+            margin: 2rem auto;
             max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            padding: 0 2rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
         
         .search-input {
@@ -205,6 +220,7 @@
             margin: 2rem auto;
             text-align: center;
             max-width: 1200px;
+            box-shadow: 0 8px 30px rgba(255, 107, 107, 0.3);
         }
         
         .stats-grid {
@@ -225,8 +241,13 @@
         }
         
         @media (max-width: 768px) {
+            .main-container {
+                padding: 0 15px;
+            }
+
             .dishes-grid {
                 grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
             
             .region-title {
@@ -235,19 +256,22 @@
             
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
             }
             
             .region-section {
-                margin: 2rem 1rem;
+                margin: 1.5rem 0;
                 padding: 1.5rem;
             }
             
             .search-section {
-                padding: 0 1rem;
+                margin: 1.5rem 0;
+                padding: 1.5rem;
             }
             
             .region-filter {
                 gap: 0.5rem;
+                flex-wrap: wrap;
             }
             
             .region-btn {
@@ -255,6 +279,10 @@
                 font-size: 0.9rem;
             }
             
+            .page-header {
+                padding: 100px 0 40px;
+            }
+
             .page-header h1 {
                 font-size: 2rem;
             }
@@ -295,6 +323,51 @@
             .nutrition-info {
                 padding: 0.8rem;
             }
+
+            .stats-section {
+                margin: 1.5rem 0;
+                padding: 1.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-container {
+                padding: 0 10px;
+            }
+
+            .region-section {
+                padding: 1rem;
+            }
+
+            .search-section {
+                padding: 1rem;
+            }
+
+            .stats-section {
+                padding: 1rem;
+            }
+
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .region-title {
+                font-size: 1.5rem;
+            }
+
+            .region-btn {
+                padding: 0.5rem 0.8rem;
+                font-size: 0.8rem;
+            }
+
+            .dish-card {
+                padding: 1rem;
+            }
         }
         
         /* AI工具链接样式 - 黑白色 */
@@ -325,37 +398,96 @@
             transform: translateY(0);
         }
         
-        /* 页面整体样式优化 */
-        body {
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-            min-height: 100vh;
+        /* 页脚样式 */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #ff6b6b;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #ff6b6b;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #555;
+            color: #ccc;
         }
         
         .page-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 4rem 0;
+            padding: 120px 0 60px;
             text-align: center;
             margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="header-grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="60" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23header-grain)"/></svg>');
+            opacity: 0.3;
         }
         
         .header-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 2rem;
+            position: relative;
+            z-index: 2;
         }
         
         .page-header h1 {
-            font-size: 3rem;
+            font-size: 2.5rem;
             margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
         }
         
         .page-header p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             opacity: 0.9;
             max-width: 600px;
             margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
         
         /* 分享按钮样式优化 */
@@ -473,9 +605,10 @@
         </div>
     </header>
 
-    <!-- 统计信息 -->
-    <section class="stats-section">
-        <div class="container">
+    <!-- 主要内容区域 -->
+    <main class="main-container">
+        <!-- 统计信息 -->
+        <section class="stats-section">
             <h2>Chinese Cuisine Statistics</h2>
             <div class="stats-grid">
                 <div class="stat-item">
@@ -495,12 +628,10 @@
                     <p>Avg Protein (g)</p>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 搜索和筛选 -->
-    <section class="search-section">
-        <div class="container">
+        <!-- 搜索和筛选 -->
+        <section class="search-section">
             <input type="text" id="searchInput" class="search-input" placeholder="Search for dishes..." data-i18n="chinese.searchPlaceholder">
             
             <div class="region-filter">
@@ -514,96 +645,96 @@
                 <button class="region-btn" data-region="hunan" data-i18n="chinese.hunan">Hunan</button>
                 <button class="region-btn" data-region="anhui" data-i18n="chinese.anhui">Anhui</button>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 川菜 -->
-    <section class="region-section" data-region="sichuan">
-        <div class="region-header">
-            <h2 class="region-title">🌶️ Sichuan Cuisine (川菜)</h2>
-            <p class="region-subtitle">Known for its bold flavors, pungency and spiciness, resulting from liberal use of garlic and chili peppers</p>
-        </div>
-        <div class="dishes-grid" id="sichuanDishes">
-            <!-- 川菜数据将通过JavaScript动态加载 -->
-        </div>
-    </section>
+        <!-- 川菜 -->
+        <section class="region-section" data-region="sichuan">
+            <div class="region-header">
+                <h2 class="region-title">🌶️ Sichuan Cuisine (川菜)</h2>
+                <p class="region-subtitle">Known for its bold flavors, pungency and spiciness, resulting from liberal use of garlic and chili peppers</p>
+            </div>
+            <div class="dishes-grid" id="sichuanDishes">
+                <!-- 川菜数据将通过JavaScript动态加载 -->
+            </div>
+        </section>
 
-    <!-- 粤菜 -->
-    <section class="region-section" data-region="cantonese">
-        <div class="region-header">
-            <h2 class="region-title">🥘 Cantonese Cuisine (粤菜)</h2>
-            <p class="region-subtitle">Characterized by its delicate flavors, fresh ingredients, and emphasis on seafood and dim sum</p>
-        </div>
-        <div class="dishes-grid" id="cantoneseDishes">
-            <!-- 粤菜数据将通过JavaScript动态加载 -->
-        </div>
-    </section>
+        <!-- 粤菜 -->
+        <section class="region-section" data-region="cantonese">
+            <div class="region-header">
+                <h2 class="region-title">🥘 Cantonese Cuisine (粤菜)</h2>
+                <p class="region-subtitle">Characterized by its delicate flavors, fresh ingredients, and emphasis on seafood and dim sum</p>
+            </div>
+            <div class="dishes-grid" id="cantoneseDishes">
+                <!-- 粤菜数据将通过JavaScript动态加载 -->
+            </div>
+        </section>
 
-    <!-- 鲁菜 -->
-    <section class="region-section" data-region="shandong">
-        <div class="region-header">
-            <h2 class="region-title">🍖 Shandong Cuisine (鲁菜)</h2>
-            <p class="region-subtitle">Known for its emphasis on freshness, saltiness, and crispness, with a focus on seafood and clear soups</p>
-        </div>
-        <div class="dishes-grid" id="shandongDishes">
-            <!-- 鲁菜数据将通过JavaScript动态加载 -->
-        </div>
-    </section>
+        <!-- 鲁菜 -->
+        <section class="region-section" data-region="shandong">
+            <div class="region-header">
+                <h2 class="region-title">🍖 Shandong Cuisine (鲁菜)</h2>
+                <p class="region-subtitle">Known for its emphasis on freshness, saltiness, and crispness, with a focus on seafood and clear soups</p>
+            </div>
+            <div class="dishes-grid" id="shandongDishes">
+                <!-- 鲁菜数据将通过JavaScript动态加载 -->
+            </div>
+        </section>
 
-    <!-- 苏菜 -->
-    <section class="region-section" data-region="jiangsu">
-        <div class="region-header">
-            <h2 class="region-title">🦀 Jiangsu Cuisine (苏菜)</h2>
-            <p class="region-subtitle">Features fresh ingredients, elegant presentation, and a balance of sweet and savory flavors</p>
-        </div>
-        <div class="dishes-grid" id="jiangsuDishes">
-            <!-- 苏菜数据将通过JavaScript动态加载 -->
-        </div>
-    </section>
+        <!-- 苏菜 -->
+        <section class="region-section" data-region="jiangsu">
+            <div class="region-header">
+                <h2 class="region-title">🦀 Jiangsu Cuisine (苏菜)</h2>
+                <p class="region-subtitle">Features fresh ingredients, elegant presentation, and a balance of sweet and savory flavors</p>
+            </div>
+            <div class="dishes-grid" id="jiangsuDishes">
+                <!-- 苏菜数据将通过JavaScript动态加载 -->
+            </div>
+        </section>
 
-    <!-- 浙菜 -->
-    <section class="region-section" data-region="zhejiang">
-        <div class="region-header">
-            <h2 class="region-title">🐟 Zhejiang Cuisine (浙菜)</h2>
-            <p class="region-subtitle">Known for its fresh, light, and delicate flavors, with an emphasis on seasonal ingredients</p>
-        </div>
-        <div class="dishes-grid" id="zhejiangDishes">
-            <!-- 浙菜数据将通过JavaScript动态加载 -->
-        </div>
-    </section>
+        <!-- 浙菜 -->
+        <section class="region-section" data-region="zhejiang">
+            <div class="region-header">
+                <h2 class="region-title">🐟 Zhejiang Cuisine (浙菜)</h2>
+                <p class="region-subtitle">Known for its fresh, light, and delicate flavors, with an emphasis on seasonal ingredients</p>
+            </div>
+            <div class="dishes-grid" id="zhejiangDishes">
+                <!-- 浙菜数据将通过JavaScript动态加载 -->
+            </div>
+        </section>
 
-    <!-- 闽菜 -->
-    <section class="region-section" data-region="fujian">
-        <div class="region-header">
-            <h2 class="region-title">🦐 Fujian Cuisine (闽菜)</h2>
-            <p class="region-subtitle">Features light, fresh, and slightly sweet flavors, with a focus on seafood and soups</p>
-        </div>
-        <div class="dishes-grid" id="fujianDishes">
-            <!-- 闽菜数据将通过JavaScript动态加载 -->
-        </div>
-    </section>
+        <!-- 闽菜 -->
+        <section class="region-section" data-region="fujian">
+            <div class="region-header">
+                <h2 class="region-title">🦐 Fujian Cuisine (闽菜)</h2>
+                <p class="region-subtitle">Features light, fresh, and slightly sweet flavors, with a focus on seafood and soups</p>
+            </div>
+            <div class="dishes-grid" id="fujianDishes">
+                <!-- 闽菜数据将通过JavaScript动态加载 -->
+            </div>
+        </section>
 
-    <!-- 湘菜 -->
-    <section class="region-section" data-region="hunan">
-        <div class="region-header">
-            <h2 class="region-title">🔥 Hunan Cuisine (湘菜)</h2>
-            <p class="region-subtitle">Known for its hot and sour flavors, with liberal use of chili peppers and pickled vegetables</p>
-        </div>
-        <div class="dishes-grid" id="hunanDishes">
-            <!-- 湘菜数据将通过JavaScript动态加载 -->
-        </div>
-    </section>
+        <!-- 湘菜 -->
+        <section class="region-section" data-region="hunan">
+            <div class="region-header">
+                <h2 class="region-title">🔥 Hunan Cuisine (湘菜)</h2>
+                <p class="region-subtitle">Known for its hot and sour flavors, with liberal use of chili peppers and pickled vegetables</p>
+            </div>
+            <div class="dishes-grid" id="hunanDishes">
+                <!-- 湘菜数据将通过JavaScript动态加载 -->
+            </div>
+        </section>
 
-    <!-- 徽菜 -->
-    <section class="region-section" data-region="anhui">
-        <div class="region-header">
-            <h2 class="region-title">🏔️ Anhui Cuisine (徽菜)</h2>
-            <p class="region-subtitle">Features wild herbs, game, and preserved vegetables, with a focus on braising and stewing</p>
-        </div>
-        <div class="dishes-grid" id="anhuiDishes">
-            <!-- 徽菜数据将通过JavaScript动态加载 -->
-        </div>
-    </section>
+        <!-- 徽菜 -->
+        <section class="region-section" data-region="anhui">
+            <div class="region-header">
+                <h2 class="region-title">🏔️ Anhui Cuisine (徽菜)</h2>
+                <p class="region-subtitle">Features wild herbs, game, and preserved vegetables, with a focus on braising and stewing</p>
+            </div>
+            <div class="dishes-grid" id="anhuiDishes">
+                <!-- 徽菜数据将通过JavaScript动态加载 -->
+            </div>
+        </section>
+    </main>
 
     <!-- 页脚 -->
     <footer class="footer">

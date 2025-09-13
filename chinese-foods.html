@@ -49,6 +49,9 @@
             padding: 1.5rem;
             transition: all 0.3s ease;
             border: 2px solid transparent;
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
         }
         
         .dish-card:hover {
@@ -85,6 +88,9 @@
             padding: 1rem;
             border-radius: 10px;
             margin-top: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
         }
         
         .nutrition-title {
@@ -98,24 +104,35 @@
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 0.5rem;
+            width: 100%;
+            overflow: hidden;
         }
         
         .nutrition-item {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             padding: 0.3rem 0;
             border-bottom: 1px solid #eee;
+            min-height: 1.5rem;
+            word-wrap: break-word;
         }
         
         .nutrition-label {
             color: #666;
             font-size: 0.9rem;
+            flex: 1;
+            margin-right: 0.5rem;
+            word-wrap: break-word;
         }
         
         .nutrition-value {
             color: #ff6b6b;
             font-weight: 600;
             font-size: 0.9rem;
+            flex-shrink: 0;
+            text-align: right;
+            min-width: fit-content;
         }
         
         .dish-description {
@@ -123,6 +140,9 @@
             line-height: 1.6;
             margin-top: 1rem;
             font-size: 0.95rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            hyphens: auto;
         }
         
         .region-filter {
@@ -250,6 +270,30 @@
             .share-btn {
                 padding: 0.4rem 0.8rem;
                 font-size: 0.8rem;
+            }
+            
+            /* 移动端营养信息优化 */
+            .nutrition-grid {
+                grid-template-columns: 1fr;
+                gap: 0.3rem;
+            }
+            
+            .nutrition-item {
+                padding: 0.4rem 0;
+                min-height: 1.8rem;
+            }
+            
+            .nutrition-label {
+                font-size: 0.85rem;
+                margin-right: 0.3rem;
+            }
+            
+            .nutrition-value {
+                font-size: 0.85rem;
+            }
+            
+            .nutrition-info {
+                padding: 0.8rem;
             }
         }
         

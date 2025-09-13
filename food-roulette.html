@@ -322,46 +322,73 @@
     </div>
 
     <script src="foods-data.js"></script>
-    <script src="city-foods-data.js"></script>
     <script src="i18n.js"></script>
     <script>
-        let currentLanguage = 'zh';
         let currentCategory = 'all';
         let isSpinning = false;
         let allFoods = [];
 
         // 初始化页面
         document.addEventListener('DOMContentLoaded', function() {
-            initializeFoods();
-            updatePageContent();
+            try {
+                initializeFoods();
+                initializePage();
+            } catch (error) {
+                console.error('页面初始化失败:', error);
+                showError('页面初始化失败，请刷新页面重试');
+            }
         });
 
         // 初始化食物数据
         function initializeFoods() {
-            // 合并普通食物数据和城市美食数据
-            allFoods = [...foodsData];
-            
-            // 添加城市美食数据，转换为统一格式
-            cityFoodsData.forEach(cityFood => {
-                const foodItem = {
-                    id: cityFood.id + 1000, // 避免ID冲突
-                    name: cityFood.name,
-                    chineseName: cityFood.chineseName,
-                    emoji: cityFood.emoji,
-                    category: 'city-food',
-                    calories: cityFood.nutrition.calories,
-                    protein: cityFood.nutrition.protein,
-                    carbs: cityFood.nutrition.carbs,
-                    fat: cityFood.nutrition.fat,
-                    fiber: cityFood.nutrition.fiber,
-                    description: cityFood.chineseDescription,
-                    englishDescription: cityFood.englishDescription,
-                    city: cityFood.cityNameChinese,
-                    price: cityFood.price,
-                    location: cityFood.location
-                };
-                allFoods.push(foodItem);
-            });
+            try {
+                // 检查数据是否加载
+                if (typeof foodsData === 'undefined') {
+                    throw new Error('食物数据未加载');
+                }
+                
+                // 使用基础食物数据
+                allFoods = [...foodsData];
+                
+                console.log('食物数据加载成功，共', allFoods.length, '种食物');
+                
+                // 尝试添加城市美食数据（如果存在）
+                if (typeof cityFoodsData !== 'undefined' && cityFoodsData.length > 0) {
+                    cityFoodsData.forEach(cityFood => {
+                        const foodItem = {
+                            id: cityFood.id + 1000, // 避免ID冲突
+                            name: cityFood.name,
+                            chineseName: cityFood.chineseName,
+                            emoji: cityFood.emoji,
+                            category: 'city-food',
+                            calories: cityFood.nutrition.calories,
+                            protein: cityFood.nutrition.protein,
+                            carbs: cityFood.nutrition.carbs,
+                            fat: cityFood.nutrition.fat,
+                            fiber: cityFood.nutrition.fiber,
+                            description: cityFood.chineseDescription,
+                            englishDescription: cityFood.englishDescription,
+                            city: cityFood.cityNameChinese,
+                            price: cityFood.price,
+                            location: cityFood.location
+                        };
+                        allFoods.push(foodItem);
+                    });
+                    console.log('城市美食数据加载成功，总计', allFoods.length, '种食物');
+                }
+            } catch (error) {
+                console.error('初始化食物数据失败:', error);
+                showError('食物数据加载失败');
+            }
+        }
+
+        // 初始化页面
+        function initializePage() {
+            // 等待语言系统初始化
+            setTimeout(() => {
+                updatePageContent();
+                updateSpinButtonText();
+            }, 100);
         }
 
         // 转动转盘
@@ -484,46 +511,63 @@
             event.target.classList.add('active');
         }
 
-        // 切换语言
-        function switchLanguage(lang) {
-            currentLanguage = lang;
-            
-            // 更新语言按钮状态
-            document.querySelectorAll('.language-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // 更新页面内容
-            updatePageContent();
-        }
-
         // 更新页面内容
         function updatePageContent() {
-            const elements = document.querySelectorAll('[data-i18n]');
-            elements.forEach(element => {
-                const key = element.getAttribute('data-i18n');
-                const translation = getTranslation(key, currentLanguage);
-                if (translation) {
-                    element.textContent = translation;
-                }
-            });
+            // 使用全局翻译系统
+            if (typeof getText === 'function') {
+                const elements = document.querySelectorAll('[data-i18n]');
+                elements.forEach(element => {
+                    const key = element.getAttribute('data-i18n');
+                    const translation = getText(key);
+                    if (translation && translation !== key) {
+                        element.textContent = translation;
+                    }
+                });
+            }
         }
 
-        // 获取翻译
-        function getTranslation(key, lang) {
-            const keys = key.split('.');
-            let value = i18nData[lang];
-            
-            for (const k of keys) {
-                if (value && value[k]) {
-                    value = value[k];
-                } else {
-                    return null;
-                }
+        // 更新转动按钮文本
+        function updateSpinButtonText() {
+            const button = document.getElementById('spinButton');
+            if (button && !isSpinning) {
+                const currentLang = getCurrentLanguage();
+                button.textContent = currentLang === 'zh' ? '转动转盘' : 'Spin the Wheel';
             }
+        }
+
+        // 获取当前语言
+        function getCurrentLanguage() {
+            if (typeof currentLanguage !== 'undefined') {
+                return currentLanguage;
+            }
+            const activeLangBtn = document.querySelector('.lang-btn.active');
+            return activeLangBtn ? activeLangBtn.getAttribute('data-lang') : 'en';
+        }
+
+        // 显示错误信息
+        function showError(message) {
+            const resultContainer = document.getElementById('resultContainer');
+            const foodCard = document.getElementById('foodCard');
             
-            return value;
+            if (resultContainer && foodCard) {
+                foodCard.innerHTML = `
+                    <div style="text-align: center; padding: 2rem; color: #dc3545;">
+                        <div style="font-size: 3rem; margin-bottom: 1rem;">⚠️</div>
+                        <h3 style="margin-bottom: 1rem;">出现错误</h3>
+                        <p>${message}</p>
+                        <button onclick="location.reload()" style="
+                            background: #dc3545;
+                            color: white;
+                            border: none;
+                            padding: 0.8rem 1.5rem;
+                            border-radius: 25px;
+                            cursor: pointer;
+                            margin-top: 1rem;
+                        ">刷新页面</button>
+                    </div>
+                `;
+                resultContainer.classList.add('show');
+            }
         }
     </script>
 </body>

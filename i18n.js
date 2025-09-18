@@ -231,6 +231,8 @@ const i18nData = {
             phone: "电话",
             phoneNumber: "0",
             aiTools: "AI工具导航",
+            privacyPolicy: "隐私政策",
+            termsOfService: "服务条款",
             copyright: "© 2024 营养早餐. 保留所有权利."
         },
         
@@ -451,6 +453,8 @@ const i18nData = {
             phone: "Phone",
             phoneNumber: "0",
             aiTools: "AI Tools Navigation",
+            privacyPolicy: "Privacy Policy",
+            termsOfService: "Terms of Service",
             copyright: "© 2024 Nutrition Breakfast. All rights reserved."
         },
         

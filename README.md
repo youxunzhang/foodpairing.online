@@ -43,9 +43,17 @@
 ├── styles.css          # 样式文件
 ├── script.js           # JavaScript功能
 ├── foods-data.js       # 食物数据
+├── internal-tools/     # 内部调试与测试页面（不对外发布）
+├── scripts/            # 部署校验脚本
 ├── README.md           # 项目说明
 └── 需求.txt            # 原始需求
 ```
+
+## 部署检查
+
+- 发布正式版本前，请确保未将 `internal-tools/` 目录或任何调试页面上传到服务器。
+- 可以运行 `python3 scripts/validate_release.py <发布目录>` 检查待部署目录是否包含内部页面。
+- 若脚本检测到内部文件，请先移除后再进行部署。
 
 ## 使用方法
 

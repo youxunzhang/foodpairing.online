@@ -953,6 +953,146 @@ const cityFoodsData = [
         bestTime: "Lunch/Dinner",
         location: "Dongbei Dumpling House, Central Street"
     }
+    ,
+    // 昆明 (Kunming)
+    {
+        id: 41,
+        name: "Crossing the Bridge Noodles",
+        chineseName: "过桥米线",
+        city: "kunming",
+        cityName: "Kunming",
+        cityNameChinese: "昆明",
+        emoji: "🍜",
+        description: "A Yunnan specialty featuring a rich broth and fresh rice noodles served with a variety of toppings.",
+        englishDescription: "A Yunnan specialty featuring a rich broth and fresh rice noodles served with a variety of toppings.",
+        chineseDescription: "云南特色，浓郁汤底配新鲜米线和多种配料。",
+        nutrition: {
+            calories: 360,
+            protein: 18,
+            carbs: 50,
+            fat: 12,
+            fiber: 3,
+            sodium: 780
+        },
+        price: "¥12-30",
+        bestTime: "Breakfast/Lunch",
+        location: "Local noodle shops in Kunming"
+    },
+    {
+        id: 42,
+        name: "Er Kuai",
+        chineseName: "饵块",
+        city: "kunming",
+        cityName: "Kunming",
+        cityNameChinese: "昆明",
+        emoji: "🍡",
+        description: "A popular Yunnan rice cake often grilled or stir-fried with savory sauces.",
+        englishDescription: "A popular Yunnan rice cake often grilled or stir-fried with savory sauces.",
+        chineseDescription: "云南常见的米制糕点，常见做法为煎烤或炒制，搭配咸味酱料。",
+        nutrition: {
+            calories: 240,
+            protein: 4,
+            carbs: 50,
+            fat: 2,
+            fiber: 1,
+            sodium: 320
+        },
+        price: "¥6-18",
+        bestTime: "Snack",
+        location: "Street vendors, local markets"
+    },
+    {
+        id: 43,
+        name: "Ningbo Tangyuan",
+        chineseName: "宁波汤圆",
+        city: "ningbo",
+        cityName: "Ningbo",
+        cityNameChinese: "宁波",
+        emoji: "🥟",
+        description: "Glutinous rice balls often filled with sweet sesame or peanut paste, popular in Ningbo during festivals.",
+        englishDescription: "Glutinous rice balls often filled with sweet sesame or peanut paste, popular in Ningbo during festivals.",
+        chineseDescription: "糯米汤圆，常见馅料有芝麻或花生，节日时尤为受欢迎。",
+        nutrition: {
+            calories: 260,
+            protein: 4,
+            carbs: 54,
+            fat: 6,
+            fiber: 1,
+            sodium: 120
+        },
+        price: "¥6-18",
+        bestTime: "Snack/Dessert",
+        location: "Local dessert shops"
+    },
+    {
+        id: 44,
+        name: "Ningbo Seafood",
+        chineseName: "宁波海鲜",
+        city: "ningbo",
+        cityName: "Ningbo",
+        cityNameChinese: "宁波",
+        emoji: "🦐",
+        description: "Fresh seafood from the East China Sea, often simply prepared to highlight natural flavors.",
+        englishDescription: "Fresh seafood from the East China Sea, often simply prepared to highlight natural flavors.",
+        chineseDescription: "来自东海的新鲜海鲜，常以清淡方式烹制以突出本味。",
+        nutrition: {
+            calories: 200,
+            protein: 28,
+            carbs: 3,
+            fat: 8,
+            fiber: 0,
+            sodium: 400
+        },
+        price: "¥35-120",
+        bestTime: "Dinner",
+        location: "Harbor restaurants, seafood markets"
+    },
+    {
+        id: 45,
+        name: "Shenyang Guo Bao Rou",
+        chineseName: "锅包肉",
+        city: "shenyang",
+        cityName: "Shenyang",
+        cityNameChinese: "沈阳",
+        emoji: "🍖",
+        description: "Crispy sweet-and-sour pork, a famous dish from Northeast China with a crunchy coating.",
+        englishDescription: "Crispy sweet-and-sour pork, a famous dish from Northeast China with a crunchy coating.",
+        chineseDescription: "东北名菜，外皮酥脆，酸甜可口的锅包肉。",
+        nutrition: {
+            calories: 420,
+            protein: 24,
+            carbs: 30,
+            fat: 22,
+            fiber: 1,
+            sodium: 780
+        },
+        price: "¥25-60",
+        bestTime: "Lunch/Dinner",
+        location: "Local restaurants in Shenyang"
+    },
+    {
+        id: 46,
+        name: "Liaoning Cold Noodles",
+        chineseName: "辽宁冷面",
+        city: "shenyang",
+        cityName: "Shenyang",
+        cityNameChinese: "沈阳",
+        emoji: "🥣",
+        description: "Refreshingly cold noodles served with savory broth or spicy sauce, common in Northeast cuisine.",
+        englishDescription: "Refreshingly cold noodles served with savory broth or spicy sauce, common in Northeast cuisine.",
+        chineseDescription: "清爽的冷面，可佐以鲜美汤底或辣酱，东北常见面食。",
+        nutrition: {
+            calories: 320,
+            protein: 10,
+            carbs: 58,
+            fat: 6,
+            fiber: 3,
+            sodium: 620
+        },
+        price: "¥10-30",
+        bestTime: "Lunch",
+        location: "Local noodle shops"
+    },
 ];
 
 // 城市信息
@@ -1143,5 +1283,40 @@ const cityInfo = [
         chineseDescription: "北方城市，以俄式风味和丰盛的东北菜闻名。",
         bestTime: "Winter",
         famousFor: ["Harbin Sausage", "Dongbei Dumplings"]
+    }
+    ,
+    {
+        id: "kunming",
+        name: "Kunming",
+        chineseName: "昆明",
+        emoji: "🏞️",
+        description: "Yunnan's capital, known for fresh ingredients, rice noodles, and diverse ethnic flavors.",
+        englishDescription: "Yunnan's capital, known for fresh ingredients, rice noodles, and diverse ethnic flavors.",
+        chineseDescription: "云南省会，以新鲜食材、米线和多民族风味著称。",
+        bestTime: "Spring and Autumn",
+        famousFor: ["Crossing the Bridge Noodles", "Er Kuai"]
+    }
+    ,
+    {
+        id: "ningbo",
+        name: "Ningbo",
+        chineseName: "宁波",
+        emoji: "⚓",
+        description: "Coastal city in Zhejiang known for seafood and light, savory flavors.",
+        englishDescription: "Coastal city in Zhejiang known for seafood and light, savory flavors.",
+        chineseDescription: "浙江沿海城市，以海鲜和清淡鲜美的口味著称。",
+        bestTime: "Summer",
+        famousFor: ["Ningbo Tangyuan", "Ningbo Seafood"]
+    },
+    {
+        id: "shenyang",
+        name: "Shenyang",
+        chineseName: "沈阳",
+        emoji: "🏯",
+        description: "Major city in Northeast China with hearty cuisine and Russian-influenced snacks.",
+        englishDescription: "Major city in Northeast China with hearty cuisine and Russian-influenced snacks.",
+        chineseDescription: "东北重要城市，以丰盛的菜肴和俄式风味小吃闻名。",
+        bestTime: "Winter",
+        famousFor: ["Guo Bao Rou", "Liaoning Cold Noodles"]
     }
 ];

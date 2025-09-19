@@ -186,28 +186,30 @@ const i18nData = {
         
         // 城市美食
         cityFoods: {
-            title: "City Must-Eat Foods",
-            subtitle: "Explore the signature dishes of major Chinese cities and their food culture",
-            selectCity: "Select City",
-            allCities: "All Cities",
-            bestTime: "Best Time",
-            famousFor: "Famous For",
-            nutritionInfo: "Nutrition Info (per 100g)",
-            price: "Price",
-            location: "Location"
-        },
-        
-        // 城市美食
-        cityFoods: {
-            title: "City Must-Eat Foods",
-            subtitle: "Explore the signature dishes of major Chinese cities and their food culture",
-            selectCity: "Select City",
-            allCities: "All Cities",
-            bestTime: "Best Time",
-            famousFor: "Famous For",
-            nutritionInfo: "Nutrition Info (per 100g)",
-            price: "Price",
-            location: "Location"
+            title: "城市必吃美食",
+            subtitle: "覆盖全国所有城市，探索各地的招牌风味与营养信息",
+            selectProvince: "选择省份/地区",
+            selectCityLabel: "选择城市",
+            searchLabel: "搜索",
+            searchPlaceholder: "输入城市或美食关键词",
+            showAll: "显示全部城市",
+            allProvinces: "全部省份/地区",
+            allCities: "全部城市",
+            bestTime: "最佳时间",
+            famousFor: "特色美食",
+            nutritionInfo: "营养信息（每100克）",
+            price: "价格",
+            location: "推荐地点",
+            totalCities: "覆盖城市",
+            totalCitiesDesc: "覆盖全国全部地级行政区",
+            totalFoods: "特色美食",
+            totalFoodsDesc: "每座城市配套详细的代表菜",
+            totalProvinces: "省份/地区",
+            totalProvincesDesc: "包含34个省级行政区域",
+            resultCount: "匹配城市",
+            resultCityUnit: "座城市",
+            totalFoodsUnit: "道美食",
+            noResults: "未找到符合条件的城市，换个关键词试试吧"
         },
         
         // 营养信息
@@ -439,6 +441,34 @@ const i18nData = {
                 avgCalories: "Avg Calories",
                 avgProtein: "Avg Protein (g)"
             }
+        },
+
+        // City Foods
+        cityFoods: {
+            title: "China City Food Atlas",
+            subtitle: "Explore signature dishes and nutrition insights from every Chinese city",
+            selectProvince: "Choose Province/Region",
+            selectCityLabel: "Choose City",
+            searchLabel: "Search",
+            searchPlaceholder: "Type a city or food keyword",
+            showAll: "Show All Cities",
+            allProvinces: "All Provinces/Regions",
+            allCities: "All Cities",
+            bestTime: "Best Season",
+            famousFor: "Signature Foods",
+            nutritionInfo: "Nutrition (per 100g)",
+            price: "Price",
+            location: "Recommended Spots",
+            totalCities: "Cities Covered",
+            totalCitiesDesc: "Prefecture-level divisions across China",
+            totalFoods: "Signature Dishes",
+            totalFoodsDesc: "Curated specialties with nutrition details",
+            totalProvinces: "Provinces/Regions",
+            totalProvincesDesc: "Includes every provincial-level region",
+            resultCount: "Matching Cities",
+            resultCityUnit: "cities",
+            totalFoodsUnit: "dishes",
+            noResults: "No cities found. Try a different keyword."
         },
         
         // Footer

@@ -179,25 +179,15 @@ function initializeApp() {
     pageName = pageName.split('?')[0].split('#')[0];
     
     switch(pageName) {
-        case 'index.html':
-        case 'index':
-        case '':
-            initializeHomePage();
-            break;
         case 'foods.html':
         case 'foods':
             initializeFoodsPage();
             break;
-        case 'chinese-foods.html':
-        case 'chinese-foods':
-            initializeChineseFoodsPage();
-            break;
-        case 'game.html':
-        case 'game':
-            initializeGamePage();
-            break;
+        case 'index.html':
+        case 'index':
+        case '':
         default:
-            // 如果无法识别页面，默认初始化首页
+            // 默认初始化首页
             initializeHomePage();
             break;
     }

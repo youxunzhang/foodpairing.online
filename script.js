@@ -188,14 +188,6 @@ function initializeApp() {
         case 'foods':
             initializeFoodsPage();
             break;
-        case 'chinese-foods.html':
-        case 'chinese-foods':
-            initializeChineseFoodsPage();
-            break;
-        case 'game.html':
-        case 'game':
-            initializeGamePage();
-            break;
         default:
             // 如果无法识别页面，默认初始化首页
             initializeHomePage();
@@ -1278,16 +1270,6 @@ function getPageInfo() {
         case 'foods':
             title = '食物营养库 - 100种常见食物营养信息';
             description = '探索100种常见食物的详细营养信息，为您的健康早餐提供科学参考。';
-            break;
-        case 'chinese-foods.html':
-        case 'chinese-foods':
-            title = '中国地方菜系 - 各地特色菜肴营养信息';
-            description = '探索中国八大菜系的特色菜肴，了解各地美食的营养价值和健康特点。';
-            break;
-        case 'game.html':
-        case 'game':
-            title = '营养搭配挑战 - 学习健康饮食知识';
-            description = '通过搭配食物完成营养目标，学习健康饮食知识。有趣的营养游戏，让健康学习更轻松！';
             break;
         default:
             title = '营养早餐 - 健康生活从早餐开始';

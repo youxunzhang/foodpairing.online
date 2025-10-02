@@ -1,2063 +1,381 @@
-/* 全局样式 */
+:root {
+    --brand: #ff7043;
+    --brand-dark: #f4511e;
+    --surface: #ffffff;
+    --text: #1f2933;
+    --muted: #52606d;
+    --bg: #f6f8fb;
+    --border: #dfe3eb;
+    --shadow: 0 20px 40px rgba(31, 41, 51, 0.08);
+    font-size: 16px;
+}
+
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    font-family: 'Noto Sans SC', sans-serif;
+    margin: 0;
+    font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--text);
+    background: var(--bg);
     line-height: 1.6;
-    color: #333;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    min-height: 100vh;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: var(--brand);
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    text-decoration: underline;
 }
 
 .container {
-    max-width: 1200px;
+    width: min(1100px, 92vw);
     margin: 0 auto;
-    padding: 0 20px;
 }
 
-/* 导航栏 */
-.navbar {
+.site-header {
     background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-    position: fixed;
+    backdrop-filter: blur(12px);
+    position: sticky;
     top: 0;
-    width: 100%;
-    z-index: 1000;
-    transition: all 0.3s ease;
-    border-bottom: 1px solid rgba(255, 107, 107, 0.1);
+    z-index: 10;
+    border-bottom: 1px solid rgba(223, 227, 235, 0.6);
 }
 
 .nav-container {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-    min-height: 60px;
+    gap: 1.5rem;
+    padding: 1rem 0;
 }
 
-.nav-logo h2 {
-    color: #ff6b6b;
-    font-size: 1.5rem;
+.brand {
     font-weight: 700;
-    text-shadow: 1px 1px 2px rgba(255, 107, 107, 0.2);
+    font-size: 1.25rem;
+    color: var(--text);
 }
 
-.nav-menu {
+.nav-links {
     display: flex;
-    list-style: none;
-    gap: 2rem;
-    margin: 0;
-    padding: 0;
-    align-items: center;
-    flex-wrap: nowrap;
-}
-
-.language-switcher {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-}
-
-.lang-btn {
-    background: transparent;
-    border: 2px solid #e9ecef;
-    color: #333;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-    font-weight: 500;
-}
-
-.lang-btn:hover,
-.lang-btn.active {
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    color: white;
-    border-color: transparent;
-    transform: translateY(-2px);
-}
-
-.nav-link {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.nav-link:hover,
-.nav-link.active {
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    color: white;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-}
-
-/* 分享功能 */
-.share-section {
-    margin-top: 2rem;
-    text-align: center;
-}
-
-.share-section h4 {
-    color: #666;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    font-weight: 500;
-}
-
-.share-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 0.8rem;
     flex-wrap: wrap;
-}
-
-.share-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 0.9rem;
+    gap: 1rem;
     font-weight: 500;
-    transition: all 0.3s ease;
+}
+
+.nav-links a {
+    color: var(--muted);
+    padding: 0.4rem 0.75rem;
+    border-radius: 999px;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-links a:hover,
+.nav-links a:focus {
+    background: rgba(255, 112, 67, 0.12);
+    color: var(--brand-dark);
     text-decoration: none;
-    color: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 8px 20px rgba(255, 112, 67, 0.2);
 }
 
-.share-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.share-btn.facebook {
-    background: linear-gradient(135deg, #1877f2, #0d6efd);
-}
-
-.share-btn.twitter {
-    background: linear-gradient(135deg, #1da1f2, #0ea5e9);
-}
-
-.share-btn.linkedin {
-    background: linear-gradient(135deg, #0077b5, #0a66c2);
-}
-
-.share-btn.whatsapp {
-    background: linear-gradient(135deg, #25d366, #128c7e);
-}
-
-.share-btn.telegram {
-    background: linear-gradient(135deg, #0088cc, #229ed9);
-}
-
-.share-btn.email {
-    background: linear-gradient(135deg, #ea4335, #d93025);
-}
-
-.share-icon {
-    font-size: 1.1rem;
-}
-
-.share-text {
-    font-size: 0.85rem;
-}
-
-/* 响应式分享按钮 */
-@media (max-width: 768px) {
-    /* 导航栏移动端样式 */
-    .nav-container {
-        padding: 0.8rem 1rem;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    
-    .nav-menu {
-        gap: 0.8rem;
-        flex-wrap: wrap;
-        justify-content: center;
-        width: 100%;
-        order: 3;
-        margin-top: 0.5rem;
-    }
-    
-    .nav-link {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.9rem;
-    }
-    
-    .nav-logo h2 {
-        font-size: 1.3rem;
-        order: 1;
-    }
-    
-    .language-switcher {
-        order: 2;
-    }
-    
-    .lang-btn {
-        padding: 0.4rem 0.8rem;
-        font-size: 0.8rem;
-    }
-    
-    .share-buttons {
-        gap: 0.5rem;
-    }
-    
-    .share-btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.8rem;
-    }
-    
-    .share-text {
-        display: none;
-    }
-    
-    .share-btn {
-        min-width: 45px;
-        justify-content: center;
-    }
-}
-
-@media (max-width: 480px) {
-    /* 导航栏小屏幕样式 */
-    .nav-container {
-        padding: 0.6rem 0.8rem;
-        flex-wrap: wrap;
-    }
-    
-    .nav-menu {
-        gap: 0.4rem;
-        margin-top: 0.3rem;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .nav-link {
-        padding: 0.3rem 0.6rem;
-        font-size: 0.8rem;
-    }
-    
-    .nav-logo h2 {
-        font-size: 1.2rem;
-        order: 1;
-    }
-    
-    .language-switcher {
-        order: 2;
-    }
-    
-    .lang-btn {
-        padding: 0.3rem 0.6rem;
-        font-size: 0.75rem;
-    }
-    
-    .share-buttons {
-        gap: 0.3rem;
-    }
-    
-    .share-btn {
-        padding: 0.4rem 0.8rem;
-        min-width: 40px;
-    }
-}
-
-/* 主横幅 */
 .hero {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 120px 0 80px;
-    display: flex;
-    align-items: center;
-    min-height: 100vh;
-    position: relative;
-    overflow: hidden;
+    padding: 5rem 0 3.5rem;
 }
 
-.hero::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="60" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-    opacity: 0.3;
-}
-
-.hero-content {
-    flex: 1;
-    z-index: 2;
-    position: relative;
-}
-
-.hero-content h1 {
-    font-size: 3.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    opacity: 0.9;
-}
-
-.cta-button {
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-}
-
-.cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
-}
-
-.hero-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-    position: relative;
-}
-
-.food-showcase {
+.hero-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    animation: float 6s ease-in-out infinite;
-}
-
-.food-item {
-    font-size: 3rem;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    padding: 1rem;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    transition: all 0.3s ease;
-}
-
-.food-item:hover {
-    transform: scale(1.1) rotate(5deg);
-    background: rgba(255, 255, 255, 0.3);
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-}
-
-/* 页面标题 */
-.page-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 100px 0 60px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-}
-
-.page-header::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="header-grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="60" r="0.5" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="40" r="0.5" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23header-grain)"/></svg>');
-    opacity: 0.3;
-}
-
-.page-header h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    position: relative;
-    z-index: 2;
-}
-
-.page-header p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    position: relative;
-    z-index: 2;
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* 收藏按钮样式 */
-.bookmark-container {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 10;
-}
-
-.bookmark-btn {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(10px);
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    color: white;
-    padding: 12px 20px;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
     align-items: center;
-    gap: 8px;
-    font-size: 14px;
-    font-weight: 500;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.bookmark-btn:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.5);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-}
-
-.bookmark-btn.active {
-    background: linear-gradient(135deg, #ffd700, #ffed4e);
-    border-color: #ffd700;
-    color: #333;
-    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-}
-
-.bookmark-btn.active:hover {
-    transform: translateY(-2px) scale(1.05);
-    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5);
-}
-
-.bookmark-icon {
-    font-size: 16px;
-    transition: transform 0.3s ease;
-}
-
-.bookmark-btn.active .bookmark-icon {
-    transform: scale(1.1);
-}
-
-.bookmark-text {
-    font-weight: 500;
-}
-
-/* 移动端收藏按钮样式 */
-@media (max-width: 768px) {
-    .bookmark-container {
-        top: 15px;
-        right: 15px;
-    }
-    
-    .bookmark-btn {
-        padding: 10px 15px;
-        font-size: 12px;
-        gap: 6px;
-    }
-    
-    .bookmark-icon {
-        font-size: 14px;
-    }
-    
-    .bookmark-text {
-        display: none; /* 在移动端只显示图标 */
-    }
-    
-    .bookmark-btn:hover .bookmark-text {
-        display: inline; /* 悬停时显示文字 */
-    }
-}
-
-@media (max-width: 480px) {
-    .bookmark-container {
-        top: 10px;
-        right: 10px;
-    }
-    
-    .bookmark-btn {
-        padding: 8px 12px;
-        border-radius: 20px;
-    }
-    
-    .bookmark-icon {
-        font-size: 12px;
-    }
-}
-
-/* 营养板块 */
-.nutrition-section {
-    padding: 60px 0;
-    background: white;
-    position: relative;
-}
-
-.nutrition-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 107, 107, 0.3), transparent);
-}
-
-.section-title {
-    text-align: center;
-    font-size: 2.5rem;
-    font-weight: 700;
+.hero h1 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
     margin-bottom: 1rem;
-    color: #333;
 }
 
-.section-subtitle {
-    text-align: center;
-    font-size: 1.1rem;
-    color: #666;
-    margin-bottom: 3rem;
+.hero p {
+    color: var(--muted);
+    max-width: 54ch;
 }
 
-.nutrition-calculator {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.food-selector {
-    background: #f8f9fa;
-    padding: 1.5rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.food-selector h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    color: #333;
-}
-
-.food-categories {
+.hero-actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.5rem;
-    margin-bottom: 1.5rem;
-}
-
-.category-btn {
-    background: white;
-    border: 2px solid #e9ecef;
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 500;
-}
-
-.category-btn:hover,
-.category-btn.active {
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    color: white;
-    border-color: transparent;
-    transform: translateY(-2px);
-}
-
-.food-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    gap: 0.8rem;
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-.food-card {
-    background: white;
-    border-radius: 12px;
-    padding: 0.8rem;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.food-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    border-color: #ff6b6b;
-}
-
-.food-card.selected {
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    color: white;
-    transform: scale(1.05);
-    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
-    animation: selectedPulse 2s infinite;
-}
-
-@keyframes selectedPulse {
-    0%, 100% {
-        box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
-    }
-    50% {
-        box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
-    }
-}
-
-.food-card .emoji {
-    font-size: 1.5rem;
-    margin-bottom: 0.4rem;
-}
-
-.food-card .name {
-    font-size: 0.8rem;
-    font-weight: 500;
-}
-
-.nutrition-results {
-    background: white;
-    padding: 1.5rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.nutrition-results h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    color: #333;
-}
-
-.selected-foods {
-    margin-bottom: 1.5rem;
-    min-height: 80px;
-}
-
-.selected-food-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f8f9fa;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    margin-bottom: 0.5rem;
-}
-
-.remove-btn {
-    background: #ff6b6b;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    cursor: pointer;
-    font-size: 0.8rem;
-}
-
-.nutrition-chart {
-    margin-bottom: 1.5rem;
-}
-
-.nutrition-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.8rem;
     gap: 1rem;
+    margin: 1.5rem 0 0.5rem;
 }
 
-.nutrition-label {
-    min-width: 120px;
-    font-weight: 500;
-}
-
-.nutrition-bar {
-    flex: 1;
-    height: 8px;
-    background: #e9ecef;
-    border-radius: 4px;
-    overflow: hidden;
-}
-
-.nutrition-fill {
-    height: 100%;
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    border-radius: 4px;
-    transition: width 0.5s ease;
-}
-
-.nutrition-value {
-    min-width: 50px;
-    font-weight: 600;
-    color: #ff6b6b;
-}
-
-.nutrition-summary {
-    background: #f8f9fa;
-    padding: 1.2rem;
-    border-radius: 15px;
-}
-
-.nutrition-summary h4 {
-    margin-bottom: 0.8rem;
-    color: #333;
-}
-
-.advice-text {
-    color: #666;
-    line-height: 1.6;
-}
-
-/* 特色推荐 */
-.features-section {
-    padding: 80px 0;
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    color: white;
-}
-
-.features-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 3rem;
-}
-
-.feature-card {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    border-radius: 20px;
-    text-align: center;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    transition: all 0.3s ease;
-}
-
-.feature-card:hover {
-    transform: translateY(-10px);
-    background: rgba(255, 255, 255, 0.2);
-}
-
-.feature-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.feature-card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-}
-
-/* 搜索和筛选 */
-.search-section {
-    background: white;
-    padding: 2rem 0;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-}
-
-.search-container {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-}
-
-.search-input {
-    flex: 1;
-    padding: 1rem;
-    border: 2px solid #e9ecef;
-    border-radius: 25px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
-.search-input:focus {
-    outline: none;
-    border-color: #ff6b6b;
-    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
-}
-
-.search-btn {
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    color: white;
-    border: none;
-    padding: 1rem 2rem;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-}
-
-.search-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-}
-
-.filter-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 1rem;
-}
-
-.filter-group {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.filter-group label {
-    font-weight: 500;
-    color: #333;
-}
-
-.filter-btn {
-    background: white;
-    border: 2px solid #e9ecef;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
-}
-
-.filter-btn:hover,
-.filter-btn.active {
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    color: white;
-    border-color: transparent;
-}
-
-.sort-select {
-    padding: 0.5rem 1rem;
-    border: 2px solid #e9ecef;
-    border-radius: 20px;
-    background: white;
-    cursor: pointer;
-}
-
-/* 食物展示 */
-.foods-section {
-    padding: 3rem 0;
-    background: #f8f9fa;
-}
-
-.foods-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 3rem;
-}
-
-.food-item-card {
-    background: white;
-    border-radius: 20px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    cursor: pointer;
-}
-
-.food-item-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-.food-item-header {
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    color: white;
-    padding: 1rem;
-    text-align: center;
-}
-
-.food-item-emoji {
-    font-size: 2rem;
-    margin-bottom: 0.4rem;
-}
-
-.food-item-name {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.4rem;
-}
-
-.food-item-category {
-    font-size: 0.8rem;
-    opacity: 0.8;
-}
-
-.food-item-body {
-    padding: 1rem;
-}
-
-.nutrition-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 0.8rem;
-    margin-bottom: 0.8rem;
-}
-
-.nutrition-stat {
-    text-align: center;
-    padding: 0.4rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-}
-
-.nutrition-stat-value {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #ff6b6b;
-}
-
-.nutrition-stat-label {
-    font-size: 0.7rem;
-    color: #666;
-}
-
-.food-item-description {
-    color: #666;
-    font-size: 0.8rem;
-    line-height: 1.4;
-}
-
-/* 分页 */
-.pagination {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 2rem;
-}
-
-.page-btn {
-    background: white;
-    border: 2px solid #e9ecef;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.page-btn:hover,
-.page-btn.active {
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    color: white;
-    border-color: transparent;
-}
-
-/* 模态框 */
-.modal {
-    display: none;
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-}
-
-.modal-content {
-    background-color: white;
-    margin: 5% auto;
-    padding: 2rem;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 600px;
-    max-height: 80vh;
-    overflow-y: auto;
-    position: relative;
-    animation: modalSlideIn 0.3s ease;
-}
-
-@keyframes modalSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.close {
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
-    font-size: 2rem;
-    cursor: pointer;
-    color: #666;
-    transition: color 0.3s ease;
-}
-
-.close:hover {
-    color: #ff6b6b;
-}
-
-/* 游戏样式 */
-.game-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-    padding: 120px 0 60px;
-    text-align: center;
-}
-
-.game-controls {
-    background: white;
-    padding: 2rem 0;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-}
-
-.game-info {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 2rem;
-}
-
-.score-board {
-    display: flex;
-    gap: 2rem;
-}
-
-.score-item {
-    text-align: center;
-}
-
-.score-label {
-    display: block;
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 0.5rem;
-}
-
-.score-value {
-    display: block;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #ff6b6b;
-}
-
-.game-buttons {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-}
-
-.game-btn {
-    padding: 0.8rem 1.5rem;
-    border: none;
-    border-radius: 25px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1rem;
-}
-
-.game-btn.primary {
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    color: white;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-}
-
-.game-btn.secondary {
-    background: #f8f9fa;
-    color: #333;
-    border: 2px solid #e9ecef;
-}
-
-.game-btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.game-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-.game-main {
-    padding: 3rem 0;
-    background: #f8f9fa;
-}
-
-.game-layout {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.game-targets,
-.game-food-area,
-.game-current {
-    background: white;
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.game-targets h3,
-.game-food-area h3,
-.game-current h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1.5rem;
-    color: #333;
-}
-
-.target-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.target-item {
-    background: #f8f9fa;
-    padding: 1rem;
-    border-radius: 10px;
-    border-left: 4px solid #ff6b6b;
-}
-
-.target-item h4 {
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    color: #333;
-}
-
-.target-range {
-    font-size: 0.9rem;
-    color: #666;
-}
-
-.food-selection {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 1rem;
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-.game-food-card {
-    background: #f8f9fa;
-    border-radius: 15px;
-    padding: 1rem;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
-    min-height: 120px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.game-food-card:hover {
-    background: #e9ecef;
-    transform: scale(1.05);
-}
-
-.game-food-card.selected {
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    color: white;
-}
-
-.game-food-card .emoji {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-}
-
-.game-food-card .name {
-    font-size: 0.8rem;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-}
-
-.game-food-card .nutrition-info {
-    font-size: 0.7rem;
-    color: #666;
-}
-
-.game-food-card .nutrition-info .nutrition-item {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.2rem;
-}
-
-.game-food-card .nutrition-info .label {
-    font-weight: 500;
-}
-
-.game-food-card .nutrition-info .value {
-    color: #ff6b6b;
-    font-weight: 600;
-}
-
-.current-foods {
-    margin-bottom: 2rem;
-    min-height: 100px;
-}
-
-.current-food-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #f8f9fa;
-    padding: 0.5rem 1rem;
-    border-radius: 10px;
-    margin-bottom: 0.5rem;
-}
-
-.nutrition-display {
-    background: #f8f9fa;
-    padding: 1rem;
-    border-radius: 10px;
-    margin-bottom: 2rem;
-}
-
-.nutrition-row {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 0.5rem;
-}
-
-.game-actions {
-    display: flex;
-    gap: 1rem;
-}
-
-.action-btn {
-    flex: 1;
-    padding: 0.8rem;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.action-btn.primary {
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    color: white;
-}
-
-.action-btn.secondary {
-    background: #e9ecef;
-    color: #333;
-}
-
-.action-btn:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.action-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-}
-
-/* 游戏结果模态框 */
-.game-result {
-    text-align: center;
-    max-width: 500px;
-}
-
-.result-actions {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-    justify-content: center;
-}
-
-/* 游戏说明 */
-.game-instructions {
-    padding: 3rem 0;
-    background: white;
-}
-
-.instructions-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
-}
-
-.instruction-card {
-    background: #f8f9fa;
-    padding: 2rem;
-    border-radius: 20px;
-    text-align: center;
-    transition: all 0.3s ease;
-}
-
-.instruction-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.instruction-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-}
-
-.instruction-card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
-    color: #333;
-}
-
-.instruction-card p {
-    color: #666;
-    line-height: 1.6;
-}
-
-/* 页脚 */
-.footer {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-    color: white;
-    padding: 3rem 0 1rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 107, 107, 0.3), transparent);
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
-}
-
-.footer-section h3,
-.footer-section h4 {
-    margin-bottom: 1rem;
-    color: #ff6b6b;
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section ul li {
-    margin-bottom: 0.5rem;
-}
-
-.footer-section ul li a {
-    color: #bdc3c7;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-section ul li a:hover {
-    color: #ff6b6b;
-}
-
-/* AI工具导航外链样式 */
-.ai-tools-link {
+.button {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: linear-gradient(135deg, #ff6b6b 0%, #ffa500 100%);
-    color: white;
-    text-decoration: none;
-    padding: 12px 20px;
-    border-radius: 25px;
-    font-weight: 600;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.ai-tools-link::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s ease;
-}
-
-.ai-tools-link:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
-    color: white;
-}
-
-.ai-tools-link:hover::before {
-    left: 100%;
-}
-
-.ai-tools-link .link-icon {
-    font-size: 1.1rem;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-    }
-}
-
-/* AI工具导航响应式样式 */
-@media (max-width: 768px) {
-    .ai-tools-link {
-        padding: 10px 16px;
-        font-size: 0.9rem;
-        gap: 6px;
-    }
-    
-    .ai-tools-link .link-icon {
-        font-size: 1rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .ai-tools-link {
-        padding: 8px 14px;
-        font-size: 0.85rem;
-        gap: 4px;
-        border-radius: 20px;
-    }
-    
-    .ai-tools-link .link-icon {
-        font-size: 0.9rem;
-    }
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid #34495e;
-    color: #bdc3c7;
-}
-
-.footer-legal-links {
-    margin-top: 1rem;
-    display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    gap: 1.5rem;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.75rem 1.75rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, color 0.2s ease;
 }
 
-.footer-legal-links a {
-    color: #bdc3c7;
-    text-decoration: none;
-    font-size: 0.95rem;
-    transition: color 0.3s ease;
+.button.primary {
+    background: linear-gradient(135deg, var(--brand), var(--brand-dark));
+    color: #fff;
+    box-shadow: 0 16px 32px rgba(255, 112, 67, 0.25);
 }
 
-.footer-legal-links a:hover {
-    color: #ff6b6b;
+.button.primary:hover,
+.button.primary:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 18px 34px rgba(255, 112, 67, 0.3);
 }
 
-.policy-page {
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4ecf7 100%);
+.button.secondary {
+    background: rgba(255, 255, 255, 0.9);
+    color: var(--brand);
+    border: 1px solid rgba(255, 112, 67, 0.5);
 }
 
-.policy-container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 4rem 1.5rem 5rem;
+.button.secondary:hover,
+.button.secondary:focus {
+    background: rgba(255, 112, 67, 0.1);
+    transform: translateY(-2px);
 }
 
-.policy-section {
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 18px;
-    padding: 2.5rem 2rem;
-    box-shadow: 0 12px 30px rgba(44, 62, 80, 0.08);
-    margin-bottom: 2.5rem;
+.button.outline {
+    background: transparent;
+    color: var(--brand);
+    border: 1.5px solid rgba(255, 112, 67, 0.6);
 }
 
-.policy-section h1,
-.policy-section h2,
-.policy-section h3 {
-    color: #2c3e50;
+.button.outline:hover,
+.button.outline:focus {
+    background: rgba(255, 112, 67, 0.08);
+    transform: translateY(-2px);
+}
+
+.roulette-result {
+    font-weight: 600;
+    color: var(--brand-dark);
+    min-height: 1.5rem;
+}
+
+.hero-card {
+    background: var(--surface);
+    padding: 2rem;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+}
+
+.hero-card h2 {
     margin-bottom: 1rem;
 }
 
-.policy-section p,
-.policy-section li {
-    color: #34495e;
-    line-height: 1.8;
-    font-size: 1rem;
-}
-
-.policy-meta {
-    color: #7f8c8d;
-    font-size: 0.95rem;
-    margin-bottom: 1.5rem;
-}
-
-.policy-list {
-    margin: 1rem 0 0 1.5rem;
+.hero-card ul {
+    list-style: none;
+    margin: 0;
     padding: 0;
+    display: grid;
+    gap: 0.75rem;
 }
 
-.policy-list li {
-    margin-bottom: 0.75rem;
+.hero-card a {
+    font-weight: 600;
 }
 
-.policy-highlight {
-    background: linear-gradient(135deg, rgba(255, 107, 107, 0.12), rgba(255, 159, 67, 0.12));
-    border-left: 4px solid #ff6b6b;
-    padding: 1rem 1.25rem;
-    border-radius: 12px;
+section h2 {
+    font-size: clamp(1.8rem, 3vw, 2.3rem);
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.tools {
+    padding: 3.5rem 0;
+}
+
+.card-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+}
+
+.tool-card {
+    background: var(--surface);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 18px 36px rgba(15, 23, 42, 0.08);
+    display: grid;
+    gap: 0.75rem;
+}
+
+.tool-card h3 {
+    margin: 0;
+}
+
+.tool-card p {
+    color: var(--muted);
+}
+
+.text-link {
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.pairings {
+    padding: 3.5rem 0;
+    background: linear-gradient(160deg, rgba(255, 112, 67, 0.08), rgba(255, 255, 255, 0.9));
+}
+
+.pairings p {
+    color: var(--muted);
+}
+
+.chip-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
     margin: 1.5rem 0;
 }
 
-.policy-section a {
-    color: #ff6b6b;
-    text-decoration: underline;
+.chip {
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 112, 67, 0.4);
+    background: rgba(255, 255, 255, 0.85);
+    color: var(--brand-dark);
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.policy-section a:hover {
-    color: #ff3b3b;
+.chip:hover,
+.chip:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(255, 112, 67, 0.24);
+    text-decoration: none;
 }
 
-@media (max-width: 768px) {
-    .policy-container {
-        padding: 3rem 1.25rem 4rem;
-    }
-
-    .policy-section {
-        padding: 2rem 1.5rem;
-    }
+.pairing-cta {
+    font-weight: 500;
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-    
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 100px 0 60px;
-    }
-    
-    .hero-content h1 {
-        font-size: 2.5rem;
-    }
-    
-    .page-header h1 {
-        font-size: 2rem;
-    }
-    
-    .page-header p {
-        font-size: 1rem;
-    }
-    
-    .nutrition-calculator {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-    
-    .game-layout {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-    
-    .food-selection {
-        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    }
-    
-    .game-info {
-        flex-direction: column;
-        text-align: center;
-        gap: 1.5rem;
-    }
-    
-    .score-board {
-        justify-content: center;
-    }
-    
-    .foods-grid {
-        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    }
-    
-    .features-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .filter-container {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .search-container {
-        flex-direction: column;
-    }
+.faq-preview {
+    padding: 3.5rem 0;
 }
 
-@media (max-width: 480px) {
-    .hero-content h1 {
-        font-size: 2rem;
-    }
-    
-    .section-title {
-        font-size: 2rem;
-    }
-    
-    .food-grid {
-        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-    }
-    
-    .foods-grid {
-        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    }
-    
-    .game-buttons {
-        flex-direction: column;
-        gap: 1rem;
-    }
-    
-    .game-btn.primary {
-        padding: 1.2rem 2.5rem;
-        font-size: 1.2rem;
-    }
-    
-    .food-selection {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-    }
-    
-    .game-food-card {
-        min-height: 100px;
-        padding: 0.8rem;
-    }
-    
-    .game-food-card .nutrition-info {
-        font-size: 0.6rem;
-    }
-    
-    .result-actions {
-        flex-direction: column;
-    }
+.faq-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    align-items: stretch;
 }
 
-/* 滚动条样式 */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(135deg, #ff5252, #ff8c00);
-}
-
-/* 动画效果 */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.fade-in-up {
-    animation: fadeInUp 0.6s ease;
-}
-
-/* 卡片悬停效果增强 */
-.card-hover-effect {
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.card-hover-effect:hover {
-    transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-}
-
-/* 按钮点击效果 */
-.btn-click-effect {
-    transition: all 0.2s ease;
-}
-
-.btn-click-effect:active {
-    transform: scale(0.95);
-}
-
-/* 渐变文字效果 */
-.gradient-text {
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-/* 玻璃态效果 */
-.glass-effect {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* 阴影效果增强 */
-.enhanced-shadow {
-    box-shadow: 
-        0 4px 6px rgba(0, 0, 0, 0.1),
-        0 1px 3px rgba(0, 0, 0, 0.08);
-}
-
-.enhanced-shadow:hover {
-    box-shadow: 
-        0 10px 25px rgba(0, 0, 0, 0.15),
-        0 4px 10px rgba(0, 0, 0, 0.1);
-}
-
-/* 加载动画 */
-.loading {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
-    border: 3px solid #f3f3f3;
-    border-top: 3px solid #ff6b6b;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-/* 空状态样式 */
-.empty-message {
-    text-align: center;
-    color: #999;
-    font-style: italic;
+.faq-card {
+    background: var(--surface);
     padding: 2rem;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
 }
 
-/* 成功/错误状态 */
-.success {
-    color: #28a745;
-    background: #d4edda;
-    border: 1px solid #c3e6cb;
-    padding: 1rem;
-    border-radius: 10px;
-    margin: 1rem 0;
+.faq-card ul {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: var(--muted);
 }
 
-.error {
-    color: #dc3545;
-    background: #f8d7da;
-    border: 1px solid #f5c6cb;
-    padding: 1rem;
-    border-radius: 10px;
-    margin: 1rem 0;
+.faq-card li + li {
+    margin-top: 0.75rem;
 }
 
-.warning {
-    color: #856404;
-    background: #fff3cd;
-    border: 1px solid #ffeaa7;
-    padding: 1rem;
-    border-radius: 10px;
-    margin: 1rem 0;
-}
-
-/* 中国美食页面专用样式 */
-.stats-section {
-    background: white;
-    padding: 3rem 0;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-}
-
-.stats-section h2 {
+.cta {
+    padding: 4rem 0 5rem;
     text-align: center;
-    font-size: 2rem;
-    margin-bottom: 2rem;
-    color: #333;
 }
 
-.stats-grid {
+.faq-list {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.faq-item {
+    background: var(--surface);
+    padding: 1.75rem;
+    border-radius: 20px;
+    box-shadow: 0 14px 28px rgba(15, 23, 42, 0.06);
+}
+
+.faq-item h2 {
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+}
+
+.faq-item p {
+    margin: 0;
+    color: var(--muted);
+}
+
+.cta p {
+    max-width: 60ch;
+    margin: 0.5rem auto 2rem;
+    color: var(--muted);
+}
+
+.site-footer {
+    background: #101622;
+    color: rgba(255, 255, 255, 0.8);
+    padding: 3rem 0 2rem;
+    margin-top: 3rem;
+}
+
+.footer-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.stat-item {
-    text-align: center;
-    padding: 1.5rem;
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    border-radius: 15px;
-    transition: all 0.3s ease;
-}
-
-.stat-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
-
-.stat-item h3 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #ff6b6b;
-    margin-bottom: 0.5rem;
-}
-
-.stat-item p {
-    color: #666;
-    font-size: 1rem;
-    font-weight: 500;
-}
-
-/* 搜索和筛选区域 */
-.search-section {
-    background: white;
-    padding: 2rem 0;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-}
-
-.search-input {
-    width: 100%;
-    max-width: 500px;
-    padding: 1rem;
-    border: 2px solid #e9ecef;
-    border-radius: 25px;
-    font-size: 1rem;
-    margin: 0 auto 2rem;
-    display: block;
-    transition: all 0.3s ease;
-}
-
-.search-input:focus {
-    outline: none;
-    border-color: #ff6b6b;
-    box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.1);
-}
-
-.region-filter {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 1rem;
     margin-bottom: 2rem;
 }
 
-.region-btn {
-    background: white;
-    border: 2px solid #e9ecef;
-    padding: 0.8rem 1.5rem;
-    border-radius: 25px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 500;
-    font-size: 0.9rem;
+.site-footer a {
+    color: rgba(255, 255, 255, 0.8);
 }
 
-.region-btn:hover,
-.region-btn.active {
-    background: linear-gradient(135deg, #ff6b6b, #ffa500);
-    color: white;
-    border-color: transparent;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+.site-footer a:hover,
+.site-footer a:focus {
+    color: #fff;
+    text-decoration: none;
 }
 
-/* 地区部分样式 */
-.region-section {
-    padding: 3rem 0;
-    background: #f8f9fa;
-}
-
-.region-section:nth-child(even) {
-    background: white;
-}
-
-.region-header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.region-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 1rem;
-}
-
-.region-subtitle {
-    font-size: 1.1rem;
-    color: #666;
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.6;
-}
-
-.dishes-grid {
+.footer-links {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 2rem;
-    margin-top: 2rem;
+    gap: 0.5rem;
 }
 
-/* 菜品卡片样式 */
-.dish-card {
-    background: white;
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    transition: all 0.3s ease;
-    border: 2px solid transparent;
+.copyright {
+    display: block;
 }
 
-.dish-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    border-color: #ff6b6b;
-}
-
-.dish-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-
-.dish-emoji {
-    font-size: 3rem;
-    margin-right: 1rem;
-}
-
-.dish-info h3 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 0.5rem;
-}
-
-.dish-info p {
-    color: #666;
-    font-size: 0.9rem;
-}
-
-.nutrition-title {
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 1rem;
-    text-align: center;
-}
-
-/* 响应式设计 */
 @media (max-width: 768px) {
-    .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
-    }
-    
-    .stat-item {
-        padding: 1rem;
-    }
-    
-    .stat-item h3 {
-        font-size: 2rem;
-    }
-    
-    .region-title {
-        font-size: 2rem;
-    }
-    
-    .dishes-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-    
-    .dish-card {
-        padding: 1.5rem;
-    }
-    
-    .dish-header {
+    .nav-container {
         flex-direction: column;
-        text-align: center;
+        align-items: flex-start;
     }
-    
-    .dish-emoji {
-        margin-right: 0;
-        margin-bottom: 1rem;
+
+    .nav-links {
+        width: 100%;
     }
-    
-    .region-filter {
-        gap: 0.5rem;
-    }
-    
-    .region-btn {
-        padding: 0.6rem 1rem;
-        font-size: 0.8rem;
+
+    .hero {
+        padding-top: 4rem;
     }
 }
 
-@media (max-width: 480px) {
-    .stats-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .region-title {
-        font-size: 1.8rem;
-    }
-    
-    .dish-card {
-        padding: 1rem;
-    }
-    
-    .search-input {
-        padding: 0.8rem;
-        font-size: 0.9rem;
-    }
-} 

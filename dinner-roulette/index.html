@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dinner Roulette – Choose Tonight’s Meal</title>
+    <meta name="description" content="Spin the dinner roulette to find comforting evening meals and exciting global flavors in seconds.">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Dinner Roulette",
+        "url": "https://www.foodpairing.online/dinner-roulette/",
+        "description": "Spin the dinner roulette to discover evening meal ideas.",
+        "applicationCategory": "Food & Drink"
+    }
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container nav-container">
+            <a class="brand" href="/">FoodPairing.online</a>
+            <nav class="nav-links">
+                <a href="/food-roulette/">Food Roulette</a>
+                <a href="/breakfast-roulette/">Breakfast</a>
+                <a href="/lunch-roulette/">Lunch</a>
+                <a href="/dinner-roulette/" aria-current="page">Dinner</a>
+                <a href="/pairing/">Pairings</a>
+                <a href="/faq/">FAQ</a>
+                <a href="/about/">About</a>
+                <a href="/contact/">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" data-roulette="dinner">
+            <div class="container hero-grid">
+                <div>
+                    <h1>Dinner Roulette</h1>
+                    <p>Wrap up the day with a comforting, flavorful dinner idea. Spin the wheel to explore sheet-pan meals, hearty pastas, and vegetable-forward plates. Pair the result with sides and sauces recommended in our ingredient guides to build a balanced evening menu.</p>
+                    <div class="hero-actions">
+                        <button class="button primary" data-roulette-spin>Spin the dinner wheel</button>
+                        <a class="button outline" href="/food-roulette/">View all meal ideas</a>
+                    </div>
+                    <p class="roulette-result" data-roulette-result aria-live="polite"></p>
+                </div>
+                <div class="hero-card">
+                    <h2>Dinner Wheel Picks</h2>
+                    <p>Here’s a peek at possible outcomes:</p>
+                    <ul data-roulette-list></ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="pairings">
+            <div class="container">
+                <h2>Plan Sides &amp; Pairings</h2>
+                <p>Match your dinner spin with pairing guides that highlight sauces, grains, and vegetables.</p>
+                <div class="chip-grid">
+                    <a class="chip" href="/pairing/chicken/">Chicken pairing ideas</a>
+                    <a class="chip" href="/pairing/tomato/">Tomato-friendly sides</a>
+                    <a class="chip" href="/pairing/cheese/">Cheese accents</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <span class="brand">FoodPairing.online</span>
+                <p>Smart food pairing ideas and meal randomizers for breakfast, lunch, and dinner.</p>
+            </div>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/food-roulette/">Food Roulette</a>
+                <a href="/pairing/">Pairings</a>
+                <a href="/faq/">FAQ</a>
+            </div>
+            <div class="footer-links">
+                <a href="/about/">About</a>
+                <a href="/contact/">Contact</a>
+                <a href="/sitemap.xml">Sitemap</a>
+                <a href="/robots.txt">Robots.txt</a>
+            </div>
+        </div>
+        <p class="copyright">© <span id="year"></span> FoodPairing.online. All rights reserved.</p>
+    </footer>
+
+    <script src="/scripts/roulette.js" defer></script>
+</body>
+</html>

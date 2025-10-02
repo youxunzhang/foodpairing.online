@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Roulette – What Should I Eat?</title>
+    <meta name="description" content="Let fate decide your next meal. Spin the food roulette wheel to choose breakfast, lunch, or dinner instantly.">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Food Roulette Tool",
+        "url": "https://www.foodpairing.online/food-roulette/",
+        "description": "Decide what to eat using the food roulette / meal randomizer tool.",
+        "applicationCategory": "Food & Drink"
+    }
+    </script>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container nav-container">
+            <a class="brand" href="/">FoodPairing.online</a>
+            <nav class="nav-links">
+                <a href="/food-roulette/" aria-current="page">Food Roulette</a>
+                <a href="/breakfast-roulette/">Breakfast</a>
+                <a href="/lunch-roulette/">Lunch</a>
+                <a href="/dinner-roulette/">Dinner</a>
+                <a href="/pairing/">Pairings</a>
+                <a href="/faq/">FAQ</a>
+                <a href="/about/">About</a>
+                <a href="/contact/">Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" data-roulette="general">
+            <div class="container hero-grid">
+                <div>
+                    <h1>Food Roulette Tool</h1>
+                    <p>The food roulette wheel mixes our favorite breakfast, lunch, and dinner picks into a single spin. Press the button, watch the suggestions cycle, and land on a meal idea you can cook, order, or prep right away. If you need extra variety, spin again or jump into the meal-specific roulette wheels for even more options.</p>
+                    <div class="hero-actions">
+                        <button class="button primary" data-roulette-spin>Spin the Food Roulette</button>
+                        <a class="button outline" href="/pairing/">Explore ingredient pairings</a>
+                    </div>
+                    <p class="roulette-result" data-roulette-result aria-live="polite"></p>
+                </div>
+                <div class="hero-card">
+                    <h2>Meal Categories</h2>
+                    <p>Sample outcomes you might land on:</p>
+                    <ul data-roulette-list></ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="tools">
+            <div class="container">
+                <h2>Try More Meal Wheels</h2>
+                <div class="card-grid">
+                    <article class="tool-card">
+                        <h3>Breakfast Roulette</h3>
+                        <p>Kick-start your day with coffee pairings, smoothies, and savory options chosen at random.</p>
+                        <a class="text-link" href="/breakfast-roulette/">Spin the breakfast wheel →</a>
+                    </article>
+                    <article class="tool-card">
+                        <h3>Lunch Roulette</h3>
+                        <p>From quick bowls to hearty soups, the lunch picker keeps midday decisions stress-free.</p>
+                        <a class="text-link" href="/lunch-roulette/">Spin the lunch wheel →</a>
+                    </article>
+                    <article class="tool-card">
+                        <h3>Dinner Roulette</h3>
+                        <p>Cozy comfort food, balanced plates, and global flavors for your evening meal.</p>
+                        <a class="text-link" href="/dinner-roulette/">Spin the dinner wheel →</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <span class="brand">FoodPairing.online</span>
+                <p>Smart food pairing ideas and meal randomizers for breakfast, lunch, and dinner.</p>
+            </div>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/food-roulette/">Food Roulette</a>
+                <a href="/pairing/">Pairings</a>
+                <a href="/faq/">FAQ</a>
+            </div>
+            <div class="footer-links">
+                <a href="/about/">About</a>
+                <a href="/contact/">Contact</a>
+                <a href="/sitemap.xml">Sitemap</a>
+                <a href="/robots.txt">Robots.txt</a>
+            </div>
+        </div>
+        <p class="copyright">© <span id="year"></span> FoodPairing.online. All rights reserved.</p>
+    </footer>
+
+    <script src="/scripts/roulette.js" defer></script>
+</body>
+</html>

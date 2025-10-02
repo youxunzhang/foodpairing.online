@@ -1,231 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8794607118520437"
-     crossorigin="anonymous"></script>
-     <meta name="google-adsense-account" content="ca-pub-8794607118520437">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healthy Breakfast - Start Your Day Right with Nutrition</title>
+    <title>FoodPairing.online — Food Roulette & Meal Randomizer</title>
+    <meta name="description" content="Can’t decide what to eat? Try our food roulette & meal randomizer tools to pick your breakfast, lunch, or dinner. Explore food pairing ideas instantly.">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7VHJZ2F4RM"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-7VHJZ2F4RM');
-</script>
-
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <h2>🍳 <span data-i18n="nav.title">营养早餐</span></h2>
-            </div>
-            <ul class="nav-menu">
-                <li class="nav-item">
-                    <a href="index.html" class="nav-link active" data-i18n="nav.home">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="foods.html" class="nav-link" data-i18n="nav.foods">Food Database</a>
-                </li>
-            </ul>
-            <div class="language-switcher">
-                <button class="lang-btn" data-lang="zh" onclick="switchLanguage('zh')">中文</button>
-                <button class="lang-btn active" data-lang="en" onclick="switchLanguage('en')">English</button>
-            </div>
-        </div>
-    </nav>
-
-    <!-- 页面标题 -->
-    <header class="page-header">
-        <div class="container">
-            <!-- 收藏按钮 -->
-            <div class="bookmark-container">
-                <button class="bookmark-btn" id="bookmarkBtn" onclick="toggleBookmark()" title="收藏此页面">
-                    <span class="bookmark-icon" id="bookmarkIcon">🔖</span>
-                    <span class="bookmark-text" data-i18n="bookmark.add">收藏</span>
-                </button>
-            </div>
-            
-            <h1 data-i18n="header.title">营养早餐搭配计算器</h1>
-            <p data-i18n="header.subtitle">选择您喜欢的食物，查看营养信息并计算搭配效果</p>
-            
-            <!-- 分享按钮 -->
-            <div class="share-section">
-                <h4 data-i18n="share.title">分享到社交媒体</h4>
-                <div class="share-buttons">
-                    <button class="share-btn facebook" onclick="shareToFacebook()" title="Facebook">
-                        <span class="share-icon">📘</span>
-                        <span class="share-text" data-i18n="share.facebook">Facebook</span>
-                    </button>
-                    <button class="share-btn twitter" onclick="shareToTwitter()" title="Twitter">
-                        <span class="share-icon">🐦</span>
-                        <span class="share-text" data-i18n="share.twitter">Twitter</span>
-                    </button>
-                    <button class="share-btn linkedin" onclick="shareToLinkedIn()" title="LinkedIn">
-                        <span class="share-icon">💼</span>
-                        <span class="share-text" data-i18n="share.linkedin">LinkedIn</span>
-                    </button>
-                    <button class="share-btn whatsapp" onclick="shareToWhatsApp()" title="WhatsApp">
-                        <span class="share-icon">💬</span>
-                        <span class="share-text" data-i18n="share.whatsapp">WhatsApp</span>
-                    </button>
-                    <button class="share-btn telegram" onclick="shareToTelegram()" title="Telegram">
-                        <span class="share-icon">📱</span>
-                        <span class="share-text" data-i18n="share.telegram">Telegram</span>
-                    </button>
-                    <button class="share-btn email" onclick="shareToEmail()" title="Email">
-                        <span class="share-icon">📧</span>
-                        <span class="share-text" data-i18n="share.email">Email</span>
-                    </button>
-                </div>
-            </div>
+    <header class="site-header">
+        <div class="container nav-container">
+            <a class="brand" href="/">FoodPairing.online</a>
+            <nav class="nav-links">
+                <a href="/food-roulette/">Food Roulette</a>
+                <a href="/breakfast-roulette/">Breakfast</a>
+                <a href="/lunch-roulette/">Lunch</a>
+                <a href="/dinner-roulette/">Dinner</a>
+                <a href="/pairing/">Pairings</a>
+                <a href="/faq/">FAQ</a>
+                <a href="/about/">About</a>
+                <a href="/contact/">Contact</a>
+            </nav>
         </div>
     </header>
 
-    <!-- 营养板块 -->
-    <section id="nutrition" class="nutrition-section">
-        <div class="container">
-            
-            <div class="nutrition-calculator">
-                <div class="food-selector">
-                    <h3 data-i18n="calculator.selectFood">选择食物</h3>
-                    <div class="food-categories">
-                        <button class="category-btn active" data-category="all" data-i18n="categories.all">全部</button>
-                        <button class="category-btn" data-category="grains" data-i18n="categories.grains">谷物</button>
-                        <button class="category-btn" data-category="protein" data-i18n="categories.protein">蛋白质</button>
-                        <button class="category-btn" data-category="dairy" data-i18n="categories.dairy">乳制品</button>
-                        <button class="category-btn" data-category="fruits" data-i18n="categories.fruits">水果</button>
-                        <button class="category-btn" data-category="vegetables" data-i18n="categories.vegetables">蔬菜</button>
+    <main>
+        <section class="hero" data-roulette="general">
+            <div class="container hero-grid">
+                <div>
+                    <h1>Food Pairing &amp; Meal Randomizer</h1>
+                    <p>
+                        FoodPairing.online helps you answer the daily question of “what should I eat?” with quick food roulette
+                        tools and curated pairing inspiration. Spin a wheel to let fate pick your next breakfast, lunch, or dinner,
+                        or explore ingredient combinations that just work. Whether you need a meal randomizer, a food pairing guide,
+                        or a spark of culinary creativity, our free tools deliver fresh ideas in seconds.
+                    </p>
+                    <div class="hero-actions">
+                        <a class="button primary" href="/food-roulette/">Launch the Food Roulette</a>
+                        <button class="button outline" data-roulette-spin>Surprise Me</button>
                     </div>
-                    
-                    <div class="food-grid" id="foodGrid">
-                        <!-- 食物选项将通过JavaScript动态加载 -->
-                    </div>
+                    <p class="roulette-result" data-roulette-result aria-live="polite"></p>
                 </div>
-                
-                <div class="nutrition-results">
-                    <h3 data-i18n="calculator.nutritionAnalysis">营养分析</h3>
-                    <div class="selected-foods" id="selectedFoods">
-                        <p class="empty-message" data-i18n="calculator.selectFoodToStart">请选择食物开始计算营养</p>
-                    </div>
-                    
-                    <div class="nutrition-chart">
-                        <div class="nutrition-item">
-                            <div class="nutrition-label" data-i18n="nutrition.calories">热量 (kcal)</div>
-                            <div class="nutrition-bar">
-                                <div class="nutrition-fill" id="caloriesFill"></div>
-                            </div>
-                            <div class="nutrition-value" id="caloriesValue">0</div>
-                        </div>
-                        <div class="nutrition-item">
-                            <div class="nutrition-label" data-i18n="nutrition.protein">蛋白质 (g)</div>
-                            <div class="nutrition-bar">
-                                <div class="nutrition-fill" id="proteinFill"></div>
-                            </div>
-                            <div class="nutrition-value" id="proteinValue">0</div>
-                        </div>
-                        <div class="nutrition-item">
-                            <div class="nutrition-label" data-i18n="nutrition.carbs">碳水化合物 (g)</div>
-                            <div class="nutrition-bar">
-                                <div class="nutrition-fill" id="carbsFill"></div>
-                            </div>
-                            <div class="nutrition-value" id="carbsValue">0</div>
-                        </div>
-                        <div class="nutrition-item">
-                            <div class="nutrition-label" data-i18n="nutrition.fat">脂肪 (g)</div>
-                            <div class="nutrition-bar">
-                                <div class="nutrition-fill" id="fatFill"></div>
-                            </div>
-                            <div class="nutrition-value" id="fatValue">0</div>
-                        </div>
-                        <div class="nutrition-item">
-                            <div class="nutrition-label" data-i18n="nutrition.fiber">纤维 (g)</div>
-                            <div class="nutrition-bar">
-                                <div class="nutrition-fill" id="fiberFill"></div>
-                            </div>
-                            <div class="nutrition-value" id="fiberValue">0</div>
-                        </div>
-                    </div>
-                    
-                    <div class="nutrition-summary">
-                        <h4 data-i18n="calculator.nutritionAdvice">营养建议</h4>
-                        <div id="nutritionAdvice" class="advice-text" data-i18n="calculator.selectFoodForAdvice">
-                            选择食物后查看个性化营养建议
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 特色推荐 -->
-    <section class="features-section">
-        <div class="container">
-            <h2 class="section-title" data-i18n="features.title">为什么选择营养早餐？</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🌅</div>
-                    <h3 data-i18n="features.card1.title">开启美好一天</h3>
-                    <p data-i18n="features.card1.desc">营养均衡的早餐为您提供充足能量，让您精力充沛地迎接新的一天</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🧠</div>
-                    <h3 data-i18n="features.card2.title">提升认知能力</h3>
-                    <p data-i18n="features.card2.desc">优质蛋白质和复合碳水化合物有助于提高记忆力和专注力</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">💪</div>
-                    <h3 data-i18n="features.card3.title">增强免疫力</h3>
-                    <p data-i18n="features.card3.desc">丰富的维生素和矿物质帮助增强身体抵抗力，预防疾病</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚖️</div>
-                    <h3 data-i18n="features.card4.title">维持健康体重</h3>
-                    <p data-i18n="features.card4.desc">科学搭配的早餐有助于控制食欲，维持健康的体重管理</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 页脚 -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>🍳 <span data-i18n="footer.title">营养早餐</span></h3>
-                    <p data-i18n="footer.slogan">让健康生活从每一顿营养早餐开始</p>
-                </div>
-                <div class="footer-section">
-                    <h4 data-i18n="footer.quickLinks">快速链接</h4>
+                <div class="hero-card">
+                    <h2>Featured Tools</h2>
                     <ul>
-                        <li><a href="index.html" data-i18n="nav.home">首页</a></li>
-                        <li><a href="foods.html" data-i18n="nav.foods">食物库</a></li>
+                        <li><a href="/breakfast-roulette/">Breakfast roulette</a> for a fast morning win.</li>
+                        <li><a href="/lunch-roulette/">Lunch randomizer</a> to avoid decision fatigue.</li>
+                        <li><a href="/dinner-roulette/">Dinner wheel</a> to end the day deliciously.</li>
+                        <li><a href="/pairing/tomato/">Tomato pairing ideas</a> for easy cooking inspiration.</li>
                     </ul>
                 </div>
-                <div class="footer-section">
-                    <h4 data-i18n="footer.contact">联系我们</h4>
-                    <p>📧 <span data-i18n="footer.email">邮箱</span>: <span data-i18n="footer.emailAddress">contact@foodpairing.online</span></p>
-                    <p>📱 <span data-i18n="footer.wechat">微信</span>: zhangyouxun2013</p>
-                    <p>📞 <span data-i18n="footer.phone">电话</span>: <span data-i18n="footer.phoneNumber">暂不提供电话服务，请通过邮箱联系</span></p>
+            </div>
+        </section>
+
+        <section class="tools">
+            <div class="container">
+                <h2>Spin a Meal Roulette</h2>
+                <div class="card-grid">
+                    <article class="tool-card">
+                        <h3>Food Roulette</h3>
+                        <p>Use the master meal randomizer to combine breakfast, lunch, and dinner favorites in one spin.</p>
+                        <a class="text-link" href="/food-roulette/">Try the food roulette →</a>
+                    </article>
+                    <article class="tool-card">
+                        <h3>Breakfast Roulette</h3>
+                        <p>Find out what to eat in the morning with coffee-friendly, grab-and-go breakfast ideas.</p>
+                        <a class="text-link" href="/breakfast-roulette/">Spin the breakfast wheel →</a>
+                    </article>
+                    <article class="tool-card">
+                        <h3>Lunch Roulette</h3>
+                        <p>Stop scrolling delivery apps and let a quick lunch picker choose your midday meal.</p>
+                        <a class="text-link" href="/lunch-roulette/">Spin the lunch wheel →</a>
+                    </article>
+                    <article class="tool-card">
+                        <h3>Dinner Roulette</h3>
+                        <p>Finish strong with comforting dinner combinations and easy weeknight ideas.</p>
+                        <a class="text-link" href="/dinner-roulette/">Spin the dinner wheel →</a>
+                    </article>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <p data-i18n="footer.copyright">&copy; 2024 营养早餐. 保留所有权利.</p>
-                <p><a href="https://www.seodog.cn" target="_blank" rel="noopener noreferrer" class="ai-tools-link"><span class="link-icon">🔗</span> <span data-i18n="footer.aiTools">AI工具导航</span> - SEOdog.cn</a></p>
+        </section>
+
+        <section class="pairings">
+            <div class="container">
+                <h2>Discover Ingredient Pairings</h2>
+                <p>Browse curated ingredient pairing pages to uncover classic and creative combinations for pantry staples. Each guide links to complementary ingredients so you can build a balanced meal fast.</p>
+                <div class="chip-grid">
+                    <a class="chip" href="/pairing/tomato/">Tomato</a>
+                    <a class="chip" href="/pairing/cheese/">Cheese</a>
+                    <a class="chip" href="/pairing/chicken/">Chicken</a>
+                </div>
+                <p class="pairing-cta">Want more ideas? Explore the full <a href="/pairing/">food pairing library</a>.</p>
+            </div>
+        </section>
+
+        <section class="faq-preview">
+            <div class="container faq-grid">
+                <div>
+                    <h2>Meal Randomizer FAQ</h2>
+                    <p>New to food roulette? Our FAQ explains how the wheels work, why food pairing matters, and tips for customizing spins. Learn how to mix ingredients, adapt to dietary needs, and bookmark favorite outcomes.</p>
+                    <a class="button secondary" href="/faq/">Read the FAQ</a>
+                </div>
+                <div class="faq-card">
+                    <h3>Popular Questions</h3>
+                    <ul>
+                        <li><a href="/faq/#how-food-pairing-works">How does food pairing work?</a></li>
+                        <li><a href="/faq/#is-roulette-free">Is the food roulette free?</a></li>
+                        <li><a href="/faq/#use-for-every-meal">Can I use it for every meal?</a></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <h2>Ready to Let the Wheel Decide?</h2>
+                <p>Bookmark FoodPairing.online for instant meal inspiration. From morning to midnight snacks, our roulette tools keep your menu fresh and fun.</p>
+                <a class="button primary" href="/food-roulette/">Spin the wheel now</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div>
+                <span class="brand">FoodPairing.online</span>
+                <p>Smart food pairing ideas and meal randomizers for breakfast, lunch, and dinner.</p>
+            </div>
+            <div class="footer-links">
+                <a href="/">Home</a>
+                <a href="/food-roulette/">Food Roulette</a>
+                <a href="/pairing/">Pairings</a>
+                <a href="/faq/">FAQ</a>
+            </div>
+            <div class="footer-links">
+                <a href="/about/">About</a>
+                <a href="/contact/">Contact</a>
+                <a href="/sitemap.xml">Sitemap</a>
+                <a href="/robots.txt">Robots.txt</a>
             </div>
         </div>
+        <p class="copyright">© <span id="year"></span> FoodPairing.online. All rights reserved.</p>
     </footer>
 
-    <script src="i18n.js"></script>
-    <script src="foods-data.js"></script>
-    <script src="script.js"></script>
+    <script src="/scripts/roulette.js" defer></script>
 </body>
-</html> 
+</html>
